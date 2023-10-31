@@ -10,25 +10,25 @@ import SignupScreen from "./screens/SignupScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
-    // return (
-    //     <NavigationContainer>
-    //         <Stack.Navigator
-    //             initialRouteName="Login"
-    //             screenOptions={{ headerShown: false }}
-    //         >
-    //             <Stack.Screen name="Login" component={LoginScreen} />
-    //             <Stack.Screen name="SignUp" component={SignupScreen} />
-    //         </Stack.Navigator>
-    //     </NavigationContainer>
-    // );
-
     return (
-        <View
-            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-            <Text>Hello World!</Text>
-        </View>
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName="Login"
+                screenOptions={{ headerShown: false }}
+            >
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="SignUp" component={SignupScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
+
+    // return (
+    //     <View
+    //         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+    //     >
+    //         <Text>Hello World!</Text>
+    //     </View>
+    // );
 }
 
 export default App;
