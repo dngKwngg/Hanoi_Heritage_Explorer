@@ -9,6 +9,10 @@ import NotificationScreen from "./screens/NotificationScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
 import VideoScreen from "./screens/VideoScreen";
 import EventScreen from "./screens/EventScreen";
+import LoginScreen from "./screens/LoginScreen";
+import SignupScreen from "./screens/SignupScreen";
+import OnboardingScreen from "./screens/OnboardingScreen";
+import Splash from "./screens/Splash";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +36,10 @@ function App() {
 				<Stack.Screen name="Feedback" component={FeedbackScreen} />
 				<Stack.Screen name="Video" component={VideoScreen} />
 				<Stack.Screen name="Event" component={EventScreen} />
+				<Stack.Screen name="Splash" component={Splash} />
+                <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen name="SignUp" component={SignupScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
