@@ -1,21 +1,28 @@
 import React from "react";
-import { View, Text, StatusBar, TouchableOpacity } from "react-native";
+import {
+    View,
+    Text,
+    StatusBar,
+    TouchableOpacity,
+    ImageBackground,
+    Image,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { ArrowLeftCircleIcon } from "react-native-heroicons/outline";
 import COLORS from "../constants/colors";
 
 const StoryScreen = () => {
     return (
-        <View className="flex-1" style={{ backgroundColor: COLORS.white }}>
+        <View className="flex-1" style={{ backgroundColor: "white" }}>
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor="#fff"
+                backgroundColor={"white"}
                 hidden={false}
             />
             {/* Header */}
             <View
                 className="w-full flex flex-row items-center justify-center pt-2"
-                style={{ backgroundColor: COLORS.white }}
+                style={{ backgroundColor: "white" }}
             >
                 <TouchableOpacity style={{ position: "absolute", left: 16 }}>
                     <Icon
