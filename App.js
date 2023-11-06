@@ -13,6 +13,7 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
+import StoryScreen from "./screens/StoryScreen";
 
 const Stack = createNativeStackNavigator();
 
