@@ -62,7 +62,7 @@ const OnboardingScreen = ({ navigation }) => {
 
                 {/* button */}
                 <View className="flex-1 flex-col justify-center items-center">
-                    {/* <TouchableOpacity
+                    <TouchableOpacity
                         className="justify-center h-[50]"
                         style={{
                             width: "90%",
@@ -83,11 +83,11 @@ const OnboardingScreen = ({ navigation }) => {
                         >
                             Get Started
                         </Text>
-                    </TouchableOpacity> */}
-                    <Buttons
+                    </TouchableOpacity>
+                    {/* <Buttons
                         buttonText={"Get Started"}
                         onPress={() => navigation.navigate("Login")}
-                    />
+                    /> */}
                 </View>
             </View>
         </View>

@@ -111,8 +111,11 @@ const LoginScreen = ({ navigation }) => {
 
                     {/* btn */}
                     <Buttons
-                        buttonText={"Sign in"}
-                        onPress={() => console.log(formData)}
+                        buttonText={"Log in"}
+                        onPress={() => {
+                            console.log(formData);
+                            navigation.navigate("Story");
+                        }}
                     />
                 </View>
             </View>
