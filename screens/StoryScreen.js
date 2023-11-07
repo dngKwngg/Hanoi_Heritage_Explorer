@@ -1,30 +1,35 @@
-import React from "react";
+import Reac, { useState } from "react";
 import {
     View,
     Text,
     StatusBar,
     TouchableOpacity,
-    ImageBackground,
-    Image,
+    Button,
+    FlatList,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { ArrowLeftCircleIcon } from "react-native-heroicons/outline";
 import COLORS from "../constants/colors";
+import { categories } from "../constants/categories";
 
 const StoryScreen = () => {
+    const [activeCategory, setActiveCategory] = useState(1);
     return (
         <View className="flex-1" style={{ backgroundColor: "white" }}>
             <StatusBar
                 barStyle="dark-content"
-                backgroundColor={"white"}
+                backgroundColor={"rgba(255, 255, 255, 0)"}
                 hidden={false}
             />
+
             {/* Header */}
             <View
                 className="w-full flex flex-row items-center justify-center pt-2"
-                style={{ backgroundColor: "white" }}
+                style={{ backgroundColor: "rgba(255, 255, 255, 1)" }} // Add a semi-transparent background to make text readable
             >
-                <TouchableOpacity style={{ position: "absolute", left: 16 }}>
+                <TouchableOpacity
+                    style={{ position: "absolute", left: 16 }}
+                    onPress={() => console.log("Back")}
+                >
                     <Icon
                         name="angle-left"
                         size={24}
@@ -35,8 +40,9 @@ const StoryScreen = () => {
                 <Text
                     style={{
                         fontSize: 18,
-                        fontWeight: 700,
+                        fontWeight: "700",
                         marginBottom: 8,
+                        color: "black", // Change text color to make it visible on the background
                     }}
                 >
                     Hoang Thanh Thang Long
@@ -44,6 +50,40 @@ const StoryScreen = () => {
             </View>
 
             {/* Body */}
+            <View>
+                {/* Body category */}
+                <View className="px-5 mt-6">
+                    <FlatList
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        data={categories}
+                        keyExtractor={(item) => item.id}
+                        className="overflow-visible"
+                        renderItem={({ item }) => {
+                            let isActive = item.id === activeCategory;
+                            let activeTextClass = isActive ? "white" : "black";
+                            return (
+                                <TouchableOpacity
+                                    onPress={() => setActiveCategory(item.id)}
+                                    style={{
+                                        backgroundColor: isActive
+                                            ? COLORS.primary
+                                            : "rgba(0, 0, 0, 0.07)",
+                                    }}
+                                    className="p-2 px-5 rounded-full mr-3"
+                                >
+                                    <Text
+                                        className={"font-semibold"}
+                                        style={{ color: activeTextClass }}
+                                    >
+                                        {item.title}
+                                    </Text>
+                                </TouchableOpacity>
+                            );
+                        }}
+                    ></FlatList>
+                </View>
+            </View>
         </View>
     );
 };
