@@ -8,11 +8,69 @@ import {
     FlatList,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import COLORS from "../constants/colors";
 import { categories } from "../constants/categories";
 
 const StoryScreen = () => {
     const [activeCategory, setActiveCategory] = useState(1);
+
+    const [date, setDate] = useState(new Date());
+    const [showPicker, setShowPicker] = useState(false);
+
+    // const [date, setDate] = useState(new Date(1598051730000));
+
+    // const onChange = (event, selectedDate) => {
+    //     const currentDate = selectedDate;
+    //     setDate(currentDate);
+    // };
+
+    // const showDatepicker = () => {
+    //     showMode("date");
+    // };
+
+    // const showTimepicker = () => {
+    //     showMode("time");
+    // };
+
+    // const showMode = (currentMode) => {
+    //     DateTimePickerAndroid.open({
+    //         value: date,
+    //         onChange,
+    //         mode: currentMode,
+    //         is24Hour: true,
+    //     });
+    // };
+
+    const renderOverview = (category) => {
+        return (
+            <View className="pt-5 p-4">
+                <Text>{category.content}</Text>
+            </View>
+        );
+    };
+
+    const renderHistory = (category) => {
+        return (
+            <View className="pt-5 p-4">
+                <Text>{category.content}</Text>
+            </View>
+        );
+    };
+    const renderCategoryContent = () => {
+        const selectedCategory = categories.find(
+            (category) => category.id === activeCategory
+        );
+
+        if (!selectedCategory) {
+            return null;
+        }
+        if (selectedCategory.id === 1) {
+            return renderOverview(selectedCategory);
+        } else if (selectedCategory.id === 2) {
+            return renderHistory(selectedCategory);
+        }
+    };
     return (
         <View className="flex-1" style={{ backgroundColor: "white" }}>
             <StatusBar
@@ -64,7 +122,9 @@ const StoryScreen = () => {
                             let activeTextClass = isActive ? "white" : "black";
                             return (
                                 <TouchableOpacity
-                                    onPress={() => setActiveCategory(item.id)}
+                                    onPress={() => {
+                                        setActiveCategory(item.id);
+                                    }}
                                     style={{
                                         backgroundColor: isActive
                                             ? COLORS.primary
@@ -83,6 +143,9 @@ const StoryScreen = () => {
                         }}
                     ></FlatList>
                 </View>
+
+                {/* Body content */}
+                {renderCategoryContent()}
             </View>
         </View>
     );
