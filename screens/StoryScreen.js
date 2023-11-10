@@ -1,4 +1,4 @@
-import Reac, { useState } from "react";
+import React, { useState } from "react";
 import {
     View,
     Text,
@@ -8,39 +8,11 @@ import {
     FlatList,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import COLORS from "../constants/colors";
 import { categories } from "../constants/categories";
 
 const StoryScreen = () => {
     const [activeCategory, setActiveCategory] = useState(1);
-
-    const [date, setDate] = useState(new Date());
-    const [showPicker, setShowPicker] = useState(false);
-
-    // const [date, setDate] = useState(new Date(1598051730000));
-
-    // const onChange = (event, selectedDate) => {
-    //     const currentDate = selectedDate;
-    //     setDate(currentDate);
-    // };
-
-    // const showDatepicker = () => {
-    //     showMode("date");
-    // };
-
-    // const showTimepicker = () => {
-    //     showMode("time");
-    // };
-
-    // const showMode = (currentMode) => {
-    //     DateTimePickerAndroid.open({
-    //         value: date,
-    //         onChange,
-    //         mode: currentMode,
-    //         is24Hour: true,
-    //     });
-    // };
 
     const renderOverview = (category) => {
         return (
