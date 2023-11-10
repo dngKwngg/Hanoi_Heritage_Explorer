@@ -9,40 +9,70 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import COLORS from "../constants/colors";
-import { categories } from "../constants/categories";
+import { locations } from "../constants/locations";
+import { ca } from "date-fns/locale";
 
 const StoryScreen = () => {
     const [activeCategory, setActiveCategory] = useState(1);
 
-    const renderOverview = (category) => {
-        return (
-            <View className="pt-5 p-4">
-                <Text>{category.content}</Text>
-            </View>
-        );
-    };
+    // const renderOverview = (category) => {
+    //     return (
+    //         <View className="pt-5 p-4">
+    //             <Text>{category.content}</Text>
+    //         </View>
+    //     );
+    // };
 
-    const renderHistory = (category) => {
-        return (
-            <View className="pt-5 p-4">
-                <Text>{category.content}</Text>
-            </View>
-        );
-    };
-    const renderCategoryContent = () => {
-        const selectedCategory = categories.find(
+    // const renderHistory = (category) => {
+    //     return (
+    //         <View className="pt-5 p-4">
+    //             <Text>{category.content}</Text>
+    //         </View>
+    //     );
+    // };
+    // const renderCategoryContent = () => {
+    //     const selectedCategory = categories.find(
+    //         (category) => category.id === activeCategory
+    //     );
+
+    //     if (!selectedCategory) {
+    //         return null;
+    //     }
+    //     if (selectedCategory.id === 1) {
+    //         return renderOverview(selectedCategory);
+    //     } else if (selectedCategory.id === 2) {
+    //         return renderHistory(selectedCategory);
+    //     }
+    // };
+
+    const renderLocationContentByCategory = (location) => {
+        const selectedCategory = location.categories.find(
             (category) => category.id === activeCategory
         );
 
         if (!selectedCategory) {
             return null;
         }
-        if (selectedCategory.id === 1) {
-            return renderOverview(selectedCategory);
-        } else if (selectedCategory.id === 2) {
-            return renderHistory(selectedCategory);
-        }
+
+        return (
+            <View className="pt-5 p-4">
+                <Text>{selectedCategory.content}</Text>
+            </View>
+        );
     };
+
+    const renderLocation = (location) => {
+        if (!location || typeof location !== "object") {
+            return null;
+        }
+
+        return (
+            <View key={location.id}>
+                {renderLocationContentByCategory(location)}
+            </View>
+        );
+    };
+
     return (
         <View className="flex-1" style={{ backgroundColor: "white" }}>
             <StatusBar
@@ -82,11 +112,11 @@ const StoryScreen = () => {
             {/* Body */}
             <View>
                 {/* Body category */}
-                <View className="px-5 mt-6">
+                <View className="px-5 mt-3" style={{ backgroundColor: "#fff" }}>
                     <FlatList
                         horizontal
                         showsHorizontalScrollIndicator={false}
-                        data={categories}
+                        data={locations[0].categories}
                         keyExtractor={(item) => item.id}
                         className="overflow-visible"
                         renderItem={({ item }) => {
@@ -117,7 +147,7 @@ const StoryScreen = () => {
                 </View>
 
                 {/* Body content */}
-                {renderCategoryContent()}
+                {renderLocation(locations[0])}
             </View>
         </View>
     );
