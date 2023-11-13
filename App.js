@@ -14,6 +14,7 @@ import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
 import StoryScreen from "./screens/StoryScreen";
+import Carousel from "./components/Carousel";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,9 +42,31 @@ function App() {
                 <Stack.Screen name="Onboarding" component={OnboardingScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="SignUp" component={SignupScreen} />
+				<Stack.Screen name="Splash" component={Splash} />
+                <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+                <Stack.Screen name="Story" component={StoryScreen} />
+                <Stack.Screen name="Carousel" component={Carousel} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName="Story"
+                screenOptions={{ headerShown: false }}
+            >
+                <
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+
+    // return (
+    //     <View
+    //         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+    //     >
+    //         <Text>Hello World!</Text>
+    //     </View>
+    // );
 }
 
 export default App;

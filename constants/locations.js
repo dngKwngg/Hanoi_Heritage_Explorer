@@ -6,7 +6,8 @@ export const locations = [
             {
                 id: 1,
                 title: "Tổng quan",
-                content: "Tổng quan về Hoàng thành Thăng Long",
+                content:
+                    "Tổng quan về Hoàng thành Thăng Longasdjfffffffaiuegruawgfejkasdbfjkawbfeuiwgjksdbfkjwgefjbkjegaruibsdajfkbasjdfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfguiwaefjsacsjwefbuwbcksd           dshfgs saehbfhkwe asdhf we asdf ewbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffk",
             },
             {
                 id: 2,
