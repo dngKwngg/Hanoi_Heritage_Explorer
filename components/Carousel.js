@@ -79,7 +79,7 @@ const Carousel = () => {
                 horizontal
                 pagingEnabled
                 onScroll={handleScroll}
-                style={{ marginTop: 20 }}
+                style={{ marginTop: 4 }}
             />
             <View
                 style={{
