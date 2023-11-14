@@ -17,7 +17,7 @@ function App() {
 		<NavigationContainer>
 			<Stack.Navigator
 				// initialRouteName="Splash
-				initialRouteName="Event"
+				initialRouteName="Image"
 				screenOptions={{ headerShown: false }}
 			>
 				<Stack.Screen name="Ticket" component={TicketScreen} />

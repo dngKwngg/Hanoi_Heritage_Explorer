@@ -88,7 +88,7 @@ const ImageScreen = () => {
 		},
 	];
 	const [activeCategory, setActiveCategory] = useState(1);
-	const renderTicket = (item) => {
+	const renderImage = (item) => {
 		return (
 			<ScrollView style={{ marginTop: 30 }}>
 				{destinations[index].imageList.map(renderItems)}
@@ -105,7 +105,7 @@ const ImageScreen = () => {
 			return null;
 		}
 		if (selectedCategory.id === 4) {
-			return renderTicket(selectedCategory);
+			return renderImage(selectedCategory);
 		}
 	};
 	const renderItems = (item, idx) => {
