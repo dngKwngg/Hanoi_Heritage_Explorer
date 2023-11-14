@@ -21,94 +21,9 @@ import { ca } from "date-fns/locale";
 import Carousel from "../components/Carousel";
 import Hyperlink from "react-native-hyperlink";
 
-const StoryScreen = () => {
+const TestScreen = () => {
     const index = 0;
     const [activeCategory, setActiveCategory] = useState(1);
-
-    // Handle press hyperlink
-    const handlePress = () => {
-        const url = "https://hoangthanhthanglong.com";
-        Linking.canOpenURL(url).then((supported) => {
-            if (supported) {
-                Linking.openURL(url);
-            } else {
-                console.log("Don't know how to open URI: " + url);
-            }
-        });
-    };
-
-    // Render by category
-    const renderLocationContentByCategory = (location, activeCategory) => {
-        const selectedCategory = location.categories.find(
-            (category) => category.id === activeCategory
-        );
-
-        if (!selectedCategory) {
-            return null;
-        }
-        if (activeCategory === 1) {
-            return (
-                <ScrollView style={{ flex: 1 }}>
-                    <Carousel />
-                    <Text
-                        style={{
-                            fontSize: 18,
-                            lineHeight: 30,
-                            marginTop: 12,
-                            paddingLeft: 16,
-                            paddingRight: 12,
-                            paddingBottom: 12,
-                        }}
-                    >
-                        {selectedCategory.content}
-                    </Text>
-                    <View className="flex flex-row items-center pb-3">
-                        <Icon
-                            name="globe"
-                            size={20}
-                            style={{ paddingLeft: 16 }}
-                        ></Icon>
-
-                        <TouchableOpacity
-                            style={{ paddingLeft: 12 }}
-                            onPress={handlePress}
-                        >
-                            <Text style={{ fontSize: 16, color: "blue" }}>
-                                {location.url}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View className="flex flex-row items-center pb-3">
-                        <Icon
-                            name="map-marker"
-                            size={24}
-                            style={{ paddingLeft: 16 }}
-                        ></Icon>
-
-                        <Text style={{ paddingLeft: 15, fontSize: 16 }}>
-                            {location.locateAt}
-                        </Text>
-                    </View>
-                </ScrollView>
-            );
-        } else {
-            return (
-                <ScrollView style={{ flex: 1 }}>
-                    {/* <Text>{location.name}</Text> */}
-                    <Text>{selectedCategory.content}</Text>
-                </ScrollView>
-            );
-        }
-    };
-
-    const renderLocation = (location, activeCategory) => {
-        if (!location || typeof location !== "object") {
-            return null;
-        }
-
-        return renderLocationContentByCategory(location, activeCategory);
-    };
 
     return (
         <View style={{ backgroundColor: "white", flex: 1 }}>
@@ -187,15 +102,14 @@ const StoryScreen = () => {
                 </View>
 
                 {/* Body content */}
-                {renderLocation(locations[index], activeCategory)}
+                {/* {renderLocation(locations[index], activeCategory)} */}
 
-                {/* <ScrollView style={{ flex: 1 }}>
+                <ScrollView style={{ flex: 1 }}>
                     <Carousel />
                     <Text style={{ fontSize: 20 }}>
                         {locations[index].categories[0].source}
                     </Text>
-                </ScrollView> */}
-                {/* {this.renderScrollViewContent()} */}
+                </ScrollView>
             </View>
         </View>
     );
@@ -215,4 +129,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default StoryScreen;
+export default TestScreen;

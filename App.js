@@ -14,7 +14,7 @@ import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
 import StoryScreen from "./screens/StoryScreen";
-import Carousel from "./components/Carousel";
+import TestScreen from "./screens/TestScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,24 +49,6 @@ function App() {
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
-    return (
-        <NavigationContainer>
-            <Stack.Navigator
-                initialRouteName="Story"
-                screenOptions={{ headerShown: false }}
-            >
-                <
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-
-    // return (
-    //     <View
-    //         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    //     >
-    //         <Text>Hello World!</Text>
-    //     </View>
-    // );
 }
 
 export default App;

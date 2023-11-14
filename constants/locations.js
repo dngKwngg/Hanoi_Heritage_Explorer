@@ -7,7 +7,7 @@ export const locations = [
                 id: 1,
                 title: "Tổng quan",
                 content:
-                    "Tổng quan về Hoàng thành Thăng Longasdjfffffffaiuegruawgfejkasdbfjkawbfeuiwgjksdbfkjwgefjbkjegaruibsdajfkbasjdfbbbbbbbbbbbbbbbbbbbbbbbbbbbbbfguiwaefjsacsjwefbuwbcksd           dshfgs saehbfhkwe asdhf we asdf ewbffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffk",
+                    "Hoàng thành Thăng Long là quần thể di tích gắn liền với lịch sử kinh thành Thăng Long Hà Nội. Công trình này được xây dựng từ thế kỷ VII đến triều đại Đinh – Tiền Lê. Vào năm 1010, dưới triều đại nhà Lý, kinh thành được dời từ Đại La về Thăng Long. Trải qua các vương triều Lý – Trần – Lê – Nguyễn… nơi đây trở thành chứng nhân lịch sử cho các cuộc đấu tranh giữ nước của dân tộc. Đồng thời kinh thành cũng là minh chứng cho sự tiếp nối văn hóa giữa các triều đại. Vào ngày 31/7/2010, tại Brazil, Ủy ban Di sản Thế giới đã thông qua Nghị quyết công nhận khu trung tâm Hoàng thành Thăng Long – Hà Nội là Di sản Văn hóa Thế giới. Đây là niềm tự hào của không chỉ Hà Nội mà cả đất nước Việt Nam. Với kiến trúc độc đáo cùng ý nghĩa đặc biệt, ngày nay Hoàng thành là khu di tích lịch sử và là địa điểm du lịch nổi tiếng Hà Nội. Đến đây, du khách sẽ được tận mắt chiêm ngưỡng một số phần di tích còn sót lại đã được bảo tồn, từ đó hiểu hơn về lịch sử, văn hóa của thế hệ cha ông đi trước.",
             },
             {
                 id: 2,
@@ -45,5 +45,7 @@ export const locations = [
                 content: "Đánh giá Hoàng thành Thăng Long",
             },
         ],
+        url: "https://www.hoangthanhthanglong.com",
+        locateAt: "19C Hoàng Diệu, Quận Ba Đình, Hà Nội",
     },
 ];
