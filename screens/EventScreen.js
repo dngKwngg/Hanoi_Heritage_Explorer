@@ -83,7 +83,26 @@ const EventScreen = () => {
 		}
 	}
 	const renderItemOfEvents = (item, idx) => (
-		<Card containerStyle={{ borderRadius: 30 }} key={idx}>
+		<Card
+			containerStyle={{
+				borderRadius: 30,
+				backgroundColor: "#f8f9fb",
+				marginBottom: 20,
+			}}
+			key={idx}
+		>
+			<View style={{ flexDirection: "row" }}>
+				<Icon
+					name={renderTypeOfEvent(item)}
+					size={30}
+					color="#000"
+					style={{ marginLeft: 10 }}
+				/>
+				<Text style={{ fontSize: 18, marginLeft: 10 }}>
+					{" "}
+					{item.type}{" "}
+				</Text>
+			</View>
 			<View style={styles.row} key={idx}>
 				<Image
 					source={{ uri: item.url }}
@@ -91,14 +110,6 @@ const EventScreen = () => {
 					key={idx}
 				/>
 				<View style={{ flex: 1, marginLeft: 10 }}>
-					<View style={{ flexDirection: "row" }}>
-						<Icon
-							name={renderTypeOfEvent(item)}
-							size={30}
-							color="#000"
-						/>
-						<Text style={{ fontSize: 18 }}> {item.type} </Text>
-					</View>
 					<Text style={{ fontSize: 14 }}>
 						<Text style={{ fontWeight: "bold" }}>Tên sự kiện:</Text>{" "}
 						{item.name}
