@@ -13,7 +13,7 @@
 
 ## EventScreen (ver1.1)
 ### Ở đây sự kiện đã có hàm sắp xếp để hiển thị đúng thứ tự thời gian diễn ra. Sự kiện đang diễn ra vào hôm nay sẽ biến mất vào ngày mai, và sự kiện diễn ra vào ngày mai sẽ được tự động chuyển từ Sắp diễn ra thành đang diễn ra.
-![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/b5890cdf-0dba-4a0f-90db-eae9b0e9a3d8)
+![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/46b3830a-e200-485b-b082-ab75efe03e4d)
 ![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/b0f62ecc-d869-41f5-8477-160733cd9b83)
 
 
