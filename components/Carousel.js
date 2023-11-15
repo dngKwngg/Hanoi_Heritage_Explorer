@@ -1,23 +1,23 @@
 import React from "react";
 import { View, Text, FlatList, Image, Dimensions } from "react-native";
 
-const Carousel = () => {
+const Carousel = ({ carouselData }) => {
     const screenWidth = Dimensions.get("window").width;
     const [activeIndex, setActiveIndex] = React.useState(0);
-    const carouselData = [
-        {
-            id: 1,
-            image: require("../assets/images/slider_1.jpg"),
-        },
-        {
-            id: 2,
-            image: require("../assets/images/slider_2.jpg"),
-        },
-        {
-            id: 3,
-            image: require("../assets/images/slider_3.jpg"),
-        },
-    ];
+    // const carouselData = [
+    //     {
+    //         id: 1,
+    //         image: require("../assets/images/slider_1.jpg"),
+    //     },
+    //     {
+    //         id: 2,
+    //         image: require("../assets/images/slider_2.jpg"),
+    //     },
+    //     {
+    //         id: 3,
+    //         image: require("../assets/images/slider_3.jpg"),
+    //     },
+    // ];
 
     // Display images / UI
     const renderItem = ({ item, index }) => {
@@ -47,7 +47,7 @@ const Carousel = () => {
     };
 
     // Render dot indicators
-    const renderDotIndicators = () => {
+    const renderDotIndicators = (carouselData) => {
         return carouselData.map((dot, index) => {
             // if the active index === index
 
@@ -88,7 +88,7 @@ const Carousel = () => {
                     marginTop: -16,
                 }}
             >
-                {renderDotIndicators()}
+                {renderDotIndicators(carouselData)}
             </View>
         </View>
     );
