@@ -47,5 +47,19 @@ export const locations = [
         ],
         url: "https://www.hoangthanhthanglong.com",
         locateAt: "19C Hoàng Diệu, Quận Ba Đình, Hà Nội",
+        carouselData: [
+            {
+                id: 1,
+                image: require("../assets/images/slider_1.jpg"),
+            },
+            {
+                id: 2,
+                image: require("../assets/images/slider_2.jpg"),
+            },
+            {
+                id: 3,
+                image: require("../assets/images/slider_3.jpg"),
+            },
+        ],
     },
 ];

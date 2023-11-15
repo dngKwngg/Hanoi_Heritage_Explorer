@@ -37,6 +37,55 @@ const StoryScreen = () => {
         });
     };
 
+    // Render overview
+
+    const renderOverview = (location) => {
+        return (
+            <ScrollView style={{ flex: 1 }}>
+                <Carousel carouselData={location.carouselData} />
+                <Text
+                    style={{
+                        fontSize: 18,
+                        lineHeight: 30,
+                        marginTop: 12,
+                        paddingLeft: 16,
+                        paddingRight: 12,
+                        paddingBottom: 12,
+                    }}
+                >
+                    {location.categories[0].content}
+                </Text>
+                <View className="flex flex-row items-center pb-3">
+                    <Icon
+                        name="globe"
+                        size={20}
+                        style={{ paddingLeft: 16 }}
+                    ></Icon>
+
+                    <TouchableOpacity
+                        style={{ paddingLeft: 12 }}
+                        onPress={handlePress}
+                    >
+                        <Text style={{ fontSize: 16, color: "blue" }}>
+                            {location.url}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View className="flex flex-row items-center pb-3">
+                    <Icon
+                        name="map-marker"
+                        size={24}
+                        style={{ paddingLeft: 16 }}
+                    ></Icon>
+
+                    <Text style={{ paddingLeft: 15, fontSize: 16 }}>
+                        {location.locateAt}
+                    </Text>
+                </View>
+            </ScrollView>
+        );
+    };
     // Render by category
     const renderLocationContentByCategory = (location, activeCategory) => {
         const selectedCategory = location.categories.find(
@@ -47,51 +96,7 @@ const StoryScreen = () => {
             return null;
         }
         if (activeCategory === 1) {
-            return (
-                <ScrollView style={{ flex: 1 }}>
-                    <Carousel />
-                    <Text
-                        style={{
-                            fontSize: 18,
-                            lineHeight: 30,
-                            marginTop: 12,
-                            paddingLeft: 16,
-                            paddingRight: 12,
-                            paddingBottom: 12,
-                        }}
-                    >
-                        {selectedCategory.content}
-                    </Text>
-                    <View className="flex flex-row items-center pb-3">
-                        <Icon
-                            name="globe"
-                            size={20}
-                            style={{ paddingLeft: 16 }}
-                        ></Icon>
-
-                        <TouchableOpacity
-                            style={{ paddingLeft: 12 }}
-                            onPress={handlePress}
-                        >
-                            <Text style={{ fontSize: 16, color: "blue" }}>
-                                {location.url}
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <View className="flex flex-row items-center pb-3">
-                        <Icon
-                            name="map-marker"
-                            size={24}
-                            style={{ paddingLeft: 16 }}
-                        ></Icon>
-
-                        <Text style={{ paddingLeft: 15, fontSize: 16 }}>
-                            {location.locateAt}
-                        </Text>
-                    </View>
-                </ScrollView>
-            );
+            return renderOverview(location);
         } else {
             return (
                 <ScrollView style={{ flex: 1 }}>
