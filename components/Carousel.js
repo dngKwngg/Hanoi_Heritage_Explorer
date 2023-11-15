@@ -1,23 +1,9 @@
 import React from "react";
 import { View, Text, FlatList, Image, Dimensions } from "react-native";
-
+import COLORS from "../constants/colors";
 const Carousel = ({ carouselData }) => {
     const screenWidth = Dimensions.get("window").width;
     const [activeIndex, setActiveIndex] = React.useState(0);
-    // const carouselData = [
-    //     {
-    //         id: 1,
-    //         image: require("../assets/images/slider_1.jpg"),
-    //     },
-    //     {
-    //         id: 2,
-    //         image: require("../assets/images/slider_2.jpg"),
-    //     },
-    //     {
-    //         id: 3,
-    //         image: require("../assets/images/slider_3.jpg"),
-    //     },
-    // ];
 
     // Display images / UI
     const renderItem = ({ item, index }) => {
@@ -57,8 +43,8 @@ const Carousel = ({ carouselData }) => {
                     style={{
                         backgroundColor:
                             activeIndex === index
-                                ? "rgba(110, 109, 110, 0.8)"
-                                : "rgba(227, 226, 228, 0.8)",
+                                ? COLORS.primary
+                                : "rgba(227, 226, 228, 0.9)",
                         height: 10,
                         width: 10,
                         borderRadius: 5,
@@ -85,7 +71,7 @@ const Carousel = ({ carouselData }) => {
                 style={{
                     flexDirection: "row",
                     justifyContent: "center",
-                    marginTop: -16,
+                    marginTop: 16,
                 }}
             >
                 {renderDotIndicators(carouselData)}
