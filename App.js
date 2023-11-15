@@ -6,7 +6,7 @@ import TicketScreen from "./screens/TicketScreen";
 import ImageScreen from "./screens/ImageScreen";
 import { NativeWindStyleSheet } from "nativewind";
 import EventScreen from "./screens/EventScreen";
-
+import ReviewScreen from "./screens/ReviewScreen";
 const Stack = createNativeStackNavigator();
 
 NativeWindStyleSheet.setOutput({
@@ -17,12 +17,13 @@ function App() {
 		<NavigationContainer>
 			<Stack.Navigator
 				// initialRouteName="Splash
-				initialRouteName="Event"
+				initialRouteName="Review"
 				screenOptions={{ headerShown: false }}
 			>
 				<Stack.Screen name="Ticket" component={TicketScreen} />
 				<Stack.Screen name="Image" component={ImageScreen} />
 				<Stack.Screen name="Event" component={EventScreen} />
+				<Stack.Screen name="Review" component={ReviewScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
