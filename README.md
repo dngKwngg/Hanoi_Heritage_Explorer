@@ -19,6 +19,8 @@
 ## ReviewScreen
 ![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/52993e7d-f74b-42c8-8a66-c7011e2c52f2)
 
+## VideoScreen (update)
+![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/c8449160-6c7d-4cea-93cb-858fb8b02c0f)
 
 
 
