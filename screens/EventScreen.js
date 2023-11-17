@@ -11,7 +11,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 const EventScreen = () => {
-	const destinations = [
+	const eventOfDestinations = [
 		{
 			type: "Sắp diễn ra",
 			name: "Đêm thiêng liêng",
@@ -64,7 +64,7 @@ const EventScreen = () => {
 			return false;
 		}
 	};
-	const sortedAndFilteredDestinations = destinations
+	const sortedAndFilteredEventOfDestinations = eventOfDestinations
 		.slice()
 		.sort((a, b) => a.day - b.day)
 		.filter(isFutureEvent);
@@ -165,9 +165,10 @@ const EventScreen = () => {
 			</View>
 			{/* Body */}
 			<ScrollView>
-				{sortedAndFilteredDestinations.map((item, idx) =>
+				{/* {sortedAndFilteredEventOfDestinations.map((item, idx) =>
 					renderItemOfEvents(item, idx)
-				)}
+				)} */}
+				{sortedAndFilteredEventOfDestinations.map(renderItemOfEvents)}
 			</ScrollView>
 		</View>
 	);

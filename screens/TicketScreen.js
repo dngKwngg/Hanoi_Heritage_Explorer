@@ -73,6 +73,18 @@ const TicketScreen = () => {
 				"http://hoangthanhthanglong.com/store/uploads/2018/11/52.jpg",
 				"http://hoangthanhthanglong.com/store/uploads/2018/11/48.jpg",
 			],
+			bgReview:
+				"http://hoangthanhthanglong.com/store/uploads/2018/11/48.jpg",
+			videoList: [
+				{
+					title: "Hoàng Thành Thăng Long Hà Nội còn lại di tích gì sau 1000 năm",
+					url: "k4iWrukqY-o",
+				},
+				{
+					title: "Trải nghiệm tour đêm tại Hoàng thành Thăng Long",
+					url: "I3DA84EBoMc",
+				},
+			],
 		},
 		{
 			name: "Hỏa Lò",
@@ -93,6 +105,18 @@ const TicketScreen = () => {
 				"https://vcdn1-dulich.vnecdn.net/2018/08/27/2-1535360145.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=NIqsaPVHt1XXQlX-wAI9FQ",
 				"https://cdnimg.vietnamplus.vn/uploaded/mzdic/2023_02_15/ttxvn_ha_noi_ra_mat_tour_dem_hoa_lo_1.jpg",
 			],
+			bgReview:
+				"https://vcdn1-dulich.vnecdn.net/2018/08/27/2-1535360145.jpg?w=460&h=0&q=100&dpr=2&fit=crop&s=NIqsaPVHt1XXQlX-wAI9FQ",
+			videoList: [
+				{
+					title: "Tour đêm di tích nhà tù Hỏa Lò - Một trong 5 nhà tù Đáng Sợ Nhất Đông Nam Á",
+					url: "8WVM8FG7Fh4",
+				},
+				{
+					title: "Nhà tù Hỏa Lò, nơi từng được gọi là Hilton Hà Nội",
+					url: "QPLgmHOZjdU",
+				},
+			],
 		},
 		{
 			name: "Quảng trường Ba Đình",
@@ -112,6 +136,18 @@ const TicketScreen = () => {
 				"https://file.qdnd.vn/data/images/0/2018/09/01/nguyenthao/chu%20tich%20hcm.jpg?w=575",
 				"https://dulichkhampha24.com/wp-content/uploads/2020/01/quang-truong-ba-dinh-ha-noi-11.jpg",
 				"https://kenh24h.com.vn/wp-content/uploads/2020/09/1-3.jpg",
+			],
+			bgReview:
+				"https://statics.vinpearl.com/quang-truong-ba-dinh-2_1680149655.jpg",
+			videoList: [
+				{
+					title: "Lễ hạ cờ ở quảng trường Ba Đình",
+					url: "oVK1wCaSF14",
+				},
+				{
+					title: "Tham Quan Lăng Bác | Quảng Trường Ba Đình | Hà Nội",
+					url: "n-cCziVKtGQ",
+				},
 			],
 		},
 	];

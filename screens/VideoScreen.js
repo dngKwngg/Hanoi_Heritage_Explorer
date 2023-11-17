@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import {
 	View,
-	Image,
-	StyleSheet,
 	ScrollView,
+	StyleSheet,
 	Text,
 	StatusBar,
 	TouchableOpacity,
-	TextInput,
-	ImageBackground,
+	FlatList,
 } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
+import YoutubePlayer from "react-native-youtube-iframe";
 import { Card } from "react-native-elements";
+import { categories } from "../constants/categories";
 import COLORS from "../constants/colors";
-const ReviewScreen = () => {
-	const index = 2;
+import Icon from "react-native-vector-icons/FontAwesome";
+
+const VideoScreen = () => {
+	const [playing, setPlaying] = useState(false);
+	const [activeCategory, setActiveCategory] = useState(1);
+	const index = 0;
 	const destinations = [
 		{
 			name: "Hoàng Thành Thăng Long",
@@ -121,90 +124,44 @@ const ReviewScreen = () => {
 			],
 		},
 	];
-	const [content, setContent] = useState("");
-	const [arrStars, setArrStars] = useState([
-		false,
-		false,
-		false,
-		false,
-		false,
-	]);
-	const renderStar = (item, idx) => {
-		const iconName = item ? "star" : "star-o";
+	const renderItemVideo = (item, idx) => {
 		return (
-			<Icon
-				name={iconName}
-				size={30}
-				color="yellow"
-				key={idx}
-				onPress={() => handleStarPress(idx)}
-			/>
+			<View style={styles.container} key={idx}>
+				<Card
+					containerStyle={{
+						borderRadius: 30,
+						height: 280,
+						backgroundColor: "#f8f9fb",
+					}}
+				>
+					<YoutubePlayer
+						height={200}
+						play={playing}
+						videoId={item.url}
+					/>
+					<Text style={styles.title}>{item.title}</Text>
+				</Card>
+			</View>
 		);
+	};
+	const renderVideo = (item) => {
+		return (
+			<View>{destinations[index].videoList.map(renderItemVideo)}</View>
+		);
+	};
+	const renderCategoryContent = () => {
+		const selectedCategory = categories.find(
+			(category) => category.id === activeCategory
+		);
+
+		if (!selectedCategory) {
+			return null;
+		}
+		if (selectedCategory.id === 5) {
+			return renderVideo(selectedCategory);
+		}
 	};
 
-	const handleStarPress = (starIndex) => {
-		const updatedStars = arrStars.map((item, idx) =>
-			idx <= starIndex ? true : false
-		);
-		setArrStars(updatedStars);
-	};
-	const handlePostReview = () => {
-		// Xử lý việc đăng tải bài review ở đây
-		console.log("Đăng thành công!");
-	};
-	const renderReview = () => {
-		return (
-			<ImageBackground
-				source={{
-					uri: destinations[index].bgReview,
-				}}
-				style={styles.background}
-				blurRadius={0.5}
-			>
-				<View style={styles.container}>
-					<Card containerStyle={{ borderRadius: 30 }}>
-						<Text style={[styles.title, { fontSize: 18 }]}>
-							Tên: {destinations[index].name}
-						</Text>
-						<View
-							style={{
-								flexDirection: "row",
-								justifyContent: "center",
-								alignContent: "center",
-							}}
-						>
-							{arrStars.map((item, idx) => renderStar(item, idx))}
-						</View>
-						<Text style={[styles.title, { fontSize: 14 }]}>
-							Chia sẻ thêm về trải nghiệm của bạn
-						</Text>
-						<TextInput
-							placeholder="Nhập nội dung"
-							textAlignVertical="top"
-							value={content}
-							onChangeText={(text) => setContent(text)}
-							style={styles.review}
-						/>
-						<TouchableOpacity
-							style={styles.button}
-							onPress={handlePostReview}
-						>
-							<Text
-								style={{
-									textAlign: "center",
-									color: "#fff",
-									fontSize: 18,
-									fontWeight: "bold",
-								}}
-							>
-								Đăng
-							</Text>
-						</TouchableOpacity>
-					</Card>
-				</View>
-			</ImageBackground>
-		);
-	};
 	return (
 		<View style={{ flex: 1, backgroundColor: "white" }}>
 			<StatusBar
@@ -241,42 +198,63 @@ const ReviewScreen = () => {
 					{destinations[index].name}
 				</Text>
 			</View>
+			<View style={{ paddingLeft: 20, paddingRight: 20, marginTop: 12 }}>
+				<FlatList
+					horizontal
+					showsHorizontalScrollIndicator={false}
+					data={categories}
+					keyExtractor={(item) => item.id}
+					style={{ overflow: "visible" }}
+					renderItem={({ item }) => {
+						let isActive = item.id === activeCategory;
+						let activeTextClass = isActive ? "white" : "black";
+						return (
+							<TouchableOpacity
+								onPress={() => {
+									setActiveCategory(item.id);
+								}}
+								style={{
+									backgroundColor: isActive
+										? COLORS.primary
+										: "rgba(0, 0, 0, 0.07)",
+									padding: 8,
+									paddingLeft: 20,
+									paddingRight: 20,
+									borderRadius: 9999,
+									marginRight: 12,
+								}}
+							>
+								<Text
+									style={{
+										color: activeTextClass,
+										fontWeight: 600,
+									}}
+								>
+									{item.title}
+								</Text>
+							</TouchableOpacity>
+						);
+					}}
+				></FlatList>
+			</View>
 			{/* Body */}
-			{renderReview()}
+
+			{renderCategoryContent()}
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignContent: "center",
-		backgroundColor: "rgba(0, 0, 0, 0.5)",
+		marginTop: 30,
 	},
-	background: {
-		flex: 1,
-		resizeMode: "cover",
-		justifyContent: "center",
-		marginTop: 4,
-	},
-	review: {
-		borderWidth: 1,
-		borderColor: "#d0d7de",
-		height: 100,
-		padding: 10,
-	},
+
 	title: {
+		fontSize: 16,
+		fontWeight: "400",
+		marginBottom: 30,
 		textAlign: "center",
-		padding: 10,
-	},
-	button: {
-		backgroundColor: COLORS.primary,
-		paddingVertical: 10,
-		paddingHorizontal: 20,
-		borderRadius: 30,
-		marginTop: 20,
 	},
 });
 
-export default ReviewScreen;
+export default VideoScreen;
