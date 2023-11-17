@@ -22,6 +22,7 @@ import Carousel from "../components/Carousel";
 import Hyperlink from "react-native-hyperlink";
 
 const StoryScreen = () => {
+    const screenWidth = Dimensions.get("window").width;
     const index = 0;
     const [activeCategory, setActiveCategory] = useState(1);
 
@@ -42,15 +43,35 @@ const StoryScreen = () => {
     const renderOverview = (location) => {
         return (
             <ScrollView style={{ flex: 1 }}>
+                {/* Carousel */}
                 <Carousel carouselData={location.carouselData} />
+                {/* Time reading */}
+                <View className="flex flex-row-reverse items-center pt-2">
+                    <Text
+                        style={{
+                            paddingLeft: 15,
+                            paddingRight: 12,
+                            fontSize: 16,
+                        }}
+                    >
+                        {location.categories[0].timeReading}
+                    </Text>
+                    <Icon
+                        name="clock-o"
+                        size={20}
+                        style={{ color: "grey" }}
+                    ></Icon>
+                </View>
+                {/* Content */}
                 <Text style={styles.textContent}>
                     {location.categories[0].content}
                 </Text>
+                {/* Hyperlink */}
                 <View className="flex flex-row items-center pb-3 pt-3">
                     <Icon
                         name="globe"
                         size={20}
-                        style={{ paddingLeft: 16 }}
+                        style={{ paddingLeft: 16, color: COLORS.primary }}
                     ></Icon>
 
                     <TouchableOpacity
@@ -62,36 +83,36 @@ const StoryScreen = () => {
                         </Text>
                     </TouchableOpacity>
                 </View>
-
+                {/* Location */}
                 <View className="flex flex-row items-center pb-3">
                     <Icon
                         name="map-marker"
                         size={24}
-                        style={{ paddingLeft: 16 }}
+                        style={{ paddingLeft: 16, color: COLORS.primary }}
                     ></Icon>
 
                     <Text style={{ paddingLeft: 15, fontSize: 16 }}>
                         {location.locateAt}
                     </Text>
                 </View>
-
+                {/* Phone */}
                 <View className="flex flex-row items-center pb-3">
                     <Icon
                         name="phone-square"
                         size={18}
-                        style={{ paddingLeft: 16 }}
+                        style={{ paddingLeft: 16, color: COLORS.primary }}
                     ></Icon>
 
                     <Text style={{ paddingLeft: 15, fontSize: 16 }}>
                         {location.phone}
                     </Text>
                 </View>
-
+                {/* Time */}
                 <View className="flex flex-row items-center pb-3">
                     <Icon
                         name="clock-o"
                         size={18}
-                        style={{ paddingLeft: 16 }}
+                        style={{ paddingLeft: 16, color: COLORS.primary }}
                     ></Icon>
 
                     <Text style={{ paddingLeft: 15, fontSize: 16 }}>
@@ -106,12 +127,30 @@ const StoryScreen = () => {
     const renderHistory = (location) => {
         return (
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ backgroundColor: "#ddd" }}>
+                <Image
+                    source={location.categories[1].image}
+                    style={{ height: 300, width: screenWidth }}
+                ></Image>
+                <View className="flex flex-row-reverse items-center pt-2">
+                    <Text
+                        style={{
+                            paddingLeft: 15,
+                            paddingRight: 12,
+                            fontSize: 16,
+                        }}
+                    >
+                        {location.categories[1].timeReading}
+                    </Text>
+                    <Icon
+                        name="clock-o"
+                        size={20}
+                        style={{ color: "grey" }}
+                    ></Icon>
+                </View>
+                <View>
                     <Text
                         style={{
                             ...styles.textContent,
-                            // marginBottom: -16,
-                            backgroundColor: "#ddd",
                         }}
                     >
                         {location.categories[1].content}
@@ -125,12 +164,30 @@ const StoryScreen = () => {
     const renderArchitecture = (location) => {
         return (
             <ScrollView style={{ flex: 1 }}>
-                <View style={{ backgroundColor: "#ddd" }}>
+                <Image
+                    source={location.categories[2].image}
+                    style={{ height: 300, width: screenWidth }}
+                ></Image>
+                <View className="flex flex-row-reverse items-center pt-2">
+                    <Text
+                        style={{
+                            paddingLeft: 15,
+                            paddingRight: 12,
+                            fontSize: 16,
+                        }}
+                    >
+                        {location.categories[2].timeReading}
+                    </Text>
+                    <Icon
+                        name="clock-o"
+                        size={20}
+                        style={{ color: "grey" }}
+                    ></Icon>
+                </View>
+                <View>
                     <Text
                         style={{
                             ...styles.textContent,
-                            // marginBottom: -16,
-                            // backgroundColor: "#ddd",
                         }}
                     >
                         {location.categories[2].content}
