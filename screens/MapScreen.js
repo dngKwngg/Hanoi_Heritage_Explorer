@@ -20,29 +20,66 @@ import Icon from '@expo/vector-icons/FontAwesome5'
 import Constants from "expo-constants"
 import { env } from '@env'
 import Locations from '../dev-data/locations.json'
-
 MapboxGL.setAccessToken(process.env.MAPBOX_ACCESS_TOKEN);
 MapboxGL.setTelemetryEnabled(false);
 
 
 function Map() {
 
-    const [place, setPlace] = useState("")
+    const [typeOfPlace, setTypeOfPlace] = useState("")
     const [selectedItemId, setSelectedItemId] = useState(null);
+    const [selectedPlace, setSelectedPlace] = useState(null)
     const [displayInfo, setDisplayInfo] = useState(false)
     const [query, setQuery] = useState('');
-    const [autoCompleteData, setAutoCompleteData] = useState([])
+    const [data, setData] = useState(makeData())
+    //const []
 
     const bottomSheetRef = useRef()
-    const snapPoints = useMemo(() => ['25%', '100%'], [])
+    const snapPoints = useMemo(() => ['50%', '100%'], [])
+    const autoCompleteData = useMemo(() => {
+        if (query) {
+            if (search(query)[0]) {
+                if (query == search(query)[0].title) {
+                    return []
+                }
+                else {
+                    return search(query)
+                }
+            }
+
+            else {
+                return search(query)
+            }
+        }
+        return []
+    }
+
+    )
 
     useEffect(() => {
         bottomSheetRef.current?.close();
-        setAutoCompleteData(getAutocompleteData())
     }, []);
 
+    useEffect(() => {
+        if (!query) setSelectedItemId(null)
+    }, [query])
+
+    useEffect(() => {
+        if (!selectedItemId) bottomSheetRef.current?.close()
+    })
+
+    useEffect(() => {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].id == selectedItemId) {
+                setSelectedPlace(data[i])
+                return
+            }
+        }
+        setSelectedPlace(null)
+        console.log(selectedPlace)
+    }, [selectedItemId, selectedPlace])
+
     function handlePresentModal() {
-        console.log('handle modal')
         bottomSheetRef.current?.expand()
         setDisplayInfo(true)
     }
@@ -51,12 +88,56 @@ function Map() {
         setSelectedItemId(id)
     }
 
-    function getAutocompleteData() {
+    function makeData() {
         let data = []
         for (let i = 0; i < Locations.length; i++) {
             data = data.concat(Locations[i].places)
         }
         return data
+    }
+
+    function compare(a, b) {
+        if (a.title.indexOf(query) < b.title.indexOf(query)) return -1
+        else if (a.title.indexOf(query) > b.title.indexOf(query)) return 1
+        else return 0
+    }
+    function search(query) {
+        let result = []
+        data.map((value, index) => {
+            if (value.title.includes(query)) {
+                result.push(value)
+            }
+        })
+        result.sort(compare)
+        return result
+    }
+
+    function showLocation(id) {
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].id == id) {
+                return (
+                    <View key={i}>
+                        <MapboxGL.PointAnnotation
+                            id={data[i].id}
+                            title={data[i].id}
+                            key={selectedItemId}
+                            selected={true}
+                            coordinate={data[i].coordinate}
+                        >
+
+                            <View>
+                                <Icon
+                                    name="map-marker-alt"
+                                    size={30}
+                                    style={{ color: selectedItemId == data[i].id ? "red" : "#888888" }}
+                                />
+                            </View>
+                        </MapboxGL.PointAnnotation>
+
+                    </View>
+                )
+            }
+        }
     }
 
     function showLocations(type) {
@@ -84,7 +165,6 @@ function Map() {
                                         name="map-marker-alt"
                                         size={30}
                                         style={{ color: selectedItemId == item.id ? "red" : "#888888" }}
-                                    //style={{color: "red"}}
                                     />
                                 </View>
                             </MapboxGL.PointAnnotation>
@@ -102,12 +182,12 @@ function Map() {
                 <TouchableOpacity key={index} style={styles.suggestions}
                     onPress={() => {
                         console.log(item.name)
-                        if (!place) {
-                            setPlace(item.name)
-                        } else if (place == item.name) {
-                            setPlace("")
+                        if (!typeOfPlace) {
+                            setTypeOfPlace(item.name)
+                        } else if (typeOfPlace == item.name) {
+                            setTypeOfPlace("")
                         } else {
-                            setPlace(item.name)
+                            setTypeOfPlace(item.name)
                         }
                     }}
 
@@ -122,17 +202,28 @@ function Map() {
     return (
         <View style={styles.container}>
             <View style={styles.searchContainer}>
+
                 <View style={styles.autoCompleteContainer}>
                     <Autocomplete
+                        style={styles.searchInput}
                         autoCorrect={false}
                         data={autoCompleteData}
                         value={query}
                         onChangeText={setQuery}
                         placeholder="Search your place"
+                        inputContainerStyle={{ margin: 0, borderRadius: 7 }}
                         flatListProps={{
+                            style: { margin: 0, borderRadius: 7, borderWidth: 1, maxHeight: 150 },
                             keyboardShouldPersistTaps: 'always',
                             renderItem: ({ item }) => (
-                                <TouchableOpacity onPress={() => setQuery(item.title)}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setQuery(item.title)
+                                        console.log(item.id)
+                                        setSelectedItemId(item.id)
+                                        handlePresentModal()
+                                    }}
+                                >
                                     <Text style={styles.itemText}>{item.title}</Text>
                                 </TouchableOpacity>
                             ),
@@ -160,25 +251,63 @@ function Map() {
                 <MapboxGL.UserLocation
                     androidRenderMode='normal'
                 />
-                {place && showLocations(place)}
+                {typeOfPlace && showLocations(typeOfPlace)}
+                {query && showLocation(selectedItemId)}
 
             </MapboxGL.MapView>
 
-            {displayInfo && <GestureHandlerRootView style={styles.infoModal}>
+            {displayInfo && selectedPlace && <GestureHandlerRootView style={styles.infoModal}>
                 <View style={{ flex: 1 }}>
                     <BottomSheet
                         ref={bottomSheetRef}
-                        index={1}
+                        index={0}
                         snapPoints={snapPoints}
                         enablePanDownToClose={true}
                         onClose={() => {
                             console.log('info modal closed')
                             setDisplayInfo(false)
                         }}
+                        style={{
+                            shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 5,
+                            },
+                            shadowOpacity: 0.34,
+                            shadowRadius: 6.27,
+
+                            elevation: 10,
+                        }}
                     >
-                        <View>
-                            <Text>Info.....</Text>
+                        <View style={styles.bottomSheetContent}>
+                            <Text style={styles.title}>{selectedPlace.title} </Text>
+
+                            <ScrollView horizontal>
+                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                            </ScrollView>
+
+                            <Text style={styles.description}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae ex id turpis maximus dapibus.
+                            </Text>
+
+                            <View style={styles.modalButtonContainer}>
+                                <TouchableOpacity style={styles.button}>
+                                    <Text style={styles.buttonText}>Get Directions</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={styles.button}>
+                                    <Text style={styles.buttonText}>View Details</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
+
+
+
                     </BottomSheet>
                 </View>
             </GestureHandlerRootView>}
@@ -206,7 +335,8 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         height: "100%",
-        backgroundColor: "#a19797",
+        top: Constants.statusBarHeight,
+        backgroundColor: "white",
     },
     map: {
         flex: 1,
@@ -218,37 +348,64 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: "transparent"
     },
+    // auto complete search style
     searchContainer: {
+        flex: 1,
         position: "absolute",
         width: "100%",
-        alignItems: "center"
+        alignItems: "center",
+        justifyContent: "center",
     },
-    searchBox: {
-        position: "absolute",
-        width: "90%",
+    autoCompleteContainer: {
+        // Hack required to make the autocomplete
+        // work on Andrdoid
+        flex: 1,
+        position: 'absolute',
+        width: "100%",
+        top: Constants.statusBarHeight,
+        zIndex: 2,
+        padding: 5,
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+        zIndex: 3,
+
+
+    },
+    searchInput: {
+        position: "relative",
+        width: 350,
+        height: 50,
         backgroundColor: "white",
         shadowColor: "black",
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.5,
-        shadowRadius: 4,
+        shadowRadius: 20,
         elevation: 4,
         padding: 8,
-        borderRadius: 8,
-        top: Constants.statusBarHeight,
-        zIndex: 2
+        zIndex: 2,
+        borderRadius: 7
     },
+    itemText: {
+        fontSize: 15,
+        margin: 0,
+        width: 350,
+    },
+    // suggestion nav style
     suggestionScrollView: {
         position: 'absolute',
         top: Platform.OS === 'ios' ? 90 : 80,
         paddingHorizontal: 10,
-        zIndex: 2
+        zIndex: 2,
+        marginTop: 20,
     },
     suggestions: {
         flexDirection: "row",
         justifyContent: 'center',
+        textAlign: "center",
         alignItems: 'center',
         backgroundColor: '#fff',
-        borderRadius: 20,
+        borderRadius: 7,
         padding: 8,
         paddingHorizontal: 20,
         marginHorizontal: 10,
@@ -259,12 +416,50 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         elevation: 10,
     },
+    // bottom sheet style
     infoModal: {
         flex: 1,
         height: "40%",
         width: "100%",
         position: "absolute",
-        bottom: 0
+        bottom: 0,
+    
+    },
+    bottomSheetContent: {
+        position: 'absolute',
+        margin: 10,
+        bottom: 30
+
+    },
+    title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 8,
+    },
+    image: {
+        width: 100,
+        height: 100,
+        marginRight: 8,
+    },
+    description: {
+        marginBottom: 8,
+    },
+    modalButtonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    button: {
+        backgroundColor: '#4285F4',
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        borderRadius: 4,
+        marginBottom: 8,
+    },
+    buttonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
     }
 })
 
