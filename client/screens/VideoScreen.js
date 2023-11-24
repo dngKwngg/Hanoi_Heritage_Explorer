@@ -5,6 +5,7 @@ import YoutubePlayer from "react-native-youtube-iframe";
 import { categories } from "../constants/categories";
 import COLORS from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Caption, Title } from 'react-native-paper';
 
 const VideoScreen = () => {
   const [playing, setPlaying] = useState(false);
@@ -31,34 +32,36 @@ const VideoScreen = () => {
 
   const renderTab = (item) => {
     return (
+     
     <ScrollView style={styles.container}>
-      <YoutubePlayer
-        height={190}
-        play={playing}
-        videoId={"5sGQuTNrBnM"}
+   
+        <YoutubePlayer
+          height={190}
+          play={playing}
+          videoId={"5sGQuTNrBnM"}
+        />
+        <Caption style={styles.caption}>Hồ Hoàn Kiếm - Di tích lịch sử và danh lam thắng cảnh của Thủ đô</Caption>
+    
+        <YoutubePlayer
+          height={190}
+          play={playing}
+          videoId={"WR2ApqIYtfc"}
+        />
+        <Caption style={styles.caption}>
+          Hồ Hoàn Kiếm tuyệt đẹp từ trên cao
+        </Caption>
+  
 
-      />
-      <Text style={styles.title}>
-        Hồ Hoàn Kiếm - Di tích lịch sử và danh lam thắng cảnh của Thủ đô
-      </Text>
-
-      <YoutubePlayer
-        height={190}
-        play={playing}
-        videoId={"WR2ApqIYtfc"}
-      />
-      <Text style={styles.title}>
-        Hồ Hoàn Kiếm tuyệt đẹp từ trên cao
-      </Text>
-
-      <YoutubePlayer
-        height={190}
-        play={playing}
-        videoId={"bMtvWMZAhns"}
-      />
-      <Text style={styles.title}>
-        Phố đi bộ Hồ Hoàn Kiếm - Tăng sức hấp dẫn đô thị Hà Nội 
-      </Text>
+  
+        <YoutubePlayer
+          height={190}
+          play={playing}
+          videoId={"bMtvWMZAhns"}
+        />
+        <Caption style={styles.caption}>
+          Phố đi bộ Hồ Hoàn Kiếm - Tăng sức hấp dẫn đô thị Hà Nội 
+        </Caption>
+      
     </ScrollView>
     )
   }
@@ -152,10 +155,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 
-  title: {
-    fontSize: 18,
+  caption: {
     fontWeight: '400',
-    marginBottom: 30
+    marginBottom: 40,
+    textAlign: "center"
   },
 });
 
