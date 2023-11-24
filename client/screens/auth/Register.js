@@ -1,6 +1,6 @@
 import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import React, { useState, useContext} from "react";
-import { AuthContext } from "../../context/authContext";
+// import { AuthContext } from "../../context/authContext";
 import { Text } from 'react-native-paper'
 import Background from '../../components/Background'
 import Logo from '../../components/Logo'
@@ -12,11 +12,11 @@ import { theme } from '../../core/theme'
 import { emailValidator } from '../../helpers/emailValidator'
 import { passwordValidator } from '../../helpers/passwordValidator'
 import { nameValidator } from '../../helpers/nameValidator'
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const Register = ({ navigation }) => {
-  const [state, setState] = useContext(AuthContext);
+  // const [state, setState] = useContext(AuthContext);
   // states
   const [name, setName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
@@ -44,9 +44,9 @@ const Register = ({ navigation }) => {
         email: emailValue,
         password: passwordValue,
       });
-      setState(data);
-      await AsyncStorage.setItem("@auth", JSON.stringify(data));
-      alert(data && data.message);
+      // setState(data);
+      // await AsyncStorage.setItem("@auth", JSON.stringify(data));
+      Alert.alert(data && data.message);
       navigation.navigate("Login");
       console.log("Register Data==> ", { nameValue, emailValue, passwordValue });
     } catch (error) {

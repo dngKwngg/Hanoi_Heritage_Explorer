@@ -1,4 +1,4 @@
-
+import { View, Text } from "react-native";
 import * as React from "react";
 import { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -7,8 +7,14 @@ import Register from "../../screens/auth/Register";
 import Login from "../../screens/auth/Login";
 import { AuthContext } from "../../context/authContext";
 import HeaderMenu from "./HeaderMenu";
+import Post from "../../screens/Post";
+import About from "../../screens/About";
+import Account from "../../screens/Account";
+import Myposts from "../../screens/Myposts";
 import Splash from "../../screens/Splash";
 import OnboardingScreen from "../../screens/OnboardingScreen"
+import ForgotPassword from "../../screens/ForgotPassword";
+import ResetPassword from "../../screens/ResetPassword";
 const ScreenMenu = () => {
   //global state
   const [state] = useContext(AuthContext);
@@ -39,8 +45,38 @@ const ScreenMenu = () => {
               headerRight: () => <HeaderMenu />,
             }}
           />
-          
-          
+          <Stack.Screen
+            name="Post"
+            component={Post}
+            options={{
+              headerBackTitle: "Back",
+              headerRight: () => <HeaderMenu />,
+            }}
+          />
+          <Stack.Screen
+            name="About"
+            component={About}
+            options={{
+              headerBackTitle: "Back",
+              headerRight: () => <HeaderMenu />,
+            }}
+          />
+          <Stack.Screen
+            name="Account"
+            component={Account}
+            options={{
+              headerBackTitle: "Back",
+              headerRight: () => <HeaderMenu />,
+            }}
+          />
+          <Stack.Screen
+            name="Myposts"
+            component={Myposts}
+            options={{
+              headerBackTitle: "Back",
+              headerRight: () => <HeaderMenu />,
+            }}
+          />
         </>
       ) : (
         <>
@@ -52,6 +88,16 @@ const ScreenMenu = () => {
           <Stack.Screen
             name="Register"
             component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
             options={{ headerShown: false }}
           />
 

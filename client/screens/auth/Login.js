@@ -36,6 +36,7 @@ const Login = ({ navigation }) => {
       const emailValue = email.value;
       const passwordValue = password.value;
       const { data } = await axios.post("/auth/login", { email: emailValue, password: passwordValue });
+      console.log(axios.error);
       setState(data);
       await AsyncStorage.setItem("@auth", JSON.stringify(data));
       Alert.alert(data && data.message);
@@ -53,13 +54,14 @@ const Login = ({ navigation }) => {
 
   //temp function to check local storage data
   const getLocalStorageData = async () => {
+    
     let data = await AsyncStorage.getItem("@auth");
     console.log("Local Storage ==> ", data);
   };
   getLocalStorageData();
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
       <Header>Welcome back!</Header>
       <TextInput
@@ -85,7 +87,7 @@ const Login = ({ navigation }) => {
       />
       <View style={styles.forgotPassword}>
         <TouchableOpacity
-          onPress={() => navigation.navigate('ResetPasswordScreen')}
+          onPress={() => navigation.navigate('ForgotPassword')}
         >
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
