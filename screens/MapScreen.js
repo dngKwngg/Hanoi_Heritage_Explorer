@@ -10,19 +10,24 @@ import {
     ScrollView,
     TouchableOpacity
 } from "react-native"
-import BottomSheet from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Autocomplete from 'react-native-autocomplete-input';
 
 import MapboxGL from "@rnmapbox/maps";
-import Icon from '@expo/vector-icons/FontAwesome5'
+import FontAwesome5Icon from '@expo/vector-icons/FontAwesome5'
+import MCIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Stars from 'react-native-stars';
+
+import darkGreyPin from '../assets/icons/map-marker-alt-solid-dark-grey.png'
+import redPin from '../assets/icons/map-marker-alt-solid-red.png'
 
 import Constants from "expo-constants"
-import { env } from '@env'
-import Locations from '../dev-data/locations.json'
+import Locations from '../dev-data/locations'
+import utils from '../utils/utils'
+
 MapboxGL.setAccessToken(process.env.MAPBOX_ACCESS_TOKEN);
 MapboxGL.setTelemetryEnabled(false);
-
 
 function Map() {
 
@@ -32,10 +37,13 @@ function Map() {
     const [displayInfo, setDisplayInfo] = useState(false)
     const [query, setQuery] = useState('');
     const [data, setData] = useState(makeData())
-    //const []
+    const [routeDirections, setRouteDirections] = useState(null);
+    const [duration, setDuration] = useState(0)
+    const [distance, setDistance] = useState(0)
 
     const bottomSheetRef = useRef()
     const snapPoints = useMemo(() => ['50%', '100%'], [])
+
     const autoCompleteData = useMemo(() => {
         if (query) {
             if (search(query)[0]) {
@@ -52,13 +60,30 @@ function Map() {
             }
         }
         return []
-    }
-
-    )
+    })
 
     useEffect(() => {
-        bottomSheetRef.current?.close();
-    }, []);
+        if (selectedPlace) {
+            console.log("fetch distance and duration")
+            const fetchData = async () => {
+                let res = await utils.fetchDirection(utils.generateDirectionQueryString(
+                    {
+                        longitude: 105.782096,
+                        latitude: 21.040622
+                    }, {
+                    longitude: selectedPlace.coordinate[0],
+                    latitude: selectedPlace.coordinate[1]
+                }
+
+                ))
+
+                setDuration(parseFloat(res["routes"][0]["duration"] / 60).toFixed(2))
+                setDistance(parseFloat(res["routes"][0]["distance"] / 1000).toFixed(2))
+
+            }
+            fetchData()
+        }
+    }, [selectedPlace])
 
     useEffect(() => {
         if (!query) setSelectedItemId(null)
@@ -66,7 +91,8 @@ function Map() {
 
     useEffect(() => {
         if (!selectedItemId) bottomSheetRef.current?.close()
-    })
+        else bottomSheetRef.current?.expand()
+    }, [selectedItemId])
 
     useEffect(() => {
         for (let i = 0; i < data.length; i++) {
@@ -80,7 +106,6 @@ function Map() {
     }, [selectedItemId, selectedPlace])
 
     function handlePresentModal() {
-        bottomSheetRef.current?.expand()
         setDisplayInfo(true)
     }
 
@@ -126,10 +151,10 @@ function Map() {
                         >
 
                             <View>
-                                <Icon
-                                    name="map-marker-alt"
+                                <Image
+                                    source={require('../assets/icons/pin-black.png')}
                                     size={30}
-                                    style={{ color: selectedItemId == data[i].id ? "red" : "#888888" }}
+                                    style={{ color: selectedItemId == data[i].id ? "red" : "#888888", zIndex: 2 }}
                                 />
                             </View>
                         </MapboxGL.PointAnnotation>
@@ -145,28 +170,25 @@ function Map() {
             if (Locations[i].name == type) {
                 return Locations[i].places.map((item, index) => {
                     return (
-                        <View key={index}>
+                        <View key={index} style={{ width: 20, height: 53.333}}
+                        >
                             <MapboxGL.PointAnnotation
                                 id={item.id}
                                 title={item.id}
                                 key={selectedItemId}
                                 selected={true}
                                 onSelected={(details) => {
+                                    setRouteDirections(null)
                                     if (selectedItemId == item.id) handleSelectMarker(null)
                                     else handleSelectMarker(item.id)
                                     handlePresentModal()
                                 }}
-
                                 coordinate={item.coordinate}
                             >
-
-                                <View>
-                                    <Icon
-                                        name="map-marker-alt"
-                                        size={30}
-                                        style={{ color: selectedItemId == item.id ? "red" : "#888888" }}
-                                    />
-                                </View>
+                                <Image
+                                    source={selectedItemId == item.id ? redPin : darkGreyPin}
+                                    style={{ width: 20, height: 53.333}}
+                                />
                             </MapboxGL.PointAnnotation>
 
                         </View>
@@ -192,7 +214,7 @@ function Map() {
                     }}
 
                 >
-                    <Icon name={item.icon} size={20} />
+                    <FontAwesome5Icon name={item.icon} size={20} />
                     <Text style={{ marginLeft: 10 }}>{item.name}</Text>
                 </TouchableOpacity>
             )
@@ -213,7 +235,7 @@ function Map() {
                         placeholder="Search your place"
                         inputContainerStyle={{ margin: 0, borderRadius: 7 }}
                         flatListProps={{
-                            style: { margin: 0, borderRadius: 7, borderWidth: 1, maxHeight: 150 },
+                            style: styles.autoCompleteList,
                             keyboardShouldPersistTaps: 'always',
                             renderItem: ({ item }) => (
                                 <TouchableOpacity
@@ -244,9 +266,9 @@ function Map() {
                 style={styles.map}>
                 <MapboxGL.Camera
                     zoomLevel={12}
-                    centerCoordinate={[105.782155, 21.040578]}
+                    centerCoordinate={selectedPlace ? selectedPlace.coordinate : [105.782155, 21.040578]}
                     animationMode="flyTo"
-                    animationDuration={3000}
+                    animationDuration={1000}
                 />
                 <MapboxGL.UserLocation
                     androidRenderMode='normal'
@@ -254,81 +276,122 @@ function Map() {
                 {typeOfPlace && showLocations(typeOfPlace)}
                 {query && showLocation(selectedItemId)}
 
+                {/* Showing direction */}
+                {routeDirections && (
+                    <MapboxGL.ShapeSource id="line1" shape={routeDirections}>
+                        <MapboxGL.LineLayer
+                            id="routerLine01"
+                            style={{
+                                lineColor: 'blue',
+                                lineWidth: 8,
+                                lineOpacity: 0.6,
+                                lineJoin: 'round',
+                                lineCap: 'round'
+                            }}
+                        />
+                    </MapboxGL.ShapeSource>
+                )}
+
             </MapboxGL.MapView>
 
             {displayInfo && selectedPlace && <GestureHandlerRootView style={styles.infoModal}>
-                <View style={{ flex: 1 }}>
-                    <BottomSheet
-                        ref={bottomSheetRef}
-                        index={0}
-                        snapPoints={snapPoints}
-                        enablePanDownToClose={true}
-                        onClose={() => {
-                            console.log('info modal closed')
-                            setDisplayInfo(false)
-                        }}
-                        style={{
-                            shadowColor: "#000",
-                            shadowOffset: {
-                                width: 0,
-                                height: 5,
-                            },
-                            shadowOpacity: 0.34,
-                            shadowRadius: 6.27,
 
-                            elevation: 10,
-                        }}
-                    >
-                        <View style={styles.bottomSheetContent}>
-                            <Text style={styles.title}>{selectedPlace.title} </Text>
-
-                            <ScrollView horizontal>
-                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
-                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
-                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
-                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
-                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
-                                <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
-                            </ScrollView>
-
-                            <Text style={styles.description}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae ex id turpis maximus dapibus.
-                            </Text>
-
-                            <View style={styles.modalButtonContainer}>
-                                <TouchableOpacity style={styles.button}>
-                                    <Text style={styles.buttonText}>Get Directions</Text>
-                                </TouchableOpacity>
-
-                                <TouchableOpacity style={styles.button}>
-                                    <Text style={styles.buttonText}>View Details</Text>
-                                </TouchableOpacity>
-                            </View>
+                <BottomSheet
+                    ref={bottomSheetRef}
+                    index={1}
+                    snapPoints={snapPoints}
+                    enablePanDownToClose={true}
+                    enableContentPanningGesture={false}
+                    enableHandlePanningGesture={true}
+                    onClose={() => {
+                        setDisplayInfo(false)
+                    }}
+                    style={styles.bottomSheet}
+                    backgroundStyle={{ backfaceVisibility: "hidden" }}
+                >
+                    <View style={styles.bottomSheetContent}>
+                        <Text style={styles.title}>{selectedPlace.title} </Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+                            <Text style={{ marginRight: 5 }}>3.3</Text>
+                            <Stars
+                                display={3.3}
+                                spacing={2}
+                                count={5}
+                                fullStar={<MCIcons size={25} name={'star'} style={[styles.star]} />}
+                                emptyStar={<MCIcons size={25} name={'star-outline'} style={[styles.star, styles.emptyStar]} />}
+                                halfStar={<MCIcons size={25} name={'star-half'} style={[styles.star]} />}
+                            />
                         </View>
 
+                        <View style={styles.categoryDistanceDurationContainer}>
+                            <Text style={styles.categoryDistanceDurationText}>{selectedPlace.category} · </Text>
+                            <Text style={styles.categoryDistanceDurationText}><FontAwesome5Icon name="car" /> {duration}min · </Text>
+                            <Text style={styles.categoryDistanceDurationText}><FontAwesome5Icon name="road" /> {distance}km</Text>
+                        </View>
+
+                        <BottomSheetScrollView horizontal>
+                            <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                            <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                            <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                            <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                            <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                            <Image source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')} style={styles.image} />
+                        </BottomSheetScrollView>
+
+                        <View style={styles.modalButtonContainer}>
+
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={async () => {
+                                    let res = await utils.fetchDirection(utils.generateDirectionQueryString(
+                                        {
+                                            longitude: 105.782096,
+                                            latitude: 21.040622
+                                        }, {
+                                        longitude: selectedPlace.coordinate[0],
+                                        latitude: selectedPlace.coordinate[1]
+                                    }
+
+                                    ))
+
+                                    setRouteDirections({
+                                        type: 'FeatureCollection',
+                                        features: [
+                                            {
+                                                type: 'Feature',
+                                                properties: {},
+                                                geometry: {
+                                                    type: 'LineString',
+                                                    coordinates: res['routes'][0]['geometry']['coordinates'],
+                                                }
+                                            }
+                                        ]
+                                    })
+                                }}
+                            >
+                                <Text style={styles.buttonText}>View Directions</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={styles.button}
+                                onPress={() => { console.log("Get direction button clicked") }}
+                            >
+                                <Text style={styles.buttonText}>Get Details</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
 
 
-                    </BottomSheet>
-                </View>
+
+                </BottomSheet>
+
             </GestureHandlerRootView>}
+
+
         </View>
 
     )
 }
-
-const markerShape = {
-    type: 'FeatureCollection',
-    features: [
-        {
-            type: 'Feature',
-            properties: {},
-            geometry: {
-                type: 'Point',
-                coordinates: [105.85227845338571, 21.02784599224821],
-            },
-        },
-    ],
-};
 
 const styles = StyleSheet.create({
     container: {
@@ -352,24 +415,21 @@ const styles = StyleSheet.create({
     searchContainer: {
         flex: 1,
         position: "absolute",
+        top: Constants.statusBarHeight,
         width: "100%",
         alignItems: "center",
         justifyContent: "center",
+        zIndex: 2
     },
     autoCompleteContainer: {
         // Hack required to make the autocomplete
         // work on Andrdoid
-        flex: 1,
-        position: 'absolute',
         width: "100%",
-        top: Constants.statusBarHeight,
-        zIndex: 2,
+        zIndex: 3,
         padding: 5,
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
-        zIndex: 3,
-
 
     },
     searchInput: {
@@ -377,14 +437,29 @@ const styles = StyleSheet.create({
         width: 350,
         height: 50,
         backgroundColor: "white",
-        shadowColor: "black",
-        shadowOffset: { width: 2, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 20,
-        elevation: 4,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+
+        elevation: 8,
         padding: 8,
         zIndex: 2,
         borderRadius: 7
+    },
+    autoCompleteList: {
+        margin: 0, borderRadius: 7, borderWidth: 1, maxHeight: 150, shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+
+        elevation: 8,
     },
     itemText: {
         fontSize: 15,
@@ -393,27 +468,26 @@ const styles = StyleSheet.create({
     },
     // suggestion nav style
     suggestionScrollView: {
-        position: 'absolute',
-        top: Platform.OS === 'ios' ? 90 : 80,
+        position: 'relative',
         paddingHorizontal: 10,
+        width: 350,
         zIndex: 2,
-        marginTop: 20,
+        marginTop: 10,
     },
     suggestions: {
         flexDirection: "row",
         justifyContent: 'center',
         textAlign: "center",
         alignItems: 'center',
-        backgroundColor: '#fff',
-        borderRadius: 7,
+        height: 35,
         padding: 8,
+        backgroundColor: '#fff',
         paddingHorizontal: 20,
         marginHorizontal: 10,
-        height: 35,
-        shadowColor: '#ccc',
-        shadowOffset: { width: 0, height: 3 },
+        borderRadius: 20,
         shadowOpacity: 0.5,
         shadowRadius: 5,
+        shadowOffset: { width: 3, height: 3 },
         elevation: 10,
     },
     // bottom sheet style
@@ -423,18 +497,33 @@ const styles = StyleSheet.create({
         width: "100%",
         position: "absolute",
         bottom: 0,
-    
+
+        shadowOffset: { width: -12, height: -12 },
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+
+        elevation: 8,
+
+    },
+    bottomSheet: {
+        flex: 1,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        shadowOffset: { width: -12, height: -12 },
+        elevation: 20,
     },
     bottomSheetContent: {
         position: 'absolute',
         margin: 10,
-        bottom: 30
-
     },
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        marginBottom: 8,
     },
     image: {
         width: 100,
@@ -460,6 +549,18 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         textAlign: 'center',
+    },
+    star: {
+        color: "#FBBC04",
+        backgroundColor: 'transparent',
+    },
+    categoryDistanceDurationContainer: {
+        flexDirection: "row",
+        alignItems: "flex-end",
+
+    },
+    categoryDistanceDurationText: {
+        color: "#70757a"
     }
 })
 
