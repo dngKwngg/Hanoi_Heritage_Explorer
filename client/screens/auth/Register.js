@@ -12,6 +12,7 @@ import { theme } from '../../core/theme'
 import { emailValidator } from '../../helpers/emailValidator'
 import { passwordValidator } from '../../helpers/passwordValidator'
 import { nameValidator } from '../../helpers/nameValidator'
+import { confirmPasswordValidator } from '../../helpers/confirmPasswordValidator'
 // import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
@@ -21,6 +22,7 @@ const Register = ({ navigation }) => {
   const [name, setName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' })
   //function
   // btn funcn
   const onSignUpPressed = async () => {
@@ -28,10 +30,12 @@ const Register = ({ navigation }) => {
       const nameError = nameValidator(name.value)
       const emailError = emailValidator(email.value)
       const passwordError = passwordValidator(password.value)
-      if (emailError || passwordError || nameError) {
+      const confirmPasswordError = confirmPasswordValidator(confirmPassword.value, password.value)
+      if (emailError || passwordError || nameError || confirmPasswordError) {
         setName({ ...name, error: nameError })
         setEmail({ ...email, error: emailError })
         setPassword({ ...password, error: passwordError })
+        setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
         return;
         
       }
@@ -57,7 +61,7 @@ const Register = ({ navigation }) => {
 
   return (
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
       <Header>Create Account</Header>
       <TextInput
@@ -82,11 +86,20 @@ const Register = ({ navigation }) => {
       />
       <TextInput
         label="Password"
-        returnKeyType="done"
+        returnKeyType="next"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
         error={!!password.error}
         errorText={password.error}
+        secureTextEntry
+      />
+      <TextInput
+        label="Confirm Password"
+        returnKeyType="done"
+        value={confirmPassword.value}
+        onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
+        error={!!confirmPassword.error}
+        errorText={confirmPassword.error}
         secureTextEntry
       />
       <Button

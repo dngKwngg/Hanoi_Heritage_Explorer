@@ -10,17 +10,21 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { resetCodeValidator } from '../helpers/resetCodeValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import { confirmPasswordValidator } from '../helpers/confirmPasswordValidator'
 
 export default function ResetPassword({ navigation }) {
   const [resetCode, setResetCode] = useState({ value: '', error: '' })
   const [newPassword, setNewPassword] = useState({ value: '', error: '' })
+  const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' })
 
   const onResetPassPressed = () => {
     const resetCodeError = resetCodeValidator(resetCode.value)
     const newPasswordError = passwordValidator(newPassword.value)
-    if (resetCodeError || newPasswordError) {
+    const confirmPasswordError = confirmPasswordValidator(confirmPassword.value, newPassword.value)
+    if (resetCodeError || newPasswordError || confirmPasswordError) {
       setResetCode({ ...resetCode, error: resetCodeError })
       setNewPassword({ ...newPassword, error: newPasswordError })
+      setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
       return;
     }
     alert('Your password has been reset successfully, please login!');
@@ -36,7 +40,7 @@ export default function ResetPassword({ navigation }) {
       <Logo />
       <Header>Reset Password</Header>
       <TextInput
-        label="Four digits code"
+        label="Four Digits Code"
         returnKeyType="next"
         value={resetCode.value}
         onChangeText={(text) => setResetCode({ value: text, error: '' })}
@@ -47,12 +51,21 @@ export default function ResetPassword({ navigation }) {
         keyboardType="numeric"
       />
       <TextInput
-        label="New password"
-        returnKeyType="done"
+        label="New Password"
+        returnKeyType="next"
         value={newPassword.value}
         onChangeText={(text) => setNewPassword({ value: text, error: '' })}
         error={!!newPassword.error}
         errorText={newPassword.error}
+        secureTextEntry
+      />
+      <TextInput
+        label="Confirm Password"
+        returnKeyType="done"
+        value={confirmPassword.value}
+        onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
+        error={!!confirmPassword.error}
+        errorText={confirmPassword.error}
         secureTextEntry
       />
       <Button mode="contained" onPress={onResetPassPressed}>
