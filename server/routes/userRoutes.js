@@ -2,6 +2,8 @@ const express = require("express");
 const {
   registerController,
   loginController,
+  forgotPasswordController,
+  resetPasswordController,
   updateUserController,
   requireSingIn,
 } = require("../controllers/userController");
@@ -15,6 +17,11 @@ router.post("/register", registerController);
 
 // LOGIN || POST
 router.post("/login", loginController);
+
+//FORGOT PASSWORD || POST
+router.post("/forgotpassword", forgotPasswordController);
+
+router.post("/resetpassword", resetPasswordController);
 
 //UPDATE || PUT
 router.put("/update-user", requireSingIn, updateUserController);

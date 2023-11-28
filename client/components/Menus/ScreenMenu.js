@@ -13,8 +13,8 @@ import Account from "../../screens/Account";
 import Myposts from "../../screens/Myposts";
 import Splash from "../../screens/Splash";
 import OnboardingScreen from "../../screens/OnboardingScreen"
-import ForgotPassword from "../../screens/ForgotPassword";
-import ResetPassword from "../../screens/ResetPassword";
+import ForgotPassword from "../../screens/auth/ForgotPassword";
+import ResetPassword from "../../screens/auth/ResetPassword";
 const ScreenMenu = () => {
   //global state
   const [state] = useContext(AuthContext);
@@ -23,16 +23,7 @@ const ScreenMenu = () => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator initialRouteName="Splash">
-      <Stack.Screen
-        name="Splash"
-        component={Splash}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Onboarding"
-        component={OnboardingScreen}
-        options={{ headerShown: false }}
-      />
+
 
 
       {authenticatedUser ? (
@@ -80,6 +71,16 @@ const ScreenMenu = () => {
         </>
       ) : (
         <>
+          <Stack.Screen
+            name="Splash"
+            component={Splash}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Onboarding"
+            component={OnboardingScreen}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name="Login"
             component={Login}
