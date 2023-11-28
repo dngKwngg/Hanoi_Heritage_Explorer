@@ -13,6 +13,8 @@ import { emailValidator } from '../../helpers/emailValidator'
 import { passwordValidator } from '../../helpers/passwordValidator'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+
 const Login = ({ navigation }) => {
   //global state
   const [state, setState] = useContext(AuthContext);
@@ -20,6 +22,11 @@ const Login = ({ navigation }) => {
   // states
   const [email, setEmail] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   //function
   // btn funcn
@@ -43,7 +50,7 @@ const Login = ({ navigation }) => {
       navigation.navigate("Home");
       console.log("Login Data==> ", { emailValue, passwordValue });
     } catch (error) {
-      alert(error.response.data.message);
+      Alert.alert(error.response.data.message);
       console.log(error);
     }
   };
@@ -76,15 +83,25 @@ const Login = ({ navigation }) => {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
-      <TextInput
-        label="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
+      <View style={{ flexDirection: 'row' }}>
+        <TextInput
+          label="Password"
+          returnKeyType="done"
+          value={password.value}
+          onChangeText={(text) => setPassword({ value: text, error: '' })}
+          error={!!password.error}
+          errorText={password.error}
+          secureTextEntry={!showPassword}
+          style={{ width: '100%' }}
+        />
+        <MaterialCommunityIcons
+          name={showPassword ? 'eye-off' : 'eye'}
+          size={24}
+          color="#aaa"
+          style={{ position: 'absolute', right: '3%', top: '38%' }}
+          onPress={toggleShowPassword}
+        />
+      </View>
       <View style={styles.forgotPassword}>
         <TouchableOpacity
           onPress={() => navigation.navigate('ForgotPassword')}

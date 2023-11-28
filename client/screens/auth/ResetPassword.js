@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert } from 'react-native'
+import { Alert, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../../components/Background'
 import Logo from '../../components/Logo'
@@ -13,6 +13,7 @@ import { passwordValidator } from '../../helpers/passwordValidator'
 import { confirmPasswordValidator } from '../../helpers/confirmPasswordValidator'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
@@ -21,6 +22,16 @@ export default function ResetPassword({ navigation }) {
   const [resetCode, setResetCode] = useState({ value: '', error: '' })
   const [newPassword, setNewPassword] = useState({ value: '', error: '' })
   const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' })
+
+  const [showPassword, setShowPassword] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const toggleShowConfirmPassword = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const onResetPassPressed = async () => {
     try {
@@ -91,25 +102,48 @@ export default function ResetPassword({ navigation }) {
         errorText={resetCode.error}
         autoCapitalize="none"
         textContentType="oneTimeCode"
+ 
       />
-      <TextInput
-        label="New Password"
-        returnKeyType="next"
-        value={newPassword.value}
-        onChangeText={(text) => setNewPassword({ value: text, error: '' })}
-        error={!!newPassword.error}
-        errorText={newPassword.error}
-        secureTextEntry
-      />
-      <TextInput
-        label="Confirm Password"
-        returnKeyType="done"
-        value={confirmPassword.value}
-        onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
-        error={!!confirmPassword.error}
-        errorText={confirmPassword.error}
-        secureTextEntry
-      />
+      <View style={{flexDirection: 'row'}}>
+        <TextInput
+          label="New Password"
+          returnKeyType="next"
+          value={newPassword.value}
+          onChangeText={(text) => setNewPassword({ value: text, error: '' })}
+          error={!!newPassword.error}
+          errorText={newPassword.error}
+          secureTextEntry={!showPassword}
+          style={{ width: '100%' }}
+        />
+        <MaterialCommunityIcons
+          name={showPassword ? 'eye-off' : 'eye'}
+          size={24}
+          color="#aaa"
+          style={{ position: 'absolute', right: '3%', top: '38%' }}
+          onPress={toggleShowPassword}
+        />
+      </View>
+
+      <View style={{flexDirection: 'row'}}>
+        <TextInput
+          label="Confirm Password"
+          returnKeyType="done"
+          value={confirmPassword.value}
+          onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
+          error={!!confirmPassword.error}
+          errorText={confirmPassword.error}
+          secureTextEntry={!showConfirmPassword}
+          style={{ width: '100%' }}
+        />
+        <MaterialCommunityIcons
+          name={showConfirmPassword ? 'eye-off' : 'eye'}
+          size={24}
+          color="#aaa"
+          style={{ position: 'absolute', right: '3%', top: '38%' }}
+          onPress={toggleShowConfirmPassword}
+        />
+      </View>
+
       <Button mode="contained" onPress={onResetPassPressed}>
         Continue
       </Button>
