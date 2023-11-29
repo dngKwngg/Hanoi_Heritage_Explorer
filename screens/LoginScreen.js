@@ -10,16 +10,11 @@ import {
     ScrollView,
 } from "react-native";
 import React, { useState } from "react";
-import Animated, {
-    FadeIn,
-    FadeInUp,
-    FadeInDown,
-    FadeOut,
-} from "react-native-reanimated";
-import { useNavigation } from "@react-navigation/native";
 import COLORS from "../constants/colors";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Buttons from "../components/Buttons";
+import SocialButton from "../components/SocialButton";
+import InputLoginSignup from "../components/InputLoginSignup";
 const LoginScreen = ({ navigation }) => {
     const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -31,9 +26,9 @@ const LoginScreen = ({ navigation }) => {
             <StatusBar barStyle="dark-content" backgroundColor="#fff" />
             {/* login form */}
             <View
-                className="flex-col"
                 style={{
                     flex: 2,
+                    flexDirection: "column",
                     backgroundColor: "#fff",
                     paddingTop: 10,
                     paddingHorizontal: "3%",
@@ -58,56 +53,31 @@ const LoginScreen = ({ navigation }) => {
 
                 {/* forms */}
                 <View className="flex-col" style={{ paddingTop: 20 }}>
-                    <View
-                        className="flex-row items-center justify-center"
-                        style={{
-                            backgroundColor: "#ededed",
-                            width: "95%",
-                            borderRadius: 10,
-                            paddingLeft: 20,
-                            height: 80,
-                        }}
-                    >
-                        <Icon name="envelope-o" size={24} color="#818181" />
-                        <TextInput
-                            onChangeText={(text) =>
-                                setFormData((prevState) => ({
-                                    ...prevState,
-                                    email: text,
-                                }))
-                            }
-                            style={styles.input}
-                            placeholder="Enter Email"
-                            placeholderTextColor="#818181"
-                        />
-                    </View>
+                    {/* email */}
+                    <InputLoginSignup
+                        iconName={"envelope-o"}
+                        placeholder={"Enter Email"}
+                        onChangeText={(text) =>
+                            setFormData((prevState) => ({
+                                ...prevState,
+                                email: text,
+                            }))
+                        }
+                        secureTextEntry={false}
+                    />
 
-                    <View
-                        className="flex-row items-center justify-center"
-                        style={{
-                            backgroundColor: "#ededed",
-                            width: "95%",
-                            borderRadius: 10,
-                            paddingLeft: 20,
-                            height: 80,
-                            marginTop: 20,
-                            marginBottom: 50,
-                        }}
-                    >
-                        <Icon name="lock" size={22} color="#818181" />
-                        <TextInput
-                            onChangeText={(text) =>
-                                setFormData((prevState) => ({
-                                    ...prevState,
-                                    password: text,
-                                }))
-                            }
-                            style={styles.input}
-                            placeholder="Enter Password"
-                            placeholderTextColor="#818181"
-                            secureTextEntry={true}
-                        />
-                    </View>
+                    {/* password */}
+                    <InputLoginSignup
+                        iconName={"lock"}
+                        placeholder={"Enter Password"}
+                        onChangeText={(text) =>
+                            setFormData((prevState) => ({
+                                ...prevState,
+                                password: text,
+                            }))
+                        }
+                        secureTextEntry={true}
+                    />
 
                     {/* btn */}
                     <Buttons
@@ -142,42 +112,25 @@ const LoginScreen = ({ navigation }) => {
                 >
                     Or
                 </Text>
+
+                {/* social btns */}
                 <View
                     className="flex-col items-center"
                     style={{ width: "95%" }}
                 >
                     {/* Google btn */}
-                    <TouchableOpacity
+                    <SocialButton
                         onPress={() => console.log("Login Google")}
-                        style={styles.social_btn}
-                    >
-                        <Image
-                            source={require("../assets/images/google_icon.png")}
-                            style={styles.social_img}
-                        />
-                        <Text
-                            className="w-4/5 text-center"
-                            style={{ fontSize: 16 }}
-                        >
-                            Sign in with Google
-                        </Text>
-                    </TouchableOpacity>
+                        source={require("../assets/images/google_icon.png")}
+                        buttonText={"Sign in with Google"}
+                    />
+
                     {/* Facebook btn */}
-                    <TouchableOpacity
-                        onPress={() => console.log("Facebook login")}
-                        style={styles.social_btn}
-                    >
-                        <Image
-                            source={require("../assets/images/facebook_icon.png")}
-                            style={styles.social_img}
-                        />
-                        <Text
-                            className="w-4/5 text-center"
-                            style={{ fontSize: 16 }}
-                        >
-                            Sign in with Facebook
-                        </Text>
-                    </TouchableOpacity>
+                    <SocialButton
+                        onPress={() => console.log("Login Facebook")}
+                        source={require("../assets/images/facebook_icon.png")}
+                        buttonText={"Sign in with Facebook"}
+                    />
                 </View>
 
                 <View
@@ -208,26 +161,4 @@ const LoginScreen = ({ navigation }) => {
 
 export default LoginScreen;
 
-const styles = StyleSheet.create({
-    input: {
-        position: "relative",
-        height: "100%",
-        width: "90%",
-        paddingLeft: 20,
-    },
-    social_btn: {
-        height: 55,
-        width: "100%",
-        flexDirection: "row",
-        alignItems: "center",
-        borderWidth: 1,
-        borderRadius: 10,
-        borderColor: "#ddd",
-        marginTop: 30,
-    },
-    social_img: {
-        height: 25,
-        width: 25,
-        marginLeft: 15,
-    },
-});
+const styles = StyleSheet.create({});
