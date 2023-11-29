@@ -9,6 +9,7 @@ const Buttons = ({ buttonText, onPress }) => {
                 justifyContent: "center",
                 width: "95%",
                 backgroundColor: COLORS.primary,
+                marginTop: 20,
                 marginBottom: 30,
                 borderRadius: 10,
             }}

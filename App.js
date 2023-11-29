@@ -17,7 +17,7 @@ function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Story"
+                initialRouteName="Splash"
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name="Splash" component={Splash} />
