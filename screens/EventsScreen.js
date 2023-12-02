@@ -7,15 +7,10 @@ import {
 	Text,
 	StatusBar,
 	TouchableOpacity,
-	useWindowDimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
-import Carousel from "../components/Carousel";
-import HTML from "react-native-render-html";
-const EventScreen = () => {
-	const [currentIndex, setCurrentIndex] = useState(4); // You can set the initial index here
-	const { width: windowWidth } = useWindowDimensions();
+const EventsScreen = () => {
 	const eventOfDestinations = [
 		{
 			type: "Sắp diễn ra",
@@ -164,30 +159,85 @@ const EventScreen = () => {
 				"<p>Đây là một thử thách thú vị, không chỉ giúp du khách có một khoảng thời gian thư giãn mà còn là cách diễn giải để du khách ôn lại những thông tin đã thu nhận được khi trải nghiệm tour, thử thách trí nhớ của mỗi người. Giải mã đúng, du khách sẽ nhận được những phần quà lưu niệm ý nghĩa của Hoàng thành Thăng Long.</br></p>",
 		},
 	];
-	const tagsStyles = {
-		h1: {
-			marginLeft: 3,
-			color: "black",
-			fontSize: 20,
-		},
-		div: {
-			marginLeft: 5,
-			marginTop: 10,
-			borderLeftWidth: 5,
-			borderColor: "#ff5b00",
-		},
-		p: {
-			fontSize: 16,
-			lineHeight: 30,
-			marginTop: 12,
-			marginLeft: 16,
-			marginRight: 12,
-			textAlign: "justify",
-		},
+	const isFutureEvent = (event) => {
+		const today = new Date(); // today được khởi tạo bằng new Date() sẽ là ngày hiện tại
+		if (
+			event.day.getDate() === today.getDate() &&
+			event.day.getMonth() === today.getMonth() &&
+			event.day.getFullYear() === today.getFullYear() &&
+			event.type == "Sắp diễn ra"
+		) {
+			event.type = "Đang diễn ra";
+			return true;
+		} else if (event.day > today) {
+			return true;
+		} else {
+			return false;
+		}
 	};
-	const handleIndexChanged = (index) => {
-		setCurrentIndex(index);
+	const sortedAndFilteredEventOfDestinations = eventOfDestinations
+		.slice()
+		.sort((a, b) => a.day - b.day)
+		.filter(isFutureEvent);
+	const formatDate = (date) => {
+		const day = date.getDate();
+		const month = date.getMonth() + 1; // Month starts from 0
+		const year = date.getFullYear();
+
+		return `${day}/${month}/${year}`;
 	};
+	function renderTypeOfEvent(item) {
+		if (item.type === "Sắp diễn ra" || item.type === "Đang diễn ra") {
+			return "bullhorn";
+		} else if (item.type === "Hủy sự kiện") {
+			return "exclamation";
+		}
+	}
+	const renderItemOfEvents = (item, idx) => (
+		<Card
+			containerStyle={{
+				borderRadius: 30,
+				backgroundColor: "#f8f9fb",
+				marginBottom: 20,
+			}}
+			key={idx}
+		>
+			<View style={{ flexDirection: "row" }}>
+				<Icon
+					name={renderTypeOfEvent(item)}
+					size={30}
+					color="#000"
+					style={{ marginLeft: 10 }}
+				/>
+				<Text style={{ fontSize: 18, marginLeft: 10 }}>
+					{" "}
+					{item.type}{" "}
+				</Text>
+			</View>
+			<View style={styles.row} key={idx}>
+				<Image
+					source={{ uri: item.url }}
+					style={styles.image}
+					key={idx}
+				/>
+				<View style={{ flex: 1, marginLeft: 10 }}>
+					<Text style={{ fontSize: 14 }}>
+						<Text style={{ fontWeight: "bold" }}>Tên sự kiện:</Text>{" "}
+						{item.name}
+					</Text>
+					<Text style={{ fontSize: 14 }}>
+						<Text style={{ fontWeight: "bold" }}>Thời gian:</Text>{" "}
+						{formatDate(item.day)}
+					</Text>
+					<Text style={{ fontSize: 14 }}>
+						<Text style={{ fontWeight: "bold" }}>Địa điểm:</Text>{" "}
+						{item.address}
+					</Text>
+				</View>
+			</View>
+		</Card>
+	);
+
 	return (
 		<View style={{ flex: 1, backgroundColor: "white" }}>
 			<StatusBar
@@ -212,6 +262,7 @@ const EventScreen = () => {
 						style={{ paddingLeft: 16, bottom: -8 }}
 					></Icon>
 				</TouchableOpacity>
+
 				<Text
 					style={{
 						fontSize: 18,
@@ -219,25 +270,34 @@ const EventScreen = () => {
 						marginBottom: 8,
 						bottom: 8,
 					}}
-				></Text>
+				>
+					Thông Báo
+				</Text>
 			</View>
 			{/* Body */}
 			<ScrollView>
-				<Carousel
-					carouselData={
-						eventOfDestinations[currentIndex].carouselData
-					}
-					onIndexChanged={handleIndexChanged}
-				/>
-
-				<HTML
-					source={{ html: eventOfDestinations[currentIndex].content }}
-					contentWidth={windowWidth}
-					tagsStyles={tagsStyles}
-				/>
+				{/* {sortedAndFilteredEventOfDestinations.map((item, idx) =>
+					renderItemOfEvents(item, idx)
+				)} */}
+				{sortedAndFilteredEventOfDestinations.map(renderItemOfEvents)}
 			</ScrollView>
 		</View>
 	);
 };
-const styles = StyleSheet.create({});
-export default EventScreen;
+
+const styles = StyleSheet.create({
+	image: {
+		width: "30%",
+		height: 100,
+	},
+	row: {
+		flexDirection: "row",
+		marginHorizontal: 10,
+		marginVertical: 30,
+	},
+	contentEvent: {
+		flexDirection: "row",
+	},
+});
+
+export default EventsScreen;
