@@ -3,6 +3,8 @@ import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
+import COLORS from "../../constants/colors";
+
 
 const FooterMenu = () => {
   // hooks
@@ -15,25 +17,25 @@ const FooterMenu = () => {
         <FontAwesome5
           name="home"
           style={styles.iconStyle}
-          color={route.name === "Home" && "#b4b8b5"}
+          color={route.name !== "Home" && COLORS.grey}
         />
-        <Text>Home</Text>
+        <Text style={route.name !== "Home" && {color: COLORS.grey}}>Home</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("Myposts")}>
         <FontAwesome5
           name="bell"
           style={styles.iconStyle}
-          color={route.name === "Myposts" && "#b4b8b5"}
+          color={route.name !== "Myposts" && COLORS.grey}
         />
-        <Text>Notification</Text>
+        <Text style={route.name !== "Myposts" && {color: COLORS.grey}}>Notification</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Account")}>
+      <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
         <FontAwesome5
-          name="user"
+          name="cog"
           style={styles.iconStyle}
-          color={route.name === "Account" && "#b4b8b5"}
+          color={route.name !== "SettingsScreen" && COLORS.grey}
         />
-        <Text>Profile</Text>
+        <Text style={route.name !== "SettingsScreen" && {color: COLORS.grey}}>Settings</Text>
       </TouchableOpacity>
     </View>
   );
@@ -44,8 +46,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 12,
     marginBottom: 12,
-    marginRight: 40,
-    marginLeft: 40,
+    marginRight: 43,
+    marginLeft: 43,
     justifyContent: "space-between",
   },
   iconStyle: {
