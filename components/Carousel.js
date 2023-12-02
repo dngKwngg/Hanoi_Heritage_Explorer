@@ -6,7 +6,7 @@ const Carousel = ({ carouselData }) => {
     const [activeIndex, setActiveIndex] = React.useState(0);
 
     // Display images / UI
-    const renderItem = ({ item, index }) => {
+    const renderItemByPath = ({ item, index }) => {
         return (
             <View>
                 <Image
@@ -60,7 +60,7 @@ const Carousel = ({ carouselData }) => {
             {/* <Image source={carouselData[0].image} /> */}
             <FlatList
                 data={carouselData}
-                renderItem={renderItem}
+                renderItem={renderItemByPath}
                 keyExtractor={(item) => item.id}
                 horizontal
                 pagingEnabled
