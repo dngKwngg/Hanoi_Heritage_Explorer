@@ -70,5 +70,20 @@ export const locations = [
                 image: require("../assets/images/HoangThanhThangLong/HTTLslider_3.jpg"),
             },
         ],
+
+        // carouselData: [
+        //     {
+        //         id: 1,
+        //         image: "https://old.hoalo.vn/DataFiles/2020/06/News/4fcf4f7b43b1beefe7a0.jpg",
+        //     },
+        //     {
+        //         id: 2,
+        //         image: "https://yourvacation.vn/uploads/images/%C4%91%C3%AAm-ling-thi%C3%AAng.jpg",
+        //     },
+        //     {
+        //         id: 3,
+        //         image: "https://old.hoalo.vn/DataFiles/2020/06/News/4fcf4f7b43b1beefe7a0.jpg",
+        //     },
+        // ],
     },
 ];
