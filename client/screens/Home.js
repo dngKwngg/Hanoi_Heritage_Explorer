@@ -34,7 +34,7 @@ const Home = () => {
         <PostCard posts={posts} />
         {/* <Text>{JSON.stringify(posts, null, 4)}</Text> */}
       </ScrollView>
-      <View style={{ backgroundColor: "#ffffff" }}>
+      <View style={{ backgroundColor: "#ffffff"}}>
         <FooterMenu />
       </View>
     </View>
@@ -44,7 +44,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 10,
+    margin: 0,
     justifyContent: "space-between",
   },
 });

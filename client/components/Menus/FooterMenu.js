@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
+
 const FooterMenu = () => {
   // hooks
   const navigation = useNavigation();
@@ -14,33 +15,25 @@ const FooterMenu = () => {
         <FontAwesome5
           name="home"
           style={styles.iconStyle}
-          color={route.name === "Home" && "orange"}
+          color={route.name === "Home" && "#b4b8b5"}
         />
         <Text>Home</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("Post")}>
-        <FontAwesome5
-          name="plus-square"
-          style={styles.iconStyle}
-          color={route.name === "Post" && "orange"}
-        />
-        <Text>Post</Text>
-      </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("Myposts")}>
         <FontAwesome5
-          name="list"
+          name="bell"
           style={styles.iconStyle}
-          color={route.name === "Myposts" && "orange"}
+          color={route.name === "Myposts" && "#b4b8b5"}
         />
-        <Text>My Posts</Text>
+        <Text>Notification</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => navigation.navigate("Account")}>
         <FontAwesome5
           name="user"
           style={styles.iconStyle}
-          color={route.name === "Account" && "orange"}
+          color={route.name === "Account" && "#b4b8b5"}
         />
-        <Text>Account</Text>
+        <Text>Profile</Text>
       </TouchableOpacity>
     </View>
   );
@@ -49,13 +42,16 @@ const FooterMenu = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    margin: 10,
+    marginTop: 12,
+    marginBottom: 12,
+    marginRight: 40,
+    marginLeft: 40,
     justifyContent: "space-between",
   },
   iconStyle: {
     marginBottom: 3,
     alignSelf: "center",
-    fontSize: 25,
+    fontSize: 22
   },
 });
 
