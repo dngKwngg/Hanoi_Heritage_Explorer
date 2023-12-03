@@ -9,21 +9,6 @@ exports.fetchDirection = async (queryString) => {
         let response = await fetch(queryString);
         let json = await response.json();
         return json
-
-        // let coordinates = json['routes'][0]['geometry']['coordinates'];
-        // setRouteDirections({
-        //     type: 'FeatureCollection',
-        //     features: [
-        //         {
-        //             type: 'Feature',
-        //             properties: {},
-        //             geometry: {
-        //                 type: 'LineString',
-        //                 coordinates: coordinates,
-        //             }
-        //         }
-        //     ]
-        // })
     } catch (e) {
         console.log("Fetch error", e)
     }
