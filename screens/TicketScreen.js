@@ -11,6 +11,7 @@ import {
 	Pressable,
 	Platform,
 	FlatList,
+	Alert,
 } from "react-native";
 import { Card } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -43,7 +44,44 @@ const TicketScreen = () => {
 	};
 	const handleBookTicket = () => {
 		// Xử lý việc đặt vé ở đây
-		console.log("Đặt vé thành công!");
+		const selectedDate = new Date(dateOfVisit);
+		const currentDate = new Date(); // Lấy thời gian hiện tại
+		const timeDifference = selectedDate.getTime() - currentDate.getTime();
+		if (quantity_adult == 0 && quantity_child == 0) {
+			if (dateOfVisit == "") {
+				Alert.alert("Vui lòng chọn số lượng vé và ngày tham quan.");
+			} else {
+				if (selectedDate.getTime() >= currentDate.getTime()) {
+					Alert.alert("Vui lòng chọn số lượng vé.");
+				} else {
+					Alert.alert("Vui lòng chọn ngày khác và chọn số lượng vé.");
+				}
+			}
+		} else {
+			if (dateOfVisit == "") {
+				Alert.alert("Vui lòng chọn ngày tham quan.");
+			} else {
+				if (selectedDate.getTime() >= currentDate.getTime()) {
+					if (
+						timeDifference >= 0 &&
+						timeDifference <= 6 * 30 * 24 * 60 * 60 * 1000
+					) {
+						setQuantity_adult(0);
+						setQuantity_child(0);
+						setdateOfVisit("");
+						setDate(new Date());
+						Alert.alert(
+							"Đặt vé thành công!",
+							"SDT liên hệ: 0359441125\nSTK: 162511202283\nNgân hàng MB Bank\nChủ tài khoản: Nguyễn Diệu Thanh"
+						);
+					} else {
+						Alert.alert("Không thể đặt vé cho thời điểm này.");
+					}
+				} else {
+					Alert.alert("Vui lòng chọn ngày khác.");
+				}
+			}
+		}
 	};
 	const destinations = [
 		{
@@ -152,7 +190,7 @@ const TicketScreen = () => {
 		},
 	];
 	const [activeCategory, setActiveCategory] = useState(1);
-	const [dateOfBirth, setDateOfBirth] = useState("");
+	const [dateOfVisit, setdateOfVisit] = useState("");
 	const [date, setDate] = useState(new Date());
 	const [showPicker, setShowPicker] = useState(false);
 	const toggleDatePicker = () => {
@@ -164,7 +202,7 @@ const TicketScreen = () => {
 			setDate(currentDate);
 			if (Platform.OS === "android") {
 				toggleDatePicker();
-				setDateOfBirth(currentDate.toDateString());
+				setdateOfVisit(currentDate.toDateString());
 			}
 		} else {
 			toggleDatePicker();
@@ -216,8 +254,8 @@ const TicketScreen = () => {
 										<TextInput
 											style={styles.input}
 											placeholder="Chọn ngày đặt vé tham quan"
-											value={dateOfBirth}
-											onChangeText={setDateOfBirth}
+											value={dateOfVisit}
+											onChangeText={setdateOfVisit}
 											placeholderTextColor="#11182744"
 											editable={false}
 										/>

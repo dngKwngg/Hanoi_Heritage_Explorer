@@ -19,7 +19,7 @@ function App() {
 		<NavigationContainer>
 			<Stack.Navigator
 				// initialRouteName="Splash
-				initialRouteName="Events"
+				initialRouteName="Review"
 				screenOptions={{ headerShown: false }}
 			>
 				<Stack.Screen name="Ticket" component={TicketScreen} />

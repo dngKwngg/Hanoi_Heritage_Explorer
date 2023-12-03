@@ -9,12 +9,13 @@ import {
 	TouchableOpacity,
 	TextInput,
 	ImageBackground,
+	Alert,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 import COLORS from "../constants/colors";
 const ReviewScreen = () => {
-	const index = 2;
+	const index = 0;
 	const destinations = [
 		{
 			name: "Hoàng Thành Thăng Long",
@@ -129,6 +130,7 @@ const ReviewScreen = () => {
 		false,
 		false,
 	]);
+	const [checkStar, setCheckStar] = useState(false); // Kiểm tra xem người dùng đã chọn sao chưa
 	const renderStar = (item, idx) => {
 		const iconName = item ? "star" : "star-o";
 		return (
@@ -147,10 +149,18 @@ const ReviewScreen = () => {
 			idx <= starIndex ? true : false
 		);
 		setArrStars(updatedStars);
+		setCheckStar(true);
 	};
 	const handlePostReview = () => {
 		// Xử lý việc đăng tải bài review ở đây
-		console.log("Đăng thành công!");
+		// console.log("Đăng thành công!");
+		if (checkStar) {
+			setContent("");
+			Alert.alert("Đăng thành công!");
+			setArrStars([false, false, false, false, false]);
+		} else {
+			Alert.alert("Bạn chưa đánh giá sao!");
+		}
 	};
 	const renderReview = () => {
 		return (
@@ -181,6 +191,8 @@ const ReviewScreen = () => {
 						<TextInput
 							placeholder="Nhập nội dung"
 							textAlignVertical="top"
+							multiline={true} // Cho phép nhập nhiều dòng
+							numberOfLines={4} // Số dòng hiển thị ban đầu
 							value={content}
 							onChangeText={(text) => setContent(text)}
 							style={styles.review}
