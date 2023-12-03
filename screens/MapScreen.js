@@ -156,8 +156,8 @@ function Map() {
     }
 
     function compare(a, b) {
-        if (a.title.indexOf(query) < b.title.indexOf(query)) return -1
-        else if (a.title.indexOf(query) > b.title.indexOf(query)) return 1
+        if ((a.title).toLowerCase().indexOf(query.toLowerCase()) < (b.title).toLowerCase().indexOf(query.toLowerCase())) return -1
+        else if ((a.title).toLowerCase().indexOf(query.toLowerCase()) > (b.title).toLowerCase().indexOf(query.toLowerCase())) return 1
         else return 0
     }
 
