@@ -3,7 +3,6 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  Image,
   Alert
 } from "react-native";
 import React, { useContext } from "react";
@@ -15,22 +14,23 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../context/authContext";
 import Header from "../components/Header";
+import BackButton from "../components/BackButton";
 
 
 
 const SettingsScreen = ({ navigation }) => {
   const [state, setState] = useContext(AuthContext);
 
-  const navigateToEditProfile = () => {
-    navigation.navigate("EditProfile");
+  const navigateToAccount = () => {
+    navigation.navigate("Account");
   };
 
-  const navigateToSecurity = () => {
-    console.log("Security function");
+  const navigateToSettings = () => {
+    console.log("Settings function");
   };
 
-  const navigateToNotifications = () => {
-    console.log("Notifications function");
+  const navigateToFeedback = () => {
+    console.log("Feedback function");
   };
 
   const navigateToPrivacy = () => {
@@ -49,13 +49,13 @@ const SettingsScreen = ({ navigation }) => {
     {
       icon: "user-alt",
       text: "My Account",
-      action: navigateToEditProfile,
+      action: navigateToAccount,
     },
-    { icon: "cog", text: "Settings", action: navigateToSecurity },
+    { icon: "cog", text: "Settings", action: navigateToSettings },
     {
       icon: "comment",
       text: "Feedback",
-      action: navigateToNotifications,
+      action: navigateToFeedback,
     },
     { icon: "shield-alt", text: "Privacy & Security", action: navigateToPrivacy },
     { icon: "sign-out-alt", text: "Log out", action: logout },
@@ -78,13 +78,13 @@ const SettingsScreen = ({ navigation }) => {
       }}
     >
       <FontAwesome5
-        name={icon} size={25} 
+        name={icon} size={25}
       />
-      
+
       <Text
         style={{
           marginLeft: 30,
-        
+
           fontWeight: 500,
           fontSize: 18,
         }}
@@ -103,34 +103,16 @@ const SettingsScreen = ({ navigation }) => {
     >
       <View
         style={{
-          marginHorizontal: 13,
+          marginHorizontal: 17,
           flexDirection: 'row',
-          marginVertical: 25
+       
         }}
       >
-
-
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={{
-            position: "absolute",
-            left: 8,
-
-          }}
-        >
-          <FontAwesome5
-            name="chevron-left"
-            size={20}
-         
-          />
-          
-        </TouchableOpacity>
-
-
-
+        <BackButton goBack={navigation.goBack} />
       </View>
 
-      <View style={{ marginLeft: 25, marginTop: 45, marginBottom: 25 }}>
+
+      <View style={{ marginLeft: 25, marginTop: 110, marginBottom: 25 }}>
 
         <Header>Settings</Header>
       </View>

@@ -8,6 +8,8 @@ export const theme = {
     primary: '#560CCE',
     secondary: '#414757',
     third: '#329bcc',
+    forth: '#bbf6fc',
+    fifth: '#46f2e1',
     error: '#f13a59',
   },
 }

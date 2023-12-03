@@ -81,7 +81,7 @@ const loginController = async (req, res) => {
     if (!user) {
       return res.status(500).send({
         success: false,
-        message: "User not found!",
+        message: "Incorrect username or password!",
       });
     }
     //match password
@@ -89,7 +89,7 @@ const loginController = async (req, res) => {
     if (!match) {
       return res.status(500).send({
         success: false,
-        message: "Invalid username or password!",
+        message: "Incorrect username or password!",
       });
     }
     //TOKEN JWT
@@ -197,39 +197,38 @@ const resetPasswordController = async (req, res) => {
 
 
 //update user
-const updateUserController = async (req, res) => {
+const updateUserProfileController = async (req, res) => {
   try {
-    const { name, password, email } = req.body;
+    const { name, email, dateOfBirth } = req.body;
     //user find
     const user = await userModel.findOne({ email });
-    //password validate
-    if (password && password.length < 6) {
-      return res.status(400).send({
-        success: false,
-        message: "Password is required and should be 6 character long",
+
+    //updated profile
+    if (name === user.name && dateOfBirth == user.dateOfBirth) {
+      return res.status(400).send({ 
+        success: false, 
+        message: 'You haven\'t made any changes yet!' 
       });
     }
-    const hashedPassword = password ? await hashPassword(password) : undefined;
-    //updated useer
     const updatedUser = await userModel.findOneAndUpdate(
       { email },
       {
         name: name || user.name,
-        password: hashedPassword || user.password,
+        dateOfBirth: dateOfBirth || user.dateOfBirth,
       },
-      { new: true }
+      {new: true}
     );
-    updatedUser.password = undefined;
+
     res.status(200).send({
       success: true,
-      message: "Profile Updated Please Login",
+      message: "Profile has been updated.",
       updatedUser,
     });
   } catch (error) {
     console.log(error);
     res.status(500).send({
       success: false,
-      message: "Error In User Update API",
+      message: "Error in user Profile Update API!",
       error,
     });
   }
@@ -241,5 +240,5 @@ module.exports = {
   loginController,
   forgotPasswordController,
   resetPasswordController,
-  updateUserController,
+  updateUserProfileController,
 };

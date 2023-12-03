@@ -4,7 +4,7 @@ const {
   loginController,
   forgotPasswordController,
   resetPasswordController,
-  updateUserController,
+  updateUserProfileController,
   requireSingIn,
 } = require("../controllers/userController");
 
@@ -24,7 +24,7 @@ router.post("/forgotpassword", forgotPasswordController);
 router.post("/resetpassword", resetPasswordController);
 
 //UPDATE || PUT
-router.put("/update-user", requireSingIn, updateUserController);
+router.put("/update-user-profile", requireSingIn, updateUserProfileController);
 
 //export
 module.exports = router;

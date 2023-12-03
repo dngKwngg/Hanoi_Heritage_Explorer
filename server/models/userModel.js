@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "user",
     },
+    dateOfBirth: {
+      type: Date,
+      required: false
+    },
     resettoken: { 
       type: String, 
       required: false 
