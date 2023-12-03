@@ -46,7 +46,9 @@ const Account = ({ navigation }) => {
       });
       
     
-      setState(data);
+      state.user = data.updatedUser;
+
+     
       Alert.alert(data && data.message);
     } catch (error) {
       Alert.alert(error.response.data.message);

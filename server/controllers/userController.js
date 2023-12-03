@@ -204,10 +204,10 @@ const updateUserProfileController = async (req, res) => {
     const user = await userModel.findOne({ email });
 
     //updated profile
-    if (name === user.name && dateOfBirth == user.dateOfBirth) {
-      return res.status(400).send({ 
-        success: false, 
-        message: 'You haven\'t made any changes yet!' 
+    if (name === user.name && JSON.stringify(dateOfBirth) === JSON.stringify(user.dateOfBirth)) {
+      return res.status(400).send({
+        success: false,
+        message: 'You haven\'t made any changes yet!'
       });
     }
     const updatedUser = await userModel.findOneAndUpdate(
@@ -216,7 +216,7 @@ const updateUserProfileController = async (req, res) => {
         name: name || user.name,
         dateOfBirth: dateOfBirth || user.dateOfBirth,
       },
-      {new: true}
+      { new: true }
     );
 
     res.status(200).send({
