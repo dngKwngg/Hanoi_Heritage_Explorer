@@ -24,6 +24,7 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState({ value: '', error: '' });
 
   const [showPassword, setShowPassword] = useState(false);
+
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -32,7 +33,7 @@ const Login = ({ navigation }) => {
   // btn funcn
   const onLoginPressed = async () => {
     try {
-      
+
       const emailError = emailValidator(email.value)
       const passwordError = passwordValidator(password.value)
       if (emailError || passwordError) {
@@ -47,6 +48,9 @@ const Login = ({ navigation }) => {
       setState(data);
       await AsyncStorage.setItem("@auth", JSON.stringify(data));
       Alert.alert(data && data.message);
+      setEmail({ value: '', error: '' });
+      setPassword({ value: '', error: '' });
+
       navigation.navigate("Home");
       console.log("Login Data==> ", { emailValue, passwordValue });
     } catch (error) {
@@ -61,7 +65,7 @@ const Login = ({ navigation }) => {
 
   //temp function to check local storage data
   const getLocalStorageData = async () => {
-    
+
     let data = await AsyncStorage.getItem("@auth");
     console.log("Local Storage ==> ", data);
   };
@@ -93,14 +97,18 @@ const Login = ({ navigation }) => {
           errorText={password.error}
           secureTextEntry={!showPassword}
           style={{ width: '100%' }}
+
         />
-        <MaterialCommunityIcons
-          name={showPassword ? 'eye-off' : 'eye'}
-          size={24}
-          color="#aaa"
-          style={{ position: 'absolute', right: '3%', top: '38%' }}
-          onPress={toggleShowPassword}
-        />
+
+
+          <MaterialCommunityIcons
+            name={showPassword ? 'eye-off' : 'eye'}
+            size={24}
+            color="#aaa"
+            style={{ position: 'absolute', right: 9, top: 32 }}
+            onPress={toggleShowPassword}
+          />
+     
       </View>
       <View style={styles.forgotPassword}>
         <TouchableOpacity

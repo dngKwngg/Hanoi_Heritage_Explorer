@@ -119,7 +119,7 @@ export default function ResetPassword({ navigation }) {
           name={showPassword ? 'eye-off' : 'eye'}
           size={24}
           color="#aaa"
-          style={{ position: 'absolute', right: '3%', top: '38%' }}
+          style={{ position: 'absolute', right: 9, top: 32 }}
           onPress={toggleShowPassword}
         />
       </View>
@@ -139,7 +139,7 @@ export default function ResetPassword({ navigation }) {
           name={showConfirmPassword ? 'eye-off' : 'eye'}
           size={24}
           color="#aaa"
-          style={{ position: 'absolute', right: '3%', top: '38%' }}
+          style={{ position: 'absolute', right: 9, top: 32 }}
           onPress={toggleShowConfirmPassword}
         />
       </View>
