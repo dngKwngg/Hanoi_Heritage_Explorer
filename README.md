@@ -11,7 +11,7 @@
 ![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/31a5907b-4917-4965-9c7d-0957b1878db1)
 ![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/a7fcd9d1-ad9f-448f-9d99-d1f4ecbb610d)
 
-## EventScreen (ver1.1)
+## EventsScreen (ver1.1)
 ### Ở đây sự kiện đã có hàm sắp xếp để hiển thị đúng thứ tự thời gian diễn ra. Sự kiện đang diễn ra vào hôm nay sẽ biến mất vào ngày mai, và sự kiện diễn ra vào ngày mai sẽ được tự động chuyển từ Sắp diễn ra thành đang diễn ra.
 ![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/46b3830a-e200-485b-b082-ab75efe03e4d)
 ![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/b0f62ecc-d869-41f5-8477-160733cd9b83)
@@ -21,6 +21,14 @@
 
 ## VideoScreen (update)
 ![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/c8449160-6c7d-4cea-93cb-858fb8b02c0f)
+
+
+## EventScreen
+![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/7c8f5e38-1eca-47c5-8cfe-28b7d29a3668)
+![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/9326e241-24d2-4103-95f4-a7823c5ec520)
+![image](https://github.com/dngKwngg/Hanoi_Heritage_Explorer/assets/100312499/3938b34c-be33-4b85-8bb1-90ff47348740)
+
+
 
 
 
