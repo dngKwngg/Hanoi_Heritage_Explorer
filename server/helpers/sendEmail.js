@@ -4,7 +4,7 @@ const handlebars = require('handlebars');
 const fs = require('fs');
 
 
-const sendEmail = async (email, username, message) => {
+const sendEmail = async (email, username, message, templatePath) => {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.email',
         secure: false,
@@ -18,7 +18,7 @@ const sendEmail = async (email, username, message) => {
 
 
 
-    const source = fs.readFileSync('./template/email.html', 'utf-8').toString();
+    const source = fs.readFileSync(templatePath, 'utf-8').toString();
     const template = handlebars.compile(source);
     const replacements = {
         username: username,

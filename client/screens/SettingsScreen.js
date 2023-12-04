@@ -3,7 +3,8 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  Alert
+  Alert,
+  ImageBackground
 } from "react-native";
 import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -15,6 +16,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthContext } from "../context/authContext";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
+import COLORS from "../constants/colors";
 
 
 
@@ -75,6 +77,9 @@ const SettingsScreen = ({ navigation }) => {
         marginHorizontal: 6,
         marginVertical: 15,
         borderRadius: 18,
+        borderStyle: 'solid',
+        borderColor: COLORS.border_gray,
+        borderWidth: 1
       }}
     >
       <FontAwesome5
@@ -101,52 +106,58 @@ const SettingsScreen = ({ navigation }) => {
         // backgroundColor: COLORS.white,
       }}
     >
-      <View
-        style={{
-          marginHorizontal: 17,
-          flexDirection: 'row',
-       
-        }}
-      >
-        <BackButton goBack={navigation.goBack} />
-      </View>
+      <ImageBackground source={require('../assets/pastel-background13.jpg')} style={{
+        flex: 1,
+        resizeMode: 'cover'
+      }}>
+        <View
+          style={{
+            marginHorizontal: 17,
+            flexDirection: 'row',
+
+          }}
+        >
+          <BackButton goBack={navigation.goBack} />
+        </View>
 
 
-      <View style={{ marginLeft: 25, marginTop: 110, marginBottom: 25 }}>
+        <View style={{ marginLeft: 25, marginTop: 110, marginBottom: 25 }}>
 
-        <Header>Settings</Header>
-      </View>
-
-
-
-      <ScrollView style={{ marginHorizontal: 13 }}>
-        {/* Account Settings */}
-
-
-        <View style={{ marginBottom: 12 }}>
-
-          <View
-            style={{
-              borderRadius: 12,
-              backgrounColor: 'white',
-            }}
-          >
-            {items.map((item, index) => (
-              <React.Fragment key={index}>
-                {renderSettingsItem(item)}
-              </React.Fragment>
-            ))}
-          </View>
+          <Header>Settings</Header>
         </View>
 
 
 
+        <ScrollView style={{ marginHorizontal: 13 }}>
+          {/* Account Settings */}
 
 
-      </ScrollView>
+          <View style={{ marginBottom: 12 }}>
+
+            <View
+              style={{
+                borderRadius: 12,
+
+              }}
+            >
+              {items.map((item, index) => (
+                <React.Fragment key={index}>
+                  {renderSettingsItem(item)}
+                </React.Fragment>
+              ))}
+            </View>
+          </View>
+
+
+
+
+
+        </ScrollView>
+      </ImageBackground>
       <View style={{ backgroundColor: 'white' }}>
         <FooterMenu />
       </View>
+
     </SafeAreaView>
   );
 };

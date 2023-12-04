@@ -10,6 +10,7 @@ export const theme = {
     third: '#329bcc',
     forth: '#bbf6fc',
     fifth: '#46f2e1',
+    sixth: '#f5f1e6',
     error: '#f13a59',
   },
 }

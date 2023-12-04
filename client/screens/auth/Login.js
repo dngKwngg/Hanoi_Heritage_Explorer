@@ -50,7 +50,7 @@ const Login = ({ navigation }) => {
       Alert.alert(data && data.message);
       setEmail({ value: '', error: '' });
       setPassword({ value: '', error: '' });
-
+      setShowPassword(false);
       navigation.navigate("Home");
       console.log("Login Data==> ", { emailValue, passwordValue });
     } catch (error) {

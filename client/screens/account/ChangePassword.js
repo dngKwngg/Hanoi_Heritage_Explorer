@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Alert, View } from 'react-native'
+import React, { useState, useContext } from 'react'
+import { Alert, View, ImageBackground } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../../components/Background'
 import Logo from '../../components/Logo'
@@ -14,12 +14,16 @@ import { confirmPasswordValidator } from '../../helpers/confirmPasswordValidator
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AuthContext } from "../../context/authContext";
 
 
 
-export default function ResetPassword({ navigation }) {
+export default function ChangePassword({ navigation }) {
 
-  const [resetCode, setResetCode] = useState({ value: '', error: '' })
+  const [state, setState] = useContext(AuthContext);
+  const { user, token } = state;
+
+  const [password, setPassword] = useState({ value: '', error: '' })
   const [newPassword, setNewPassword] = useState({ value: '', error: '' })
   const [confirmPassword, setConfirmPassword] = useState({ value: '', error: '' })
 
@@ -28,37 +32,51 @@ export default function ResetPassword({ navigation }) {
     setShowPassword(!showPassword);
   };
 
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const toggleShowNewPassword = () => {
+    setShowNewPassword(!showNewPassword);
+  };
+
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const toggleShowConfirmPassword = () => {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const onResetPassPressed = async () => {
+  const onChangePassPressed = async () => {
     try {
-      const resetCodeError = resetCodeValidator(resetCode.value)
-      const newPasswordError = passwordValidator(newPassword.value)
+      const passwordError = passwordValidator(password.value)
+      let newPasswordError = passwordValidator(newPassword.value)
       const confirmPasswordError = confirmPasswordValidator(confirmPassword.value, newPassword.value)
-      if (resetCodeError || newPasswordError || confirmPasswordError) {
-        setResetCode({ ...resetCode, error: resetCodeError })
+      if (newPassword.value === password.value) {
+        newPasswordError = 'New password and current password can\'t be the same.'
+      }
+      if (passwordError || newPasswordError || confirmPasswordError) {
+        setPassword({ ...password, error: passwordError })
         setNewPassword({ ...newPassword, error: newPasswordError })
         setConfirmPassword({ ...confirmPassword, error: confirmPasswordError })
         return;
       }
 
-      const email = await AsyncStorage.getItem("@email");
-      const { data } = await axios.post("/auth/reset-password", {
-        email: email,
-        resetCode: resetCode.value,
+
+      const { data } = await axios.post("/auth/change-password", {
+        email: user?.email,
+        currentPassword: password.value,
         newPassword: newPassword.value,
       });
       Alert.alert(data && data.message);
-      await AsyncStorage.removeItem("@email");
+
+      await AsyncStorage.removeItem("@newpassword");
+      await AsyncStorage.setItem("@newpassword", newPassword.value);
+
+      setPassword({ value: '', error: '' });
+      setNewPassword({ value: '', error: '' });
+      setConfirmPassword({ value: '', error: '' });
+      setShowPassword(false);
+      setShowNewPassword(false);
+      setShowConfirmPassword(false);
 
       // Alert.alert('Your password has been reset successfully, please login!');
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Login' }],
-      })
+      navigation.navigate('Verification');
 
     } catch (error) {
       Alert.alert(error.response.data.message);
@@ -67,51 +85,23 @@ export default function ResetPassword({ navigation }) {
   }
 
 
-  const resendCode = async () => {
-    try {
-
-      const email = await AsyncStorage.getItem("@email");
-      const { data } = await axios.post("/auth/forgot-password", {
-        email: email
-      });
-
-      console.log(axios.error);
-
-
-      Alert.alert(data && data.message);
-
-
-
-    } catch (error) {
-      Alert.alert(error.response.data.message);
-      console.log(error);
-    }
-  }
 
   return (
+
     <Background>
-      {/* <BackButton goBack={navigation.goBack} /> */}
+  
+      <BackButton goBack={navigation.goBack} />
+
       <Logo />
-      <Header>Reset Password</Header>
-      <TextInput
-        label="Verification Code"
-        returnKeyType="next"
-        value={resetCode.value}
-        onChangeText={(text) => setResetCode({ value: text, error: '' })}
-        error={!!resetCode.error}
-        errorText={resetCode.error}
-        autoCapitalize="none"
-        textContentType="oneTimeCode"
- 
-      />
-      <View style={{flexDirection: 'row'}}>
+      <Header>Change Password</Header>
+      <View style={{ flexDirection: 'row' }}>
         <TextInput
-          label="New Password"
+          label="Current Password"
           returnKeyType="next"
-          value={newPassword.value}
-          onChangeText={(text) => setNewPassword({ value: text, error: '' })}
-          error={!!newPassword.error}
-          errorText={newPassword.error}
+          value={password.value}
+          onChangeText={(text) => setPassword({ value: text, error: '' })}
+          error={!!password.error}
+          errorText={password.error}
           secureTextEntry={!showPassword}
           style={{ width: '100%' }}
         />
@@ -123,8 +113,27 @@ export default function ResetPassword({ navigation }) {
           onPress={toggleShowPassword}
         />
       </View>
+      <View style={{ flexDirection: 'row' }}>
+        <TextInput
+          label="New Password"
+          returnKeyType="next"
+          value={newPassword.value}
+          onChangeText={(text) => setNewPassword({ value: text, error: '' })}
+          error={!!newPassword.error}
+          errorText={newPassword.error}
+          secureTextEntry={!showNewPassword}
+          style={{ width: '100%' }}
+        />
+        <MaterialCommunityIcons
+          name={showNewPassword ? 'eye-off' : 'eye'}
+          size={24}
+          color="#aaa"
+          style={{ position: 'absolute', right: 9, top: 32 }}
+          onPress={toggleShowNewPassword}
+        />
+      </View>
 
-      <View style={{flexDirection: 'row'}}>
+      <View style={{ flexDirection: 'row' }}>
         <TextInput
           label="Confirm Password"
           returnKeyType="done"
@@ -144,31 +153,15 @@ export default function ResetPassword({ navigation }) {
         />
       </View>
 
-      <Button mode="contained" onPress={onResetPassPressed}>
+      <Button mode="contained" onPress={onChangePassPressed}>
         Continue
       </Button>
-      <Button
-        mode="text"
-        onPress={resendCode}
-        style={{
-          marginTop: 0,
-          marginBottom: 0,
-        }}
-      >
-        Resend Code
-      </Button>
-
-      <Button
-        mode="text"
-        onPress={() => navigation.replace('Login')}
-        style={{
-          marginTop: 0,
-        }}
-      >
-        Back to Login
-      </Button>
+      
 
     </Background>
+
+
+
   )
 }
 

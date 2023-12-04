@@ -1,5 +1,5 @@
 const JWT = require("jsonwebtoken");
-const { hashPassword, comparePassword } = require("../helpers/authHelper");
+const { hashPassword, comparePassword, generateCode } = require("../helpers/authHelper");
 const userModel = require("../models/userModel");
 const { sendEmail } = require("../helpers/sendEmail");
 var { expressjwt: jwt } = require("express-jwt");
@@ -41,6 +41,7 @@ const registerController = async (req, res) => {
         message: "This email has already been registered! ",
       });
     }
+
     //hashed pasword
     const hashedPassword = await hashPassword(password);
 
@@ -115,20 +116,6 @@ const loginController = async (req, res) => {
   }
 };
 
-async function generateCode(length) {
-  let result = "";
-
-  const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  const charactersLength = characters.length;
-
-  let counter = 0;
-  while (counter < length) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    counter += 1;
-  }
-
-  return result;
-}
 
 
 //forgot password
@@ -146,9 +133,9 @@ const forgotPasswordController = async (req, res) => {
 
     const token = await generateCode(5);
     user.resettoken = token;
-    user.resettokenExpiration = Date.now() + 3600000;
+    user.resettokenExpiration = Date.now() + 300000;
     await user.save();
-    await sendEmail(user.email, user.name, `${token}`)
+    await sendEmail(user.email, user.name, `${token}`, './template/forgotPasswordEmail.html')
     return res.send({ success: true, message: "We've sent a verification code to your email!" });
 
   } catch (error) {
@@ -195,6 +182,107 @@ const resetPasswordController = async (req, res) => {
   }
 };
 
+const changePasswordController = async (req, res) => {
+  try {
+    const { email, currentPassword, newPassword } = req.body;
+    //user find
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.send({
+        success: false,
+        message: "User not found!",
+      });
+    }
+
+    const match = await comparePassword(currentPassword, user.password);
+    if (!match) {
+      return res.status(500).send({
+        success: false,
+        message: "Incorrect current password. Please try again!",
+      });
+    }
+
+    const token = await generateCode(5);
+    user.resettoken = token;
+    user.resettokenExpiration = Date.now() + 300000;
+    await user.save();
+    await sendEmail(user.email, user.name, `${token}`, './template/changePasswordEmail.html')
+    return res.send({ success: true, message: "We've sent a verification code to your email!" });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Change Password API!",
+      error,
+    });
+  }
+};
+
+const verificationController = async (req, res) => {
+  try {
+    const { email, resetCode, newPassword } = req.body;
+    //user find
+
+    const user = await userModel.findOne({ email });
+    if (!user || user.resettoken !== resetCode) {
+      return res.status(400).send({ success: false, message: 'The verification code is incorrect. Please try again!' });
+    }
+    if (user.resettokenExpiration < new Date()) {
+      return res.status(400).send({ success: false, message: 'Verification code has expired!' });
+    }
+    //hashed pasword
+    const hashedPassword = await hashPassword(newPassword);
+
+    user.password = hashedPassword;
+    user.resettoken = '';
+    user.resettokenExpiration = null;
+    await user.save();
+
+
+    return res.status(200).send({
+      success: true,
+      message: 'Your password has been changed successfully, please login!',
+    });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Verification API!",
+      error,
+    });
+  }
+};
+
+const resendCodeController = async (req, res) => {
+  try {
+    const { email } = req.body;
+    //user find
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.send({
+        success: false,
+        message: "User not found!",
+      });
+    }
+
+    const token = await generateCode(5);
+    user.resettoken = token;
+    user.resettokenExpiration = Date.now() + 300000;
+    await user.save();
+    await sendEmail(user.email, user.name, `${token}`, './template/changePasswordEmail.html')
+    return res.send({ success: true, message: "We've resent a verification code to your email!" });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error in Resend Code API!",
+      error,
+    });
+  }
+};
 
 //update user
 const updateUserProfileController = async (req, res) => {
@@ -240,5 +328,8 @@ module.exports = {
   loginController,
   forgotPasswordController,
   resetPasswordController,
+  changePasswordController,
+  verificationController,
+  resendCodeController,
   updateUserProfileController,
 };

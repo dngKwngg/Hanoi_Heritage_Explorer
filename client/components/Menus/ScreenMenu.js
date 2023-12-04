@@ -7,8 +7,9 @@ import Register from "../../screens/auth/Register";
 import Login from "../../screens/auth/Login";
 import { AuthContext } from "../../context/authContext";
 
-import Post from "../../screens/Post";
-import About from "../../screens/About";
+import ChangePassword from "../../screens/account/ChangePassword";
+import Account from "../../screens/account/Account";
+import Verification from "../../screens/account/Verification";
 import SettingsScreen from "../../screens/SettingsScreen";
 import Myposts from "../../screens/Myposts";
 import Splash from "../../screens/Splash";
@@ -22,7 +23,7 @@ const ScreenMenu = () => {
   const authenticatedUser = state?.user && state?.token;
   const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator initialRouteName="Splash">
+    <Stack.Navigator>
 
 
 
@@ -33,26 +34,34 @@ const ScreenMenu = () => {
             component={Home}
    
           />
+          
           <Stack.Screen
-            name="Post"
-            component={Post}
-
+            name="Myposts"
+            component={Myposts}
+    
           />
-          <Stack.Screen
-            name="About"
-            component={About}
-            
-          />
+          
           <Stack.Screen
             name="SettingsScreen"
             component={SettingsScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Myposts"
-            component={Myposts}
-    
+            name="Account"
+            component={Account}
+            options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="ChangePassword"
+            component={ChangePassword}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Verification"
+            component={Verification}
+            options={{ headerShown: false }}
+          />
+        
         </>
       ) : (
         <>
