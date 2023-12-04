@@ -100,7 +100,7 @@ const Account = ({ navigation }) => {
             {name}
           </Text>
 
-          <Text style={styles.subsectionTitle}>Profile</Text>
+          <Text style={styles.subsectionTitle}>Information</Text>
           <View style={styles.profileContainer}>
 
             <View style={styles.inputContainer}>

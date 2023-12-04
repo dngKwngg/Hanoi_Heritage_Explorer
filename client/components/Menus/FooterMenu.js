@@ -29,13 +29,13 @@ const FooterMenu = () => {
         />
         <Text style={route.name !== "Myposts" && {color: COLORS.grey}}>Notification</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.navigate("SettingsScreen")}>
+      <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
         <FontAwesome5
-          name="cog"
+          name="user-alt"
           style={styles.iconStyle}
-          color={route.name !== "SettingsScreen" && COLORS.grey}
+          color={route.name !== "Profile" && COLORS.grey}
         />
-        <Text style={route.name !== "SettingsScreen" && {color: COLORS.grey}}>Settings</Text>
+        <Text style={route.name !== "Profile" && {color: COLORS.grey}}>Profile</Text>
       </TouchableOpacity>
     </View>
   );

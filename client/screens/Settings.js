@@ -6,61 +6,65 @@ import {
   Alert,
   ImageBackground
 } from "react-native";
-import React, { useContext } from "react";
+import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import FooterMenu from "../components/Menus/FooterMenu";
-
-
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { AuthContext } from "../context/authContext";
 import Header from "../components/Header";
 import BackButton from "../components/BackButton";
 import COLORS from "../constants/colors";
+import { MaterialIcons } from 'react-native-vector-icons';
 
 
+const Settings = ({ navigation }) => {
 
-const SettingsScreen = ({ navigation }) => {
-  const [state, setState] = useContext(AuthContext);
 
-  const navigateToAccount = () => {
-    navigation.navigate("Account");
+  const toNotificationSettings = () => {
+    navigation.navigate("NotificationSettings");
   };
 
-  const navigateToSettings = () => {
-    console.log("Settings function");
+  const toDarkModeSettings = () => {
+    navigation.navigate("DarkModeSettings");
   };
 
-  const navigateToFeedback = () => {
-    console.log("Feedback function");
+  const toLanguageSettings = () => {
+    navigation.navigate("LanguageSettings");
   };
 
-  const navigateToPrivacy = () => {
-    console.log("Privacy function");
+  const toFontSizeSettings = () => {
+    navigation.navigate("FontSizeSettings");
   };
 
-
-
-  const logout = async () => {
-    setState({ token: "", user: null });
-    await AsyncStorage.removeItem("@auth");
-    Alert.alert("Logout successfully!");
+  const toUpdateAppSettings = () => {
+    navigation.navigate("UpdateAppSettings");
   };
+
 
   const items = [
     {
-      icon: "user-alt",
-      text: "My Account",
-      action: navigateToAccount,
+      icon: "bell",
+      text: "Notification",
+      action: toNotificationSettings,
     },
-    { icon: "cog", text: "Settings", action: navigateToSettings },
     {
-      icon: "comment",
-      text: "Feedback",
-      action: navigateToFeedback,
+      icon: "moon",
+      text: "Dark Mode",
+      action: toDarkModeSettings
     },
-    { icon: "shield-alt", text: "Privacy & Security", action: navigateToPrivacy },
-    { icon: "sign-out-alt", text: "Log out", action: logout },
+    {
+      icon: "language",
+      text: "Language",
+      action: toLanguageSettings,
+    },
+    {
+      icon: "font",
+      text: "Font Size",
+      action: toFontSizeSettings
+    },
+    {
+      icon: "download",
+      text: "Application Updates",
+      action: toUpdateAppSettings
+    },
   ];
 
 
@@ -89,13 +93,19 @@ const SettingsScreen = ({ navigation }) => {
       <Text
         style={{
           marginLeft: 30,
-
           fontWeight: 500,
           fontSize: 18,
         }}
       >
         {text}{" "}
       </Text>
+      <MaterialIcons name="chevron-right" size={30} style={{
+        position: 'absolute',
+        right: 18,
+        alignSelf: 'center'
+      }} />
+
+
     </TouchableOpacity>
   );
 
@@ -125,19 +135,11 @@ const SettingsScreen = ({ navigation }) => {
 
           <Header>Settings</Header>
         </View>
-
-
-
         <ScrollView style={{ marginHorizontal: 13 }}>
-          {/* Account Settings */}
-
-
           <View style={{ marginBottom: 12 }}>
-
             <View
               style={{
                 borderRadius: 12,
-
               }}
             >
               {items.map((item, index) => (
@@ -147,18 +149,9 @@ const SettingsScreen = ({ navigation }) => {
               ))}
             </View>
           </View>
-
-
-
-
-
         </ScrollView>
       </ImageBackground>
-      <View style={{ backgroundColor: 'white' }}>
-        <FooterMenu />
-      </View>
-
     </SafeAreaView>
   );
 };
-export default SettingsScreen;
+export default Settings;

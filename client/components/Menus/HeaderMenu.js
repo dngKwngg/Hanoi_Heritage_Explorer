@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -10,7 +10,7 @@ const HeaderMenu = () => {
   const handleLogout = async () => {
     setState({ token: "", user: null });
     await AsyncStorage.removeItem("@auth");
-    alert("logout Successfully");
+    Alert.alert("Logout successfully!");
   };
 
   return (

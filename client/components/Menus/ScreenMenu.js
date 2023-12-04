@@ -10,7 +10,9 @@ import { AuthContext } from "../../context/authContext";
 import ChangePassword from "../../screens/account/ChangePassword";
 import Account from "../../screens/account/Account";
 import Verification from "../../screens/account/Verification";
-import SettingsScreen from "../../screens/SettingsScreen";
+import ResetPassWithoutBacktoLogin from "../../screens/account/ResetPassWithoutBacktoLogin";
+import Profile from "../../screens/Profile";
+import Settings from "../../screens/Settings";
 import Myposts from "../../screens/Myposts";
 import Splash from "../../screens/Splash";
 import OnboardingScreen from "../../screens/OnboardingScreen"
@@ -42,8 +44,8 @@ const ScreenMenu = () => {
           />
           
           <Stack.Screen
-            name="SettingsScreen"
-            component={SettingsScreen}
+            name="Profile"
+            component={Profile}
             options={{ headerShown: false }}
           />
           <Stack.Screen
@@ -61,7 +63,16 @@ const ScreenMenu = () => {
             component={Verification}
             options={{ headerShown: false }}
           />
-        
+          <Stack.Screen
+            name="ResetPassWithoutBacktoLogin"
+            component={ResetPassWithoutBacktoLogin}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{ headerShown: false }}
+          />
         </>
       ) : (
         <>
