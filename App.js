@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -9,6 +10,7 @@ import NotificationScreen from "./screens/NotificationScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
 import VideoScreen from "./screens/VideoScreen";
 import EventScreen from "./screens/EventScreen";
+import { useFonts } from "expo-font";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
