@@ -12,12 +12,17 @@ import Account from "../../screens/account/Account";
 import Verification from "../../screens/account/Verification";
 import ResetPassWithoutBacktoLogin from "../../screens/account/ResetPassWithoutBacktoLogin";
 import Profile from "../../screens/Profile";
-import Settings from "../../screens/Settings";
+import Settings from "../../screens/settings/Settings";
+import NotificationSettings from "../../screens/settings/NotificationSettings";
+import DarkModeSettings from "../../screens/settings/DarkModeSettings";
+import LanguageSettings from "../../screens/settings/LanguageSettings";
 import Myposts from "../../screens/Myposts";
 import Splash from "../../screens/Splash";
 import OnboardingScreen from "../../screens/OnboardingScreen"
 import ForgotPassword from "../../screens/auth/ForgotPassword";
 import ResetPassword from "../../screens/auth/ResetPassword";
+import FontSizeSettings from "../../screens/settings/FontSizeSettings";
+import AppUpdatesSettings from "../../screens/settings/AppUpdatesSettings";
 const ScreenMenu = () => {
   //global state
   const [state] = useContext(AuthContext);
@@ -73,6 +78,26 @@ const ScreenMenu = () => {
             component={Settings}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="Notification Settings"
+            component={NotificationSettings}
+          />
+          <Stack.Screen
+            name="Appearance Settings"
+            component={DarkModeSettings}
+          />
+          <Stack.Screen
+            name="App Language Settings"
+            component={LanguageSettings}
+          />
+          <Stack.Screen
+            name="Font Size Settings"
+            component={FontSizeSettings}
+          />
+          <Stack.Screen
+            name="App Updates Settings"
+            component={AppUpdatesSettings}
+          />
         </>
       ) : (
         <>
@@ -106,7 +131,6 @@ const ScreenMenu = () => {
             component={ResetPassword}
             options={{ headerShown: false }}
           />
-
         </>
       )}
     </Stack.Navigator>

@@ -9,9 +9,9 @@ import {
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Header from "../components/Header";
-import BackButton from "../components/BackButton";
-import COLORS from "../constants/colors";
+import Header from "../../components/Header";
+import BackButton from "../../components/BackButton";
+import COLORS from "../../constants/colors";
 import { MaterialIcons } from 'react-native-vector-icons';
 
 
@@ -19,23 +19,23 @@ const Settings = ({ navigation }) => {
 
 
   const toNotificationSettings = () => {
-    navigation.navigate("NotificationSettings");
+    navigation.navigate("Notification Settings");
   };
 
   const toDarkModeSettings = () => {
-    navigation.navigate("DarkModeSettings");
+    navigation.navigate("Appearance Settings");
   };
 
   const toLanguageSettings = () => {
-    navigation.navigate("LanguageSettings");
+    navigation.navigate("App Language Settings");
   };
 
   const toFontSizeSettings = () => {
-    navigation.navigate("FontSizeSettings");
+    navigation.navigate("Font Size Settings");
   };
 
   const toUpdateAppSettings = () => {
-    navigation.navigate("UpdateAppSettings");
+    navigation.navigate("App Updates Settings");
   };
 
 
@@ -47,22 +47,22 @@ const Settings = ({ navigation }) => {
     },
     {
       icon: "moon",
-      text: "Dark Mode",
+      text: "Appearance",
       action: toDarkModeSettings
     },
     {
       icon: "language",
-      text: "Language",
+      text: "App Language",
       action: toLanguageSettings,
     },
     {
       icon: "font",
-      text: "Font Size",
+      text: "App Font Size",
       action: toFontSizeSettings
     },
     {
       icon: "download",
-      text: "Application Updates",
+      text: "App Updates",
       action: toUpdateAppSettings
     },
   ];
@@ -116,7 +116,7 @@ const Settings = ({ navigation }) => {
         // backgroundColor: COLORS.white,
       }}
     >
-      <ImageBackground source={require('../assets/pastel-background13.jpg')} style={{
+      <ImageBackground source={require('../../assets/pastel-background13.jpg')} style={{
         flex: 1,
         resizeMode: 'cover'
       }}>
@@ -136,7 +136,7 @@ const Settings = ({ navigation }) => {
           <Header>Settings</Header>
         </View>
         <ScrollView style={{ marginHorizontal: 13 }}>
-          <View style={{ marginBottom: 12 }}>
+          <View>
             <View
               style={{
                 borderRadius: 12,
