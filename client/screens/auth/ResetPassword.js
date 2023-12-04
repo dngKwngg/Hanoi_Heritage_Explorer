@@ -79,7 +79,11 @@ export default function ResetPassword({ navigation }) {
 
 
       Alert.alert(data && data.message);
-
+      setResetCode({ value: '', error: '' });
+      setNewPassword({ value: '', error: '' });
+      setConfirmPassword({ value: '', error: '' });
+      setShowPassword(false);
+      setShowConfirmPassword(false);
 
 
     } catch (error) {

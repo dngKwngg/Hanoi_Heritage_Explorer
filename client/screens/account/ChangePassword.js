@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Alert, View, ImageBackground } from 'react-native'
+import { Alert, View, TouchableOpacity } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../../components/Background'
 import Logo from '../../components/Logo'
@@ -84,12 +84,37 @@ export default function ChangePassword({ navigation }) {
     }
   }
 
+  const onForgotPressed = async () => {
+    try {
 
+      const { data } = await axios.post("/auth/forgot-password", {
+        email: user?.email
+      });
+
+      console.log(axios.error);
+
+
+      Alert.alert(data && data.message);
+      setPassword({ value: '', error: '' });
+      setNewPassword({ value: '', error: '' });
+      setConfirmPassword({ value: '', error: '' });
+      setShowPassword(false);
+      setShowNewPassword(false);
+      setShowConfirmPassword(false);
+    
+      // Alert.alert("We've sent a 4 digits code to your email!")
+      navigation.navigate('ResetPassWithoutBacktoLogin')
+
+    } catch (error) {
+      Alert.alert(error.response.data.message);
+      console.log(error);
+    }
+  }
 
   return (
 
     <Background>
-  
+
       <BackButton goBack={navigation.goBack} />
 
       <Logo />
@@ -152,11 +177,25 @@ export default function ChangePassword({ navigation }) {
           onPress={toggleShowConfirmPassword}
         />
       </View>
-
+      <View style={{
+        width: '100%',
+        alignItems: 'flex-end',
+        marginBottom: 24,
+      }}>
+        <TouchableOpacity
+          onPress={onForgotPressed}
+        >
+          <Text style={{
+            fontSize: 13,
+            color: theme.colors.secondary,
+            fontWeight: '700'
+          }}>Forgot your password?</Text>
+        </TouchableOpacity>
+      </View>
       <Button mode="contained" onPress={onChangePassPressed}>
         Continue
       </Button>
-      
+
 
     </Background>
 

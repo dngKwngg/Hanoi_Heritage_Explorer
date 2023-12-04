@@ -43,10 +43,7 @@ export default function Verification({ navigation }) {
       await AsyncStorage.removeItem("@auth");
 
       // Alert.alert('Your password has been reset successfully, please login!');
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Login' }],
-      })
+
 
     } catch (error) {
       Alert.alert(error.response.data.message);
@@ -66,6 +63,7 @@ export default function Verification({ navigation }) {
 
 
       Alert.alert(data && data.message);
+      setResetCode({ value: '', error: '' });
 
 
 
@@ -105,6 +103,15 @@ export default function Verification({ navigation }) {
         }}
       >
         Resend Code
+      </Button>
+      <Button
+        mode="text"
+        onPress={() => navigation.replace('Account')}
+        style={{
+          marginTop: 0,
+        }}
+      >
+        Back to My Account
       </Button>
 
     </Background>
