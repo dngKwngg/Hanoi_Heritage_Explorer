@@ -3,16 +3,10 @@ import {
     View,
     Text,
     StatusBar,
-    TouchableOpacity,
-    Button,
-    FlatList,
     ScrollView,
     StyleSheet,
-    SafeAreaView,
     Image,
     Dimensions,
-    Linking,
-    Touchable,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import COLORS from "../constants/colors";
@@ -20,181 +14,35 @@ import { locations } from "../constants/locations";
 import Carousel from "../components/Carousel";
 import Header from "../components/Header";
 import CategorySlider from "../components/CategorySlider";
-import Hyperlink from "react-native-hyperlink";
+import AttractionOverview from "../components/AttractionOverview";
+import AttractionHistory from "../components/AttractionHistory";
+import AttractionArchitecture from "../components/AttractionArchitecture";
 
 const StoryScreen = () => {
     const screenWidth = Dimensions.get("window").width;
     const index = 0;
     const [activeCategory, setActiveCategory] = useState(1);
 
-    // Handle press hyperlink
-    const handlePress = () => {
-        const url = "https://hoangthanhthanglong.com";
-        Linking.canOpenURL(url).then((supported) => {
-            if (supported) {
-                Linking.openURL(url);
-            } else {
-                console.log("Don't know how to open URI: " + url);
-            }
-        });
-    };
-
     // Render overview
 
     const renderOverview = (location) => {
-        return (
-            <ScrollView style={{ flex: 1 }}>
-                {/* Carousel */}
-                <Carousel carouselData={location.carouselData} />
-                {/* Time reading */}
-                <View className="flex flex-row-reverse items-center pt-2">
-                    <Text
-                        style={{
-                            paddingLeft: 15,
-                            paddingRight: 12,
-                            fontSize: 16,
-                        }}
-                    >
-                        {location.categories[0].timeReading}
-                    </Text>
-                    <Icon
-                        name="clock-o"
-                        size={20}
-                        style={{ color: "grey" }}
-                    ></Icon>
-                </View>
-                {/* Content */}
-                <Text style={styles.textContent}>
-                    {location.categories[0].content}
-                </Text>
-                {/* Hyperlink */}
-                <View className="flex flex-row items-center pb-3 pt-3">
-                    <Icon
-                        name="globe"
-                        size={20}
-                        style={{ paddingLeft: 16, color: COLORS.primary }}
-                    ></Icon>
-
-                    <TouchableOpacity
-                        style={{ paddingLeft: 12 }}
-                        onPress={handlePress}
-                    >
-                        <Text style={{ fontSize: 16, color: "blue" }}>
-                            {location.url}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                {/* Location */}
-                <View className="flex flex-row items-center pb-3">
-                    <Icon
-                        name="map-marker"
-                        size={24}
-                        style={{ paddingLeft: 16, color: COLORS.primary }}
-                    ></Icon>
-
-                    <Text style={{ paddingLeft: 15, fontSize: 16 }}>
-                        {location.locateAt}
-                    </Text>
-                </View>
-                {/* Phone */}
-                <View className="flex flex-row items-center pb-3">
-                    <Icon
-                        name="phone-square"
-                        size={18}
-                        style={{ paddingLeft: 16, color: COLORS.primary }}
-                    ></Icon>
-
-                    <Text style={{ paddingLeft: 15, fontSize: 16 }}>
-                        {location.phone}
-                    </Text>
-                </View>
-                {/* Time */}
-                <View className="flex flex-row items-center pb-3">
-                    <Icon
-                        name="clock-o"
-                        size={18}
-                        style={{ paddingLeft: 16, color: COLORS.primary }}
-                    ></Icon>
-
-                    <Text style={{ paddingLeft: 15, fontSize: 16 }}>
-                        {location.time}
-                    </Text>
-                </View>
-            </ScrollView>
-        );
+        return <AttractionOverview location={location} />;
     };
 
     // Render history
     const renderHistory = (location) => {
         return (
-            <ScrollView style={{ flex: 1 }}>
-                <Image
-                    source={location.categories[1].image}
-                    style={{ height: 300, width: screenWidth }}
-                ></Image>
-                <View className="flex flex-row-reverse items-center pt-2">
-                    <Text
-                        style={{
-                            paddingLeft: 15,
-                            paddingRight: 12,
-                            fontSize: 16,
-                        }}
-                    >
-                        {location.categories[1].timeReading}
-                    </Text>
-                    <Icon
-                        name="clock-o"
-                        size={20}
-                        style={{ color: "grey" }}
-                    ></Icon>
-                </View>
-                <View>
-                    <Text
-                        style={{
-                            ...styles.textContent,
-                        }}
-                    >
-                        {location.categories[1].content}
-                    </Text>
-                </View>
-            </ScrollView>
+            <AttractionHistory location={location} screenWidth={screenWidth} />
         );
     };
 
     // Render architecture
     const renderArchitecture = (location) => {
         return (
-            <ScrollView style={{ flex: 1 }}>
-                <Image
-                    source={location.categories[2].image}
-                    style={{ height: 300, width: screenWidth }}
-                ></Image>
-                <View className="flex flex-row-reverse items-center pt-2">
-                    <Text
-                        style={{
-                            paddingLeft: 15,
-                            paddingRight: 12,
-                            fontSize: 16,
-                        }}
-                    >
-                        {location.categories[2].timeReading}
-                    </Text>
-                    <Icon
-                        name="clock-o"
-                        size={20}
-                        style={{ color: "grey" }}
-                    ></Icon>
-                </View>
-                <View>
-                    <Text
-                        style={{
-                            ...styles.textContent,
-                        }}
-                    >
-                        {location.categories[2].content}
-                    </Text>
-                </View>
-            </ScrollView>
+            <AttractionArchitecture
+                location={location}
+                screenWidth={screenWidth}
+            />
         );
     };
 
@@ -271,5 +119,25 @@ const styles = StyleSheet.create({
         marginLeft: 16,
         marginRight: 12,
         textAlign: "justify",
+        fontFamily: "Montserrat-Regular",
+    },
+    title: {
+        fontFamily: "Montserrat-Bold",
+        fontSize: 22,
+    },
+    textAdditionalInfo: {
+        fontFamily: "Montserrat-Regular",
+        fontSize: 16,
+        paddingLeft: 15,
+    },
+    iconAdditionInfo: {
+        paddingLeft: 6,
+        paddingRight: 6,
+        paddingTop: 3,
+        paddingBottom: 3,
+        borderRadius: 8,
+        marginLeft: 16,
+        color: COLORS.primary,
+        backgroundColor: "#ddd",
     },
 });

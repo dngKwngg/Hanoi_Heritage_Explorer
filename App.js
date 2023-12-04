@@ -1,9 +1,9 @@
-// In App.js in a new project
-
 import * as React from "react";
+import { useEffect, useState } from "react";
 import { View, Text } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useFonts } from "expo-font";
 import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
@@ -14,6 +14,18 @@ import TestScreen from "./screens/TestScreen";
 const Stack = createNativeStackNavigator();
 
 function App() {
+    const [fontsLoaded] = useFonts({
+        "Gelix-Regular": require("./assets/fonts/Gellix-Regular.ttf"),
+        "Montserrat-Regular": require("./assets/fonts/Montserrat-Regular.ttf"),
+        "Montserrat-Bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+        // Add more fonts if needed
+    });
+
+    if (!fontsLoaded) {
+        // You can return a loading screen or null while fonts are loading
+        return null;
+    }
+
     return (
         <NavigationContainer>
             <Stack.Navigator
@@ -29,14 +41,6 @@ function App() {
             </Stack.Navigator>
         </NavigationContainer>
     );
-
-    // return (
-    //     <View
-    //         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-    //     >
-    //         <Text>Hello World!</Text>
-    //     </View>
-    // );
 }
 
 export default App;
