@@ -9,7 +9,7 @@ const Header = ({ onPress, headerContent }) => {
                 <Icon
                     name="angle-left"
                     size={24}
-                    style={{ paddingLeft: 16 }}
+                    style={{ paddingLeft: 20, paddingRight: 20 }}
                 ></Icon>
             </TouchableOpacity>
             <Text style={styles.headerText}>{headerContent}</Text>

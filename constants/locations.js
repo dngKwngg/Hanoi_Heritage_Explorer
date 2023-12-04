@@ -49,16 +49,10 @@ export const locations = [
             },
             {
                 id: 7,
-                title: "Đồ lưu niệm",
-                content: "Đồ lưu niệm Hoàng thành Thăng Long",
-            },
-            {
-                id: 8,
                 title: "Đánh giá",
                 content: "Đánh giá Hoàng thành Thăng Long",
             },
         ],
-        url: "https://www.hoangthanhthanglong.com",
         locateAt: "19C Hoàng Diệu, Quận Ba Đình, Hà Nội",
         phone: "+84-24-37345926",
         time: "8:00 đến 17:00 hàng ngày",
@@ -76,20 +70,5 @@ export const locations = [
                 image: require("../assets/images/HoangThanhThangLong/HTTLslider_3.jpg"),
             },
         ],
-
-        // carouselData: [
-        //     {
-        //         id: 1,
-        //         image: "https://old.hoalo.vn/DataFiles/2020/06/News/4fcf4f7b43b1beefe7a0.jpg",
-        //     },
-        //     {
-        //         id: 2,
-        //         image: "https://yourvacation.vn/uploads/images/%C4%91%C3%AAm-ling-thi%C3%AAng.jpg",
-        //     },
-        //     {
-        //         id: 3,
-        //         image: "https://old.hoalo.vn/DataFiles/2020/06/News/4fcf4f7b43b1beefe7a0.jpg",
-        //     },
-        // ],
     },
 ];
