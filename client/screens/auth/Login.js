@@ -1,5 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/authContext";
 import { Text } from 'react-native-paper'
 import Background from '../../components/Background'
@@ -13,7 +13,7 @@ import { emailValidator } from '../../helpers/emailValidator'
 import { passwordValidator } from '../../helpers/passwordValidator'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 
 const Login = ({ navigation }) => {
   //global state
@@ -24,9 +24,25 @@ const Login = ({ navigation }) => {
   const [password, setPassword] = useState({ value: '', error: '' });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const checkRemembered = async () => {
+    try {
+      const rememberedEmail = await AsyncStorage.getItem('@rememberedEmail');
+      const rememberedPassword = await AsyncStorage.getItem('@rememberedPassword');
+      const checkbox = await AsyncStorage.getItem('@checkbox');
+      if (checkbox === 'true' && rememberedEmail) {
+        setEmail({ value: rememberedEmail, error: '' });
+        setPassword({ value: rememberedPassword, error: '' });
+        setIsChecked(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //function
@@ -47,6 +63,18 @@ const Login = ({ navigation }) => {
       console.log(axios.error);
       setState(data);
       await AsyncStorage.setItem("@auth", JSON.stringify(data));
+
+      if (isChecked) {
+        await AsyncStorage.setItem('@rememberedEmail', emailValue);
+        await AsyncStorage.setItem('@rememberedPassword', passwordValue);
+        await AsyncStorage.setItem('@checkbox', isChecked.toString());
+      } else {
+        await AsyncStorage.removeItem('@rememberedEmail');
+        await AsyncStorage.removeItem('@rememberedPassword');
+        await AsyncStorage.removeItem('@checkbox');
+      }
+
+
       Alert.alert(data && data.message);
       setEmail({ value: '', error: '' });
       setPassword({ value: '', error: '' });
@@ -60,9 +88,6 @@ const Login = ({ navigation }) => {
   };
 
 
-
-
-
   //temp function to check local storage data
   const getLocalStorageData = async () => {
 
@@ -70,6 +95,10 @@ const Login = ({ navigation }) => {
     console.log("Local Storage ==> ", data);
   };
   getLocalStorageData();
+  useEffect(() => {
+    checkRemembered();
+  }, []);
+
   return (
     <Background>
       {/* <BackButton goBack={navigation.goBack} /> */}
@@ -101,22 +130,36 @@ const Login = ({ navigation }) => {
         />
 
 
-          <MaterialCommunityIcons
-            name={showPassword ? 'eye-off' : 'eye'}
-            size={24}
-            color="#aaa"
-            style={{ position: 'absolute', right: 9, top: 32 }}
-            onPress={toggleShowPassword}
-          />
-     
+        <MaterialCommunityIcons
+          name={showPassword ? 'eye-off' : 'eye'}
+          size={24}
+          color="#aaa"
+          style={{ position: 'absolute', right: 9, top: 32 }}
+          onPress={toggleShowPassword}
+        />
+
       </View>
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity
+
+      <View style={{ flexDirection: 'row', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+
+        <TouchableOpacity style={styles.rememberMe}
+          onPress={() => { setIsChecked(!isChecked) }}
+        >
+          {isChecked && <MaterialIcons name="check-box" size={23} />}
+          {!isChecked && <MaterialIcons name="check-box-outline-blank" size={23} />}
+          <Text style={styles.remember}>Remember me</Text>
+        </TouchableOpacity>
+
+
+
+        <TouchableOpacity style={styles.forgotPassword}
           onPress={() => navigation.navigate('ForgotPassword')}
         >
           <Text style={styles.forgot}>Forgot your password?</Text>
         </TouchableOpacity>
+
       </View>
+
       <Button mode="contained" onPress={onLoginPressed}>
         Login
       </Button>
@@ -132,18 +175,29 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   forgotPassword: {
-    width: '100%',
-    alignItems: 'flex-end',
     marginBottom: 24,
-  },
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
+    
   },
   forgot: {
     fontSize: 13,
     color: theme.colors.secondary,
-    fontWeight: '700'
+    fontWeight: '700',
+  },
+  rememberMe: {
+    marginBottom: 24,
+    flexDirection: 'row',
+    alignItems: 'center',
+   
+  },
+  remember: {
+    fontSize: 13,
+    color: theme.colors.secondary,
+    fontWeight: '700',
+    marginLeft: 3
+  },
+  row: {
+    flexDirection: 'row',
+    marginTop: 4,
   },
   link: {
     fontWeight: 'bold',
