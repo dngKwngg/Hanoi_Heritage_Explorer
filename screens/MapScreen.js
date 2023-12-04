@@ -30,6 +30,7 @@ MapboxGL.setTelemetryEnabled(false);
 
 function Map() {
 
+    // variable
     const [typeOfPlace, setTypeOfPlace] = useState("")
     const [selectedItemId, setSelectedItemId] = useState(null);
     const [selectedPlace, setSelectedPlace] = useState(null)
@@ -40,11 +41,7 @@ function Map() {
     const [displayRoute, setDisplayRoute] = useState(false)
     const [duration, setDuration] = useState(0)
     const [distance, setDistance] = useState(0)
-    const [suggestionScrollViewMarginTop, setSuggestionScrollViewMarginTop] = useState(10)
-
-    const bottomSheetRef = useRef()
-    const snapPoints = useMemo(() => ['50%', '100%'], [])
-
+    const [waypoints, setWaypoints] = useState([])
     const autoCompleteData = useMemo(() => {
         if (query) {
             if (search(query)[0]) {
@@ -63,6 +60,30 @@ function Map() {
         return []
     })
 
+    // dynamic style
+    const snapPoints = useMemo(() => ['50%', '100%'], [])
+    const [suggestionScrollViewMarginTop, setSuggestionScrollViewMarginTop] = useState(10)
+    const [addToWayPointButtonColor, setAddToWayPointButtonColor] = useState("green")
+    const [addToWayPointButtonText, setAddToWayPointButtonText] = useState("Add to waypoint")
+
+    // component reference
+    const bottomSheetRef = useRef()
+    
+
+    // handle add to waypoint button color after being pressed
+    useEffect(() => {
+        console.log("test waypoint", waypoints)
+        if (waypoints.includes(selectedItemId)) {
+            setAddToWayPointButtonColor("red")
+            setAddToWayPointButtonText("Remove from waypoint")
+        }
+        else {
+            setAddToWayPointButtonColor("green")
+            setAddToWayPointButtonText("Add to waypoint")
+        }
+    }, [waypoints, selectedItemId])
+
+    // handle suggestion scroll view position change by height of auto complete list
     useEffect(() => {
         if (autoCompleteData.length == 0) {
             setSuggestionScrollViewMarginTop(10)
@@ -75,6 +96,7 @@ function Map() {
         }
     }, [autoCompleteData])
 
+    // fetch distance, duration and direction
     useEffect(() => {
         if (selectedPlace) {
             console.log("fetch distance and duration")
@@ -111,16 +133,19 @@ function Map() {
         }
     }, [selectedPlace])
 
+    // disable selected place when change type of place
     useEffect(() => {
         setSelectedItemId(null)
         setSelectedPlace(null)
         setDisplayRoute(false)
     }, [typeOfPlace])
 
+    // disable selected place when search query is empty
     useEffect(() => {
         if (!query) setSelectedItemId(null)
     }, [query])
 
+    // handle close and open bottom sheet modal when select and deselect place
     useEffect(() => {
         if (!selectedItemId) bottomSheetRef.current?.close()
         else bottomSheetRef.current?.expand()
@@ -171,7 +196,7 @@ function Map() {
         result.sort(compare)
         return result
     }
-
+ 
     function showLocation(id) {
         for (let i = 0; i < data.length; i++) {
             if (data[i].id == id) {
@@ -280,7 +305,6 @@ function Map() {
                         flatListProps={{
                             style: styles.autoCompleteList,
                             keyboardShouldPersistTaps: 'always',
-                            keyExtractor: (_, idx) => idx,
                             renderItem: ({ item }) => (
                                 <TouchableOpacity
                                     onPress={() => {
@@ -338,6 +362,7 @@ function Map() {
                         />
                     </MapboxGL.ShapeSource>
                 )}
+                
 
             </MapboxGL.MapView>
 
@@ -399,12 +424,26 @@ function Map() {
                             >
                                 <Text style={[styles.buttonText, styles.viewDirectionText]}>View Directions</Text>
                             </TouchableOpacity>
-
+                            
                             <TouchableOpacity
                                 style={[styles.button, styles.getDetailsButton]}
                                 onPress={() => { console.log("Get direction button clicked") }}
                             >
                                 <Text style={[styles.buttonText, styles.getDetailsText]}>Get Details</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={[styles.button, styles.getDetailsButton, {borderColor: addToWayPointButtonColor}]}
+                                onPress={() => { 
+                                    if (!waypoints.includes(selectedPlace.coordinate)) {
+                                        setWaypoints([...waypoints, selectedPlace.coordinate])
+                                    } else {
+                                        setWaypoints(waypoints.filter((waypoint) => waypoint !== selectedPlace.coordinate))
+                                    }
+                                    
+                                }}
+                            >
+                                <Text style={[styles.buttonText, {color: addToWayPointButtonColor}]}>{addToWayPointButtonText}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -581,7 +620,7 @@ const styles = StyleSheet.create({
         borderColor: "#4285F4"
     },
     buttonText: {
-        fontSize: 13,
+        fontSize: 10,
         fontWeight: 'bold',
         textAlign: 'center',
         fontWeight: "400"
