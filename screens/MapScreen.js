@@ -173,7 +173,7 @@ function Map() {
     const onMapLoaded = () => {
         console.log("map rendered")
         setDisplayLocation(true);
-      };
+    };
 
     const fetchDirection = async () => {
         let res = await utils.fetchDirection(utils.generateDirectionQueryString(
@@ -290,11 +290,11 @@ function Map() {
     function showLocations() {
         return Locations[0].places.map((item, index) => {
             return (
-                <View key={index}>
+                
                     <MapboxGL.PointAnnotation
-                        id={String(item.id)}
+                        id={item.slug}
                         title={item.title}
-                        key={selectedItemId}
+                        key={[selectedItemId, index]}
                         selected={true}
                         onSelected={(details) => {
                             setRouteDirections(null)
@@ -315,7 +315,7 @@ function Map() {
                             />
                         </View>
                     </MapboxGL.PointAnnotation>
-                </View>
+                
 
 
             )
@@ -397,8 +397,8 @@ function Map() {
             {/* Map */}
             <MapboxGL.MapView
                 style={styles.map}
-                onDidFinishLoadingMapFully={onMapLoaded}
-            > 
+                onDidFinishLoadingMap={onMapLoaded}
+            >
                 <MapboxGL.Camera
                     zoomLevel={12}
                     centerCoordinate={selectedPlace ? selectedPlace.coordinate : userLocation}
@@ -410,9 +410,9 @@ function Map() {
                 />
 
                 {/* display marker */}
-                {/* {typeOfPlace && showLocations(typeOfPlace)} */}
-                {/* {showLocations()} */}
-                {displayLocation && showLocation()}
+                
+                {displayLocation &&  <View>{showLocations()}</View>}
+                {/* {displayLocation && showLocation()} */}
                 {query && showLocation(selectedItemId)}
 
                 {/* Showing direction */}

@@ -18,6 +18,7 @@
     "expo": "~49.0.15",
     "expo-constants": "^14.4.2",
     "expo-dev-client": "~2.4.11",
+    "expo-location": "^16.3.0",
     "expo-status-bar": "~1.6.0",
     "fs": "^0.0.1-security",
     "nativewind": "^2.0.11",
