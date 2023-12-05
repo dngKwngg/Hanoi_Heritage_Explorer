@@ -9,6 +9,7 @@ import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
 import StoryScreen from "./screens/StoryScreen";
+import HomeScreen from "./screens/HomeScreen";
 import TestScreen from "./screens/TestScreen";
 
 const Stack = createNativeStackNavigator();
@@ -29,13 +30,14 @@ function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Splash"
+                initialRouteName="Home"
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="Onboarding" component={OnboardingScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="SignUp" component={SignupScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Story" component={StoryScreen} />
                 <Stack.Screen name="Test" component={TestScreen} />
             </Stack.Navigator>
