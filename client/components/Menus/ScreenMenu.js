@@ -23,6 +23,7 @@ import ForgotPassword from "../../screens/auth/ForgotPassword";
 import ResetPassword from "../../screens/auth/ResetPassword";
 import FontSizeSettings from "../../screens/settings/FontSizeSettings";
 import AppUpdatesSettings from "../../screens/settings/AppUpdatesSettings";
+import MapScreen from '../../screens/MapScreen'
 const ScreenMenu = () => {
   //global state
   const [state] = useContext(AuthContext);
@@ -38,7 +39,7 @@ const ScreenMenu = () => {
         <>
           <Stack.Screen
             name="Home"
-            component={Home}
+            component={MapScreen}
    
           />
           

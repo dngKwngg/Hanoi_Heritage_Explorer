@@ -7,17 +7,24 @@ export default function TextInput({ errorText, description, ...props }) {
   return (
     <View style={styles.container}>
       <Input
-        style={styles.input}
-        selectionColor={theme.colors.secondary}
+
+        style={[
+          styles.input,
+          // mode === 'flat' && { backgroundColor: theme.colors.third },
+        ]}
+        // selectionColor={theme.colors.primary}
         underlineColor="transparent"
         activeOutlineColor={theme.colors.third}
         mode="outlined"
+
         {...props}
+        
       />
       {description && !errorText ? (
         <Text style={styles.description}>{description}</Text>
       ) : null}
       {errorText ? <Text style={styles.error}>{errorText}</Text> : null}
+      
     </View>
   )
 }
@@ -34,6 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: theme.colors.secondary,
     paddingTop: 8,
+
   },
   error: {
     fontSize: 13,
