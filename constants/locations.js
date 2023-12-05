@@ -45,6 +45,11 @@ export const locations = [
             {
                 id: 6,
                 title: "Đặt vé",
+                backgroundUrl:
+                    "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2023/5/7/1189286/Anh-Hoang-Thanh-Than-11.jpg",
+                adultPrice: 50000,
+                teenPrice: 20000,
+                childPrice: 10000,
                 content: "Đặt vé Hoàng thành Thăng Long",
             },
             {

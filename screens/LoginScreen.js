@@ -84,7 +84,7 @@ const LoginScreen = ({ navigation }) => {
                         buttonText={"Log in"}
                         onPress={() => {
                             console.log(formData);
-                            navigation.navigate("Story");
+                            navigation.navigate("Home");
                         }}
                     />
                 </View>

@@ -16,6 +16,7 @@ import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
 import StoryScreen from "./screens/StoryScreen";
+import HomeScreen from "./screens/HomeScreen";
 import TestScreen from "./screens/TestScreen";
 
 const Stack = createNativeStackNavigator();
@@ -24,28 +25,29 @@ NativeWindStyleSheet.setOutput({
 	default: "native",
 });
 function App() {
-	return (
-		<NavigationContainer>
-			<Stack.Navigator
-				// initialRouteName="Splash
-				initialRouteName="Notification"
-				screenOptions={{ headerShown: false }}
-			>
-				<Stack.Screen name="Ticket" component={TicketScreen} />
-				<Stack.Screen name="Image" component={ImageScreen} />
-				<Stack.Screen
-					name="Notification"
-					component={NotificationScreen}
-				/>
-				<Stack.Screen name="Feedback" component={FeedbackScreen} />
-				<Stack.Screen name="Video" component={VideoScreen} />
-				<Stack.Screen name="Event" component={EventScreen} />
-				<Stack.Screen name="Splash" component={Splash} />
+    const [fontsLoaded] = useFonts({
+        "Gelix-Regular": require("./assets/fonts/Gellix-Regular.ttf"),
+        "Montserrat-Regular": require("./assets/fonts/Montserrat-Regular.ttf"),
+        "Montserrat-Bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+        // Add more fonts if needed
+    });
+
+    if (!fontsLoaded) {
+        // You can return a loading screen or null while fonts are loading
+        return null;
+    }
+
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                initialRouteName="Home"
+                screenOptions={{ headerShown: false }}
+            >
+                <Stack.Screen name="Splash" component={Splash} />
                 <Stack.Screen name="Onboarding" component={OnboardingScreen} />
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="SignUp" component={SignupScreen} />
-				<Stack.Screen name="Splash" component={Splash} />
-                <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Story" component={StoryScreen} />
                 <Stack.Screen name="Carousel" component={Carousel} />
 			</Stack.Navigator>
