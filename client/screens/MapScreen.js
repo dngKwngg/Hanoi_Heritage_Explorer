@@ -524,7 +524,7 @@ function Map() {
                                 {[...Array(10)].map((_, i) => (
                                     <Image
                                         key={i}
-                                        source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')}
+                                        source={require('../assets/images/HoangThanhThangLong/HTTLslider_1.jpg')}
                                         style={styles.image}
                                     />
                                 ))}
