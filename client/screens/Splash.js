@@ -14,7 +14,9 @@ const Splash = ({ navigation }) => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: COLORS.primary,
+        paddingTop: StatusBar.height,
+        backgroundColor: COLORS.primary
+        
       }}
     >
       <StatusBar barStyle="light-content" hidden={false} backgroundColor="#329bcc" />

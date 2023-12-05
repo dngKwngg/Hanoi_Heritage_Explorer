@@ -19,13 +19,14 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import COLORS from "../../constants/colors";
 import { theme } from "../../core/theme";
 import Button from "../../components/Button";
+import { nameValidator } from '../../helpers/nameValidator'
 
 const Account = ({ navigation }) => {
   //global state
   const [state, setState] = useContext(AuthContext);
   const { user, token } = state;
   //local state
-  const [name, setName] = useState(user?.name);
+  const [name, setName] = useState({ value: user?.name, error: '' });
   const [password, setPassword] = useState(user?.password);
   const [dateOfBirth, setDateOfBirth] = useState(user?.dateOfBirth ? new Date(user?.dateOfBirth).toDateString() : 'Not yet provided');
   const [email] = useState(user?.email);
@@ -39,9 +40,14 @@ const Account = ({ navigation }) => {
   //handle update user data
   const handleUpdate = async () => {
     try {
+      const nameError = nameValidator(name.value)
+      if (nameError) {
+        setName({ ...name, error: nameError })
+        return;
+      }
 
       const { data } = await axios.put("/auth/update-user-profile", {
-        name: name,
+        name: name.value,
         email: email,
         dateOfBirth: new Date(dateOfBirth)
       });
@@ -97,7 +103,7 @@ const Account = ({ navigation }) => {
             />
           </View>
           <Text style={styles.name}>
-            {name}
+            {name.value}
           </Text>
 
           <Text style={styles.subsectionTitle}>Information</Text>
@@ -110,16 +116,18 @@ const Account = ({ navigation }) => {
                 <TextInput
                   style={styles.inputBox}
                   returnKeyType="next"
-                  value={name}
+                  value={name.value}
                   mode='flat'
-                  onChangeText={(text) => setName(text)}
+                  onChangeText={(text) => setName({ value: text, error: '' })}
+                  error={!!name.error}
+                  errorText={name.error}
                   autoCapitalize="none"
                   activeUnderlineColor={theme.colors.fifth}
                   underlineColor='black'
                 />
                 <FontAwesome5
                   name="pencil-alt" size={18}
-                  style={{ position: 'absolute', right: '5%', top: '35%' }}
+                  style={{ position: 'absolute', right: 9, top: 27 }}
                 />
               </View>
             </View>
@@ -165,7 +173,7 @@ const Account = ({ navigation }) => {
 
                 <FontAwesome5
                   name="calendar-alt" size={20}
-                  style={{ position: 'absolute', right: '5%', top: '33%' }}
+                  style={{ position: 'absolute', right: 9, top: 25 }}
                 />
               </TouchableOpacity>
 

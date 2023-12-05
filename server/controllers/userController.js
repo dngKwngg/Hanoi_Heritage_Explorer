@@ -298,6 +298,14 @@ const updateUserProfileController = async (req, res) => {
         message: 'You haven\'t made any changes yet!'
       });
     }
+
+    if (!name) {
+      return res.status(400).send({
+        success: false,
+        message: 'Name can not be empty!'
+      });
+    }
+
     const updatedUser = await userModel.findOneAndUpdate(
       { email },
       {

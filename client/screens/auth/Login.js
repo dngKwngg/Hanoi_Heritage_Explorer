@@ -1,7 +1,7 @@
 import { View, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/authContext";
-import { Text } from 'react-native-paper'
+import { Text, IconButton } from 'react-native-paper'
 import Background from '../../components/Background'
 import Logo from '../../components/Logo'
 import Header from '../../components/Header'
@@ -13,7 +13,7 @@ import { emailValidator } from '../../helpers/emailValidator'
 import { passwordValidator } from '../../helpers/passwordValidator'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 
 const Login = ({ navigation }) => {
   //global state
@@ -163,6 +163,18 @@ const Login = ({ navigation }) => {
       <Button mode="contained" onPress={onLoginPressed}>
         Login
       </Button>
+
+      <Text style={{ fontWeight: '500', marginTop: 20 }}>Or login with</Text>
+      <View style={{flexDirection: 'row', marginVertical: 10, width: '80%', justifyContent: 'space-evenly'}}>
+        <TouchableOpacity style={[styles.iconButton, {backgroundColor: '#f2391d'}]}>
+          <FontAwesome5 name='google' size={20} color='white' />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.iconButton, {backgroundColor: '#1e309c'}]}>
+          <FontAwesome5 name='facebook-f' size={20} color='white' />
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.row}>
         <Text>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Register')}>
@@ -176,7 +188,7 @@ const Login = ({ navigation }) => {
 const styles = StyleSheet.create({
   forgotPassword: {
     marginBottom: 24,
-    
+
   },
   forgot: {
     fontSize: 13,
@@ -187,7 +199,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     flexDirection: 'row',
     alignItems: 'center',
-   
+
   },
   remember: {
     fontSize: 13,
@@ -195,6 +207,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     marginLeft: 3
   },
+
   row: {
     flexDirection: 'row',
     marginTop: 4,
@@ -203,6 +216,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.third,
   },
+  iconButton: {
+    padding: 9,
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 30
+  }
 });
 
 

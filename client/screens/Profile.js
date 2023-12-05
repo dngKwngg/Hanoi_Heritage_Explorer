@@ -132,7 +132,7 @@ const SettingsScreen = ({ navigation }) => {
           {/* Account Settings */}
 
 
-          <View style={{ marginBottom: 12 }}>
+          <View>
 
             <View
               style={{
@@ -147,9 +147,6 @@ const SettingsScreen = ({ navigation }) => {
               ))}
             </View>
           </View>
-
-
-
 
 
         </ScrollView>
