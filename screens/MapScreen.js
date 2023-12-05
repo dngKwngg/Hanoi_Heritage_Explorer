@@ -10,6 +10,8 @@ import {
     ScrollView,
     TouchableOpacity
 } from "react-native"
+
+import Animated from 'react-native-reanimated'
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import Autocomplete from 'react-native-autocomplete-input';
@@ -24,15 +26,17 @@ import redPin from '../assets/icons/map-marker-alt-solid-red.png'
 import Constants from "expo-constants"
 import Locations from '../dev-data/locations'
 import utils from '../utils/utils'
+import { useSharedValue } from 'react-native-reanimated';
+import * as expoLocation from 'expo-location'
 
 MapboxGL.setAccessToken(process.env.MAPBOX_ACCESS_TOKEN);
 MapboxGL.setTelemetryEnabled(false);
 
 function Map() {
 
-    // variable
+
     const [typeOfPlace, setTypeOfPlace] = useState("")
-    const [selectedItemId, setSelectedItemId] = useState(null);
+    const [selectedItemId, setSelectedItemId] = useState(-1);
     const [selectedPlace, setSelectedPlace] = useState(null)
     const [displayInfo, setDisplayInfo] = useState(false)
     const [query, setQuery] = useState('');
@@ -42,6 +46,13 @@ function Map() {
     const [duration, setDuration] = useState(0)
     const [distance, setDistance] = useState(0)
     const [waypoints, setWaypoints] = useState([])
+    const [displayRouteToWaypoints, setDisplayRouteToWaypoints] = useState(false)
+    const [userLocation, setUserLocation] = useState([105.7820467, 21.0405764])
+    const [displayLocation, setDisplayLocation] = useState(false)
+
+    // constants
+    const windowHeight = Dimensions.get("window").height
+
     const autoCompleteData = useMemo(() => {
         if (query) {
             if (search(query)[0]) {
@@ -64,24 +75,44 @@ function Map() {
     const snapPoints = useMemo(() => ['50%', '100%'], [])
     const [suggestionScrollViewMarginTop, setSuggestionScrollViewMarginTop] = useState(10)
     const [addToWayPointButtonColor, setAddToWayPointButtonColor] = useState("green")
-    const [addToWayPointButtonText, setAddToWayPointButtonText] = useState("Add to waypoint")
+    const [addToWayPointButtonText, setAddToWayPointButtonText] = useState("Add to Waypoints")
+    const bottomSheetPosition = useSharedValue(0)
+    const addToWayPointButtonContainerHeight = Dimensions.get("window").height * 0.4 + 100
 
     // component reference
     const bottomSheetRef = useRef()
-    
+    const waypointRef = useRef()
+
+
+    useEffect(() => {
+        if (userLocation) {
+            waypoints.push(userLocation)
+        }
+    }, [userLocation])
+
+    // get user's current coordinates
+    useEffect(() => {
+        (async () => {
+            let coordinate = await expoLocation.getCurrentPositionAsync({});
+            setUserLocation([coordinate.coords.longitude, coordinate.coords.latitude]);
+        })();
+    }, []);
 
     // handle add to waypoint button color after being pressed
     useEffect(() => {
         console.log("test waypoint", waypoints)
-        if (waypoints.includes(selectedItemId)) {
-            setAddToWayPointButtonColor("red")
-            setAddToWayPointButtonText("Remove from waypoint")
+        if (selectedPlace) {
+            if (waypoints.includes(selectedPlace.coordinate)) {
+                setAddToWayPointButtonColor("red")
+                setAddToWayPointButtonText("Remove from waypoint")
+            }
+            else {
+                setAddToWayPointButtonColor("green")
+                setAddToWayPointButtonText("Add to Waypoints")
+            }
         }
-        else {
-            setAddToWayPointButtonColor("green")
-            setAddToWayPointButtonText("Add to waypoint")
-        }
-    }, [waypoints, selectedItemId])
+
+    }, [waypoints, selectedPlace])
 
     // handle suggestion scroll view position change by height of auto complete list
     useEffect(() => {
@@ -100,36 +131,7 @@ function Map() {
     useEffect(() => {
         if (selectedPlace) {
             console.log("fetch distance and duration")
-            const fetchData = async () => {
-                let res = await utils.fetchDirection(utils.generateDirectionQueryString(
-                    {
-                        longitude: 105.782096,
-                        latitude: 21.040622
-                    }, {
-                    longitude: selectedPlace.coordinate[0],
-                    latitude: selectedPlace.coordinate[1]
-                }
-
-                ))
-
-                setDuration(parseFloat(res["routes"][0]["duration"] / 60).toFixed(2))
-                setDistance(parseFloat(res["routes"][0]["distance"] / 1000).toFixed(2))
-                setRouteDirections({
-                    type: 'FeatureCollection',
-                    features: [
-                        {
-                            type: 'Feature',
-                            properties: {},
-                            geometry: {
-                                type: 'LineString',
-                                coordinates: res['routes'][0]['geometry']['coordinates'],
-                            }
-                        }
-                    ]
-                })
-
-            }
-            fetchData()
+            fetchDirection()
         }
     }, [selectedPlace])
 
@@ -164,6 +166,65 @@ function Map() {
         console.log(selectedPlace)
     }, [selectedItemId, selectedPlace])
 
+    useEffect(() => {
+        console.log("test display location:", displayLocation)
+    }, [displayLocation])
+
+    const onMapLoaded = () => {
+        console.log("map rendered")
+        setDisplayLocation(true);
+      };
+
+    const fetchDirection = async () => {
+        let res = await utils.fetchDirection(utils.generateDirectionQueryString(
+            {
+                longitude: 105.782096,
+                latitude: 21.040622
+            },
+            {
+                longitude: selectedPlace.coordinate[0],
+                latitude: selectedPlace.coordinate[1]
+            }))
+
+
+
+        setDuration(parseFloat(res["routes"][0]["duration"] / 60).toFixed(2))
+        setDistance(parseFloat(res["routes"][0]["distance"] / 1000).toFixed(2))
+        setRouteDirections({
+            type: 'FeatureCollection',
+            features: [
+                {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: res['routes'][0]['geometry']['coordinates'],
+                    }
+                }
+            ]
+        })
+
+    }
+
+    const fetchDirectionThroughWaypoints = async () => {
+        console.log("fetch direction through waypoints")
+        let res = await utils.fetchDirection(utils.generateWaypointsDirectionQueryString(waypoints))
+        setRouteDirections({
+            type: 'FeatureCollection',
+            features: [
+                {
+                    type: 'Feature',
+                    properties: {},
+                    geometry: {
+                        type: 'LineString',
+                        coordinates: res['routes'][0]['geometry']['coordinates'],
+                    }
+                }
+            ]
+        })
+
+    }
+
     function handlePresentModal() {
         setDisplayInfo(true)
     }
@@ -196,15 +257,15 @@ function Map() {
         result.sort(compare)
         return result
     }
- 
+
     function showLocation(id) {
         for (let i = 0; i < data.length; i++) {
             if (data[i].id == id) {
                 return (
                     <View key={i}>
                         <MapboxGL.PointAnnotation
-                            id={data[i].id}
-                            title={data[i].id}
+                            id={data[i].slug}
+                            title={data[i].title}
                             key={selectedItemId}
                             selected={true}
                             coordinate={data[i].coordinate}
@@ -214,7 +275,7 @@ function Map() {
                             <View>
                                 <FontAwesome5Icon
                                     name="map-marker-alt"
-                                    size={25}
+                                    size={30}
                                     color={data[i].id == selectedItemId ? "red" : "#888888"}
                                 />
                             </View>
@@ -226,43 +287,41 @@ function Map() {
         }
     }
 
-    function showLocations(type) {
-        for (let i = 0; i < Locations.length; i++) {
-            if (Locations[i].name == type) {
-                return Locations[i].places.map((item, index) => {
-                    return (
-                        <View key={index}>
-                            <MapboxGL.PointAnnotation
-                                id={item.id}
-                                title={item.id}
-                                key={selectedItemId}
-                                selected={true}
-                                onSelected={(details) => {
-                                    setRouteDirections(null)
-                                    if (selectedItemId == item.id) handleSelectMarker(null)
-                                    else handleSelectMarker(item.id)
-                                    handlePresentModal()
-                                    console.log(selectedItemId, item.id, selectedItemId == item.id)
+    function showLocations() {
+        return Locations[0].places.map((item, index) => {
+            return (
+                <View key={index}>
+                    <MapboxGL.PointAnnotation
+                        id={String(item.id)}
+                        title={item.title}
+                        key={selectedItemId}
+                        selected={true}
+                        onSelected={(details) => {
+                            setRouteDirections(null)
+                            if (selectedItemId == item.id) handleSelectMarker(null)
+                            else handleSelectMarker(item.id)
+                            handlePresentModal()
+                            console.log(selectedItemId, item.id, selectedItemId == item.id)
 
-                                }}
-                                anchor={{ x: 0.5, y: 1 }}
-                                coordinate={item.coordinate}
-                            >
-                                <View>
-                                    <FontAwesome5Icon
-                                        name="map-marker-alt"
-                                        size={25}
-                                        color={item.id == selectedItemId ? "red" : "#888888"}
-                                    />
-                                </View>
-                            </MapboxGL.PointAnnotation>
+                        }}
+                        anchor={{ x: 0.5, y: 1 }}
+                        coordinate={item.coordinate}
+                    >
+                        <View>
+                            <FontAwesome5Icon
+                                name="map-marker-alt"
+                                size={30}
+                                color={item.id == selectedItemId ? "red" : "#888888"}
+                            />
                         </View>
+                    </MapboxGL.PointAnnotation>
+                </View>
 
 
-                    )
-                })
-            }
-        }
+            )
+        })
+
+
     }
 
     function renderSuggestionTab() {
@@ -300,7 +359,7 @@ function Map() {
                         value={query}
                         onChangeText={setQuery}
                         placeholder="Search your place"
-                        inputContainerStyle={{ margin: 0, borderRadius: 7 }}
+                        inputContainerStyle={styles.inputContainerStyle}
 
                         flatListProps={{
                             style: styles.autoCompleteList,
@@ -314,6 +373,11 @@ function Map() {
                                         setSelectedItemId(item.id)
                                         handlePresentModal()
                                     }}
+                                    style={{
+                                        marginVertical: 2.5,
+                                        borderBottomWidth: 1,
+                                        borderBottomColor: "#dbd6d6"
+                                    }}
                                 >
                                     <Text style={styles.itemText}>{item.title}</Text>
                                 </TouchableOpacity>
@@ -322,20 +386,22 @@ function Map() {
                     />
                 </View>
 
-                <ScrollView
+                {/* <ScrollView
                     horizontal
                     style={[styles.suggestionScrollView, { marginTop: suggestionScrollViewMarginTop }]}
                 >
                     {renderSuggestionTab()}
-                </ScrollView>
+                </ScrollView> */}
             </View>
 
             {/* Map */}
             <MapboxGL.MapView
-                style={styles.map}>
+                style={styles.map}
+                onDidFinishLoadingMapFully={onMapLoaded}
+            > 
                 <MapboxGL.Camera
                     zoomLevel={12}
-                    centerCoordinate={selectedPlace ? selectedPlace.coordinate : [105.782155, 21.040578]}
+                    centerCoordinate={selectedPlace ? selectedPlace.coordinate : userLocation}
                     animationMode="flyTo"
                     animationDuration={1000}
                 />
@@ -344,11 +410,13 @@ function Map() {
                 />
 
                 {/* display marker */}
-                {typeOfPlace && showLocations(typeOfPlace)}
+                {/* {typeOfPlace && showLocations(typeOfPlace)} */}
+                {/* {showLocations()} */}
+                {displayLocation && showLocation()}
                 {query && showLocation(selectedItemId)}
 
                 {/* Showing direction */}
-                {displayRoute && routeDirections && selectedItemId && (
+                {(displayRoute || displayRouteToWaypoints) && routeDirections && selectedItemId && (
                     <MapboxGL.ShapeSource id="line1" shape={routeDirections}>
                         <MapboxGL.LineLayer
                             id="routerLine01"
@@ -362,97 +430,146 @@ function Map() {
                         />
                     </MapboxGL.ShapeSource>
                 )}
-                
+
 
             </MapboxGL.MapView>
 
-            {/* Bottom Sheet */}
-            {displayInfo && selectedPlace && <GestureHandlerRootView style={styles.infoModal}>
-
-                <BottomSheet
-                    ref={bottomSheetRef}
-                    index={1}
-                    snapPoints={snapPoints}
-                    enablePanDownToClose={true}
-                    enableContentPanningGesture={false}
-                    enableHandlePanningGesture={true}
-                    onClose={() => {
-                        setDisplayInfo(false)
-                        setSelectedItemId(null)
-                    }}
-                    style={styles.bottomSheet}
-
+            {/* waypoint */}
+            <View
+                style={{
+                    position: "absolute",
+                    bottom: 0,
+                    right: 0,
+                    width: 0,
+                    height: addToWayPointButtonContainerHeight,
+                    backgroundColor: "grey"
+                }}
+            >
+                <Animated.View
+                    style={[styles.waypointButton, { top: selectedItemId ? bottomSheetPosition : addToWayPointButtonContainerHeight - 150 }]}
+                    //style={[styles.waypointButton, { top: }]}
+                    ref={waypointRef}
                 >
-                    <View style={styles.bottomSheetContent}>
-                        <Text style={styles.title}>{selectedPlace.title} </Text>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
-                            <Text style={{ marginRight: 5 }}>3.3</Text>
-                            <Stars
-                                display={3.3}
-                                spacing={2}
-                                count={5}
-                                fullStar={<MCIcons size={25} name={'star'} style={[styles.star]} />}
-                                emptyStar={<MCIcons size={25} name={'star-outline'} style={[styles.star, styles.emptyStar]} />}
-                                halfStar={<MCIcons size={25} name={'star-half'} style={[styles.star]} />}
+                    <TouchableOpacity
+                        onPress={async () => {
+                            if (!displayRouteToWaypoints) {
+                                await fetchDirectionThroughWaypoints()
+                                setDisplayRouteToWaypoints(true)
+                            } else {
+                                setDisplayRouteToWaypoints(false)
+                            }
+
+                        }}
+                    >
+                        <View>
+                            <FontAwesome5Icon
+                                name="route"
+                                size={30}
                             />
                         </View>
+                    </TouchableOpacity>
+                </Animated.View>
+            </View>
 
-                        <View style={styles.categoryDistanceDurationContainer}>
-                            <Text style={styles.categoryDistanceDurationText}>{selectedPlace.category} · </Text>
-                            <Text style={styles.categoryDistanceDurationText}><FontAwesome5Icon name="car" /> {duration}min · </Text>
-                            <Text style={styles.categoryDistanceDurationText}><FontAwesome5Icon name="road" /> {distance}km</Text>
-                        </View>
 
-                        <BottomSheetScrollView horizontal style={styles.imageContainer}>
-                            {[...Array(10)].map((_, i) => (
-                                <Image
-                                    key={i}
-                                    source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')}
-                                    style={styles.image}
+
+
+            {/* Bottom Sheet */}
+            {displayInfo && selectedPlace &&
+                <GestureHandlerRootView
+                    style={styles.infoModal}
+                    pointerEvents="none"
+                >
+
+                    <BottomSheet
+                        ref={bottomSheetRef}
+                        animatedPosition={bottomSheetPosition}
+                        index={1}
+                        snapPoints={snapPoints}
+                        enablePanDownToClose={true}
+                        enableContentPanningGesture={false}
+                        enableHandlePanningGesture={true}
+
+                        onClose={() => {
+                            setDisplayInfo(false)
+                            setSelectedItemId(null)
+                        }}
+                        onChange={() => {
+                            console.log("bottom sheet pos:", bottomSheetPosition.value)
+                        }}
+                        style={styles.bottomSheet}
+
+                    >
+                        <View style={styles.bottomSheetContent}>
+                            <Text style={styles.title}>{selectedPlace.title} </Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start' }}>
+                                <Text style={{ marginRight: 5 }}>3.3</Text>
+                                <Stars
+                                    display={3.3}
+                                    spacing={2}
+                                    count={5}
+                                    fullStar={<MCIcons size={25} name={'star'} style={[styles.star]} />}
+                                    emptyStar={<MCIcons size={25} name={'star-outline'} style={[styles.star, styles.emptyStar]} />}
+                                    halfStar={<MCIcons size={25} name={'star-half'} style={[styles.star]} />}
                                 />
-                            ))}
+                            </View>
 
-                        </BottomSheetScrollView>
+                            <View style={styles.categoryDistanceDurationContainer}>
+                                <Text style={styles.categoryDistanceDurationText}>{selectedPlace.type} · </Text>
+                                <Text style={styles.categoryDistanceDurationText}><FontAwesome5Icon name="car" /> {duration}min · </Text>
+                                <Text style={styles.categoryDistanceDurationText}><FontAwesome5Icon name="road" /> {distance}km</Text>
+                            </View>
 
-                        <View style={styles.modalButtonContainer}>
+                            <BottomSheetScrollView horizontal style={styles.imageContainer}>
+                                {[...Array(10)].map((_, i) => (
+                                    <Image
+                                        key={i}
+                                        source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')}
+                                        style={styles.image}
+                                    />
+                                ))}
 
-                            <TouchableOpacity
-                                style={[styles.button, styles.viewDirectionButton]}
-                                onPress={async () => {
-                                    setDisplayRoute(true)
-                                }}
-                            >
-                                <Text style={[styles.buttonText, styles.viewDirectionText]}>View Directions</Text>
-                            </TouchableOpacity>
-                            
-                            <TouchableOpacity
-                                style={[styles.button, styles.getDetailsButton]}
-                                onPress={() => { console.log("Get direction button clicked") }}
-                            >
-                                <Text style={[styles.buttonText, styles.getDetailsText]}>Get Details</Text>
-                            </TouchableOpacity>
+                            </BottomSheetScrollView>
 
-                            <TouchableOpacity
-                                style={[styles.button, styles.getDetailsButton, {borderColor: addToWayPointButtonColor}]}
-                                onPress={() => { 
-                                    if (!waypoints.includes(selectedPlace.coordinate)) {
-                                        setWaypoints([...waypoints, selectedPlace.coordinate])
-                                    } else {
-                                        setWaypoints(waypoints.filter((waypoint) => waypoint !== selectedPlace.coordinate))
-                                    }
-                                    
-                                }}
-                            >
-                                <Text style={[styles.buttonText, {color: addToWayPointButtonColor}]}>{addToWayPointButtonText}</Text>
-                            </TouchableOpacity>
+                            <View style={styles.modalButtonContainer}>
+
+                                <TouchableOpacity
+                                    style={[styles.button, styles.viewDirectionButton]}
+                                    onPress={async () => {
+                                        setDisplayRoute(true)
+                                    }}
+                                >
+                                    <Text style={[styles.buttonText, styles.viewDirectionText]}>View Directions</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={[styles.button, styles.getDetailsButton]}
+                                    onPress={() => { console.log("Get direction button clicked") }}
+                                >
+                                    <Text style={[styles.buttonText, styles.getDetailsText]}>Get Details</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity
+                                    style={[styles.button, styles.getDetailsButton, { borderColor: addToWayPointButtonColor }]}
+                                    onPress={() => {
+                                        if (!waypoints.includes(selectedPlace.coordinate)) {
+                                            setWaypoints([...waypoints, selectedPlace.coordinate])
+                                        } else {
+                                            setWaypoints(waypoints.filter((waypoint) => waypoint !== selectedPlace.coordinate))
+                                        }
+
+                                    }}
+                                >
+                                    <Text style={[styles.buttonText, { color: addToWayPointButtonColor }]}>{addToWayPointButtonText}</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
 
 
 
-                </BottomSheet>
+                    </BottomSheet>
 
-            </GestureHandlerRootView>}
+                </GestureHandlerRootView>}
 
 
         </View>
@@ -502,7 +619,14 @@ const styles = StyleSheet.create({
         position: "relative",
         width: 350,
         height: 50,
+        paddingLeft: 10,
         backgroundColor: "white",
+        padding: 8,
+        zIndex: 2,
+        borderRadius: 7
+    },
+    inputContainerStyle: {
+        margin: 0, borderRadius: 7,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -512,9 +636,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 8,
-        padding: 8,
-        zIndex: 2,
-        borderRadius: 7
     },
     autoCompleteList: {
         maxHeight: 103,
@@ -530,6 +651,7 @@ const styles = StyleSheet.create({
     itemText: {
         fontSize: 15,
         margin: 0,
+        paddingLeft: 10,
         width: 350,
     },
     // suggestion nav style
@@ -574,7 +696,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 8,
-
     },
     bottomSheet: {
         flex: 1,
@@ -582,7 +703,6 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: -12, height: -12 },
         elevation: 20,
-
     },
     bottomSheetContent: {
         position: 'absolute',
@@ -601,13 +721,13 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     button: {
-        height: 30,
+        height: 40,
         flexGrow: 1,
         flexBasis: 0,
         borderRadius: 4,
         marginVertical: 8,
         marginHorizontal: 4,
-        padding: 5,
+        paddingHorizontal: 5,
         borderRadius: 20,
         backgroundColor: "transparent",
         justifyContent: "center"
@@ -652,6 +772,18 @@ const styles = StyleSheet.create({
         marginRight: 8,
         borderRadius: 10
     },
+    // way point button
+    waypointButton: {
+        width: 70,
+        height: 70,
+        right: 0,
+        borderRadius: 35,
+        backgroundColor: 'lightblue',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: "absolute",
+        zIndex: 4,
+    }
 })
 
 export default Map
