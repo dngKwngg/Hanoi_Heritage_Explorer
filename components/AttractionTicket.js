@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     TextInput,
@@ -17,10 +17,14 @@ const AttractionTicket = ({ location }) => {
     const adultPrice = location.categories[5].adultPrice;
     const teenPrice = location.categories[5].teenPrice;
     const childrenPrice = location.categories[5].childPrice;
+
+    // Use state to store quantity of tickets
     const [quantity_adult, setQuantity_adult] = useState(0);
     const [quantity_teen, setQuantity_teen] = useState(0);
     const [quantity_child, setQuantity_child] = useState(0);
 
+    // // Use state to store booked ticket
+    // const [bookedTickets, setBookedTickets] = useState([]);
     // Increase and decrease quantity
     // Adult
     const increaseQuantity_adult = () => {
@@ -77,11 +81,20 @@ const AttractionTicket = ({ location }) => {
                         timeDifference >= 0 &&
                         timeDifference <= 6 * 30 * 24 * 60 * 60 * 1000
                     ) {
+                        // Store the booked ticket information
+                        const bookedTicket = {
+                            quantity_adult,
+                            quantity_teen,
+                            quantity_child,
+                            dateOfVisit,
+                        };
+
                         setQuantity_adult(0);
                         setQuantity_child(0);
                         setQuantity_teen(0);
                         setdateOfVisit("");
                         setDate(new Date());
+
                         Alert.alert(
                             "Đặt vé thành công!",
                             "SDT liên hệ: 0359441125\nSTK: 162511202283\nNgân hàng MB Bank\nChủ tài khoản: Nguyễn Diệu Thanh"
