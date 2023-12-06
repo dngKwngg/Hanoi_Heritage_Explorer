@@ -48,7 +48,7 @@ const StoryScreen = ({ route, navigation }) => {
                     />
                 );
             case 6:
-                return <AttractionTicket />;
+                return <AttractionTicket location={location} />;
             default:
                 return (
                     <ScrollView style={{ flex: 1, paddingLeft: 16 }}>
