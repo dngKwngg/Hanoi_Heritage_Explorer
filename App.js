@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -12,6 +12,9 @@ import StoryScreen from "./screens/StoryScreen";
 import HomeScreen from "./screens/HomeScreen";
 import MapScreen from "./screens/MapScreen"
 import TestScreen from "./screens/TestScreen";
+import ScreenMenu from "./screens/SignupScreen";
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -41,10 +44,12 @@ function App() {
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Story" component={StoryScreen} />
                 <Stack.Screen name="Map" component={MapScreen} />
+
+                <Stack.Screen name="ScreenMenu" component={ScreenMenu} />
                 
                 <Stack.Screen name="Test" component={TestScreen} />
-                
 
+                
             </Stack.Navigator>
         </NavigationContainer>
     );

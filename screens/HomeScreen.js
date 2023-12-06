@@ -17,6 +17,11 @@ const HomeScreen = ({ navigation }) => {
                 title="Go to MapScreen (Index 2)"
                 onPress={() => navigation.navigate("Map", { index: 2 })}
             />
+
+            <Button
+                title="Go to Menu Screen (Index 3)"
+                onPress={() => navigation.navigate("ScreenMenu", { index: 3 })}
+            />
             {/* Add more buttons for different indices as needed */}
         </View>
     );
