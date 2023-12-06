@@ -64,15 +64,24 @@ const NotificationScreen = ({ navigation }) => {
 					});
 					console.log("This is index: " + idx);
 				}}
+				style={{
+					backgroundColor: "#f8f9fb",
+					padding: 10,
+					margin: 10,
+					borderRadius: 20,
+					shadowColor: "#000",
+					shadowOffset: {
+						width: 0,
+						height: 6,
+					},
+					shadowOpacity: 0.37,
+					shadowRadius: 7.49,
+
+					elevation: 12,
+				}}
 			>
-				<Card
-					containerStyle={{
-						borderRadius: 30,
-						backgroundColor: "#f8f9fb",
-						marginBottom: 20,
-					}}
-					key={idx}
-				>
+
+				
 					<View style={{ flexDirection: "row" }}>
 						<Icon
 							name={renderTypeOfEvent(item)}
@@ -112,7 +121,9 @@ const NotificationScreen = ({ navigation }) => {
 							</Text>
 						</View>
 					</View>
-				</Card>
+				
+
+
 			</TouchableOpacity>
 		);
 	};
