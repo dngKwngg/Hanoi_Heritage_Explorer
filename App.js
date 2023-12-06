@@ -17,16 +17,11 @@ import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
 import StoryScreen from "./screens/StoryScreen";
 import HomeScreen from "./screens/HomeScreen";
-import Carousel from "./components/Carousel";
-
 
 import TestScreen from "./screens/TestScreen";
 
 const Stack = createNativeStackNavigator();
 
-NativeWindStyleSheet.setOutput({
-	default: "native",
-});
 function App() {
     const [fontsLoaded] = useFonts({
         "Gelix-Regular": require("./assets/fonts/Gellix-Regular.ttf"),
@@ -43,7 +38,7 @@ function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Home"
+                initialRouteName="Splash"
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name="Splash" component={Splash} />
@@ -52,11 +47,13 @@ function App() {
                 <Stack.Screen name="SignUp" component={SignupScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Story" component={StoryScreen} />
-                <Stack.Screen name="Carousel" component={Carousel} />
-                <Stack.Screen name="Notification" component={NotificationScreen} />
-			</Stack.Navigator>
-		</NavigationContainer>
-	);
+                <Stack.Screen
+                    name="Notification"
+                    component={NotificationScreen}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 export default App;
