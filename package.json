@@ -35,6 +35,15 @@
     "react-native-screens": "~3.22.0",
     "react-native-star-rating-widget": "^1.7.2",
     "react-native-stars": "^1.2.2",
+    "@react-native-community/datetimepicker": "7.2.0",
+    "date-fns": "^2.30.0",
+    "expo-linear-gradient": "~12.3.0",
+    "react-day-picker": "^8.9.1",
+    "react-native-date-picker": "^4.3.3",
+    "react-native-elements": "^3.4.3",
+    "react-native-heroicons": "^3.2.0",
+    "react-native-hyperlink": "^0.0.22",
+    "react-native-svg": "13.9.0",
     "react-native-vector-icons": "^10.0.1"
   },
   "devDependencies": {
