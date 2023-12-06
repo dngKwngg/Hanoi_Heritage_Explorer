@@ -406,9 +406,11 @@ function Map() {
                     centerCoordinate={selectedPlace ? selectedPlace.coordinate : userLocation}
                     animationMode="flyTo"
                     animationDuration={1000}
+                    
                 />
                 <MapboxGL.UserLocation
                     androidRenderMode='normal'
+                    minDisplacement={1.0}
                 />
 
                 {/* display marker */}
@@ -584,8 +586,8 @@ const styles = StyleSheet.create({
         flex: 1,
         width: "100%",
         height: "100%",
-        top: Constants.statusBarHeight,
         backgroundColor: "white",
+        top: Constants.statusBarHeight
     },
     map: {
         flex: 1,

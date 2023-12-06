@@ -13,6 +13,10 @@ const HomeScreen = ({ navigation }) => {
                 title="Go to StoryScreen (Index 1)"
                 onPress={() => navigation.navigate("Story", { index: 1 })}
             />
+            <Button
+                title="Go to MapScreen (Index 2)"
+                onPress={() => navigation.navigate("Map", { index: 2 })}
+            />
             {/* Add more buttons for different indices as needed */}
         </View>
     );
