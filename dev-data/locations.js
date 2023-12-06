@@ -289,7 +289,7 @@ const locations = [
             {
 
                 "id": 20,
-                "title": "Trung tâm Nghệ thuật đương đại Vincom",
+                "title": "Trung tâm Nghệ thuật đương đại",
                 "type": "Art gallery",
                 "coordinate": [
                     105.81481058717804,  21.003143749864048
