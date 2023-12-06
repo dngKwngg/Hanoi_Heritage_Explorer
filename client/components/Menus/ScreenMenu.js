@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, StatusBar } from "react-native";
 import * as React from "react";
 import { useContext } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -23,7 +23,7 @@ import ForgotPassword from "../../screens/auth/ForgotPassword";
 import ResetPassword from "../../screens/auth/ResetPassword";
 import FontSizeSettings from "../../screens/settings/FontSizeSettings";
 import AppUpdatesSettings from "../../screens/settings/AppUpdatesSettings";
-import MapScreen from '../../screens/MapScreen'
+import MapScreen from "../../screens/MapScreen"
 const ScreenMenu = () => {
   //global state
   const [state] = useContext(AuthContext);
@@ -40,7 +40,7 @@ const ScreenMenu = () => {
           <Stack.Screen
             name="Home"
             component={MapScreen}
-   
+            options={{ headerShown: false }}
           />
           
           <Stack.Screen

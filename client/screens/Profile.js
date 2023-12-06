@@ -103,6 +103,7 @@ const SettingsScreen = ({ navigation }) => {
     <SafeAreaView
       style={{
         flex: 1,
+        paddingTop: 0
         // backgroundColor: COLORS.white,
       }}
     >

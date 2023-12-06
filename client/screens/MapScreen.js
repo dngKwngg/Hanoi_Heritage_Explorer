@@ -8,7 +8,8 @@ import {
     Input,
     TextInput,
     ScrollView,
-    TouchableOpacity
+    TouchableOpacity,
+    StatusBar
 } from "react-native"
 
 import Animated from 'react-native-reanimated'
@@ -28,8 +29,11 @@ import Locations from '../dev-data/locations'
 import utils from '../utils/utils'
 import { useSharedValue } from 'react-native-reanimated';
 import * as expoLocation from 'expo-location'
+import FooterMenu from "../components/Menus/FooterMenu";
 
-MapboxGL.setAccessToken(process.env.MAPBOX_ACCESS_TOKEN);
+MapboxGL.setAccessToken('pk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNscGEydHRqMDAyenIyanJsZDIzZ2ptYnkifQ.lgAafxD6INU3ufH3N09Xcw');
+MapboxGL.setWellKnownTileServer('mapbox')
+MapboxGL.setConnected(true)
 MapboxGL.setTelemetryEnabled(false);
 
 function Map() {
@@ -173,7 +177,7 @@ function Map() {
     const onMapLoaded = () => {
         console.log("map rendered")
         setDisplayLocation(true);
-      };
+    };
 
     const fetchDirection = async () => {
         let res = await utils.fetchDirection(utils.generateDirectionQueryString(
@@ -290,32 +294,34 @@ function Map() {
     function showLocations() {
         return Locations[0].places.map((item, index) => {
             return (
-                <View key={index}>
-                    <MapboxGL.PointAnnotation
-                        id={String(item.id)}
-                        title={item.title}
-                        key={selectedItemId}
-                        selected={true}
-                        onSelected={(details) => {
-                            setRouteDirections(null)
-                            if (selectedItemId == item.id) handleSelectMarker(null)
-                            else handleSelectMarker(item.id)
-                            handlePresentModal()
-                            console.log(selectedItemId, item.id, selectedItemId == item.id)
 
-                        }}
-                        anchor={{ x: 0.5, y: 1 }}
-                        coordinate={item.coordinate}
-                    >
-                        <View>
-                            <FontAwesome5Icon
-                                name="map-marker-alt"
-                                size={30}
-                                color={item.id == selectedItemId ? "red" : "#888888"}
-                            />
-                        </View>
-                    </MapboxGL.PointAnnotation>
-                </View>
+                <MapboxGL.PointAnnotation
+                    id={item.slug}
+                    title={item.title}
+                    key={[selectedItemId, index]}
+                    selected={true}
+                    onSelected={(details) => {
+                        setRouteDirections(null)
+                        if (selectedItemId == item.id) handleSelectMarker(null)
+                        else handleSelectMarker(item.id)
+                        handlePresentModal()
+                        console.log(selectedItemId, item.id, selectedItemId == item.id)
+
+                    }}
+                    anchor={{ x: 0.5, y: 1 }}
+                    coordinate={item.coordinate}
+                >
+                    <View>
+                        <FontAwesome5Icon
+                            name="map-marker-alt"
+                            size={30}
+                            color={item.id == selectedItemId ? "red" : "#888888"}
+                        />
+                    </View>
+                </MapboxGL.PointAnnotation>
+
+
+
 
 
             )
@@ -349,6 +355,7 @@ function Map() {
 
     return (
         <View style={styles.container}>
+            <StatusBar barStyle="light-content" hidden={false} backgroundColor='#b1b3b5' />
             {/* Autocomplete search */}
             <View style={styles.searchContainer}>
 
@@ -397,8 +404,8 @@ function Map() {
             {/* Map */}
             <MapboxGL.MapView
                 style={styles.map}
-                onDidFinishLoadingMapFully={onMapLoaded}
-            > 
+                onDidFinishLoadingMap={onMapLoaded}
+            >
                 <MapboxGL.Camera
                     zoomLevel={12}
                     centerCoordinate={selectedPlace ? selectedPlace.coordinate : userLocation}
@@ -410,9 +417,9 @@ function Map() {
                 />
 
                 {/* display marker */}
-                {/* {typeOfPlace && showLocations(typeOfPlace)} */}
-                {/* {showLocations()} */}
-                {displayLocation && showLocation()}
+
+                {displayLocation && showLocations()}
+                {/* {displayLocation && showLocation()} */}
                 {query && showLocation(selectedItemId)}
 
                 {/* Showing direction */}
@@ -472,8 +479,6 @@ function Map() {
             </View>
 
 
-
-
             {/* Bottom Sheet */}
             {displayInfo && selectedPlace &&
                 <GestureHandlerRootView
@@ -524,7 +529,7 @@ function Map() {
                                 {[...Array(10)].map((_, i) => (
                                     <Image
                                         key={i}
-                                        source={require('../assets/images/HoangThanhThangLong/HTTLslider_1.jpg')}
+                                        source={require('../assets/images/place-images/van-mieu-quoc-tu-giam.png')}
                                         style={styles.image}
                                     />
                                 ))}
@@ -570,7 +575,9 @@ function Map() {
                     </BottomSheet>
 
                 </GestureHandlerRootView>}
-
+            <View style={{ backgroundColor: "#ffffff" }}>
+                <FooterMenu />
+            </View>
 
         </View>
 
@@ -581,9 +588,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: "100%",
-        height: "100%",
-        top: Constants.statusBarHeight,
-        backgroundColor: "white",
+        height: '100%',
+        // backgroundColor: "white"
     },
     map: {
         flex: 1,
@@ -684,7 +690,8 @@ const styles = StyleSheet.create({
         width: "100%",
         padding: 4,
         position: "absolute",
-        bottom: 0,
+        bottom: 19,
+       
 
         shadowOffset: { width: -12, height: -12 },
         shadowColor: "#000",
@@ -696,6 +703,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 8,
+        
     },
     bottomSheet: {
         flex: 1,
@@ -703,11 +711,14 @@ const styles = StyleSheet.create({
         shadowRadius: 5,
         shadowOffset: { width: -12, height: -12 },
         elevation: 20,
+
+        
     },
     bottomSheetContent: {
         position: 'absolute',
         margin: 10,
-        width: "95%"
+        width: "95%",
+        
     },
     title: {
         fontSize: 18,
@@ -718,7 +729,7 @@ const styles = StyleSheet.create({
     },
     modalButtonContainer: {
         flexDirection: "row",
-        width: "100%"
+        width: "100%",
     },
     button: {
         height: 40,

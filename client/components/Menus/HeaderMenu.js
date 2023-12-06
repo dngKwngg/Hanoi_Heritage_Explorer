@@ -15,6 +15,7 @@ const HeaderMenu = () => {
 
   return (
     <View>
+      
       <TouchableOpacity onPress={handleLogout}>
         <FontAwesome5
           name="sign-out-alt"
