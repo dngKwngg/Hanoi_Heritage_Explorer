@@ -13,6 +13,7 @@ import AttractionOverview from "../components/AttractionOverview";
 import AttractionHistory from "../components/AttractionHistory";
 import AttractionArchitecture from "../components/AttractionArchitecture";
 import AttractionTicket from "../components/AttractionTicket";
+import AttractionImage from "../components/AttractionImage";
 import { locations } from "../constants/locations";
 
 const StoryScreen = ({ route, navigation }) => {
@@ -47,6 +48,8 @@ const StoryScreen = ({ route, navigation }) => {
                         screenWidth={screenWidth}
                     />
                 );
+            case 4:
+                return <AttractionImage location={location} />;
             case 6:
                 return <AttractionTicket location={location} />;
             default:
