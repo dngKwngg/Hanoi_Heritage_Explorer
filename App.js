@@ -17,6 +17,9 @@ import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
 import StoryScreen from "./screens/StoryScreen";
 import HomeScreen from "./screens/HomeScreen";
+import Carousel from "./components/Carousel";
+
+
 import TestScreen from "./screens/TestScreen";
 
 const Stack = createNativeStackNavigator();
@@ -50,6 +53,7 @@ function App() {
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Story" component={StoryScreen} />
                 <Stack.Screen name="Carousel" component={Carousel} />
+                <Stack.Screen name="Notification" component={NotificationScreen} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
