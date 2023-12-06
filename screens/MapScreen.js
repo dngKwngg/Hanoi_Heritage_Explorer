@@ -290,7 +290,7 @@ function Map() {
     function showLocations() {
         return Locations[0].places.map((item, index) => {
             return (
-                <View key={index}>
+                
                     <MapboxGL.PointAnnotation
                         id={item.slug}
                         title={item.title}
@@ -315,7 +315,7 @@ function Map() {
                             />
                         </View>
                     </MapboxGL.PointAnnotation>
-                </View>
+               
 
 
 
