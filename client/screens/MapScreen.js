@@ -31,14 +31,13 @@ import { useSharedValue } from 'react-native-reanimated';
 import * as expoLocation from 'expo-location'
 import FooterMenu from "../components/Menus/FooterMenu";
 
+MapboxGL.setWellKnownTileServer('Mapbox')
 MapboxGL.setAccessToken('pk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNscGEydHRqMDAyenIyanJsZDIzZ2ptYnkifQ.lgAafxD6INU3ufH3N09Xcw');
-MapboxGL.setWellKnownTileServer('mapbox')
-MapboxGL.setConnected(true)
+
+
 MapboxGL.setTelemetryEnabled(false);
 
 function Map() {
-
-
     const [typeOfPlace, setTypeOfPlace] = useState("")
     const [selectedItemId, setSelectedItemId] = useState(-1);
     const [selectedPlace, setSelectedPlace] = useState(null)
@@ -51,7 +50,7 @@ function Map() {
     const [distance, setDistance] = useState(0)
     const [waypoints, setWaypoints] = useState([])
     const [displayRouteToWaypoints, setDisplayRouteToWaypoints] = useState(false)
-    const [userLocation, setUserLocation] = useState([105.7820467, 21.0405764])
+    const [userLocation, setUserLocation] = useState([-1, -1])
     const [displayLocation, setDisplayLocation] = useState(false)
 
     // constants
@@ -88,11 +87,7 @@ function Map() {
     const waypointRef = useRef()
 
 
-    useEffect(() => {
-        if (userLocation) {
-            waypoints.push(userLocation)
-        }
-    }, [userLocation])
+    
 
     // get user's current coordinates
     useEffect(() => {
@@ -101,6 +96,12 @@ function Map() {
             setUserLocation([coordinate.coords.longitude, coordinate.coords.latitude]);
         })();
     }, []);
+
+    useEffect(() => {
+        if (userLocation[0] !== -1 && userLocation[1] !== -1) {
+            waypoints.push(userLocation)
+        }
+    }, [userLocation])
 
     // handle add to waypoint button color after being pressed
     useEffect(() => {
@@ -136,6 +137,7 @@ function Map() {
         if (selectedPlace) {
             console.log("fetch distance and duration")
             fetchDirection()
+            console.log(routeDirections)
         }
     }, [selectedPlace])
 
@@ -182,8 +184,8 @@ function Map() {
     const fetchDirection = async () => {
         let res = await utils.fetchDirection(utils.generateDirectionQueryString(
             {
-                longitude: 105.782096,
-                latitude: 21.040622
+                longitude: userLocation[0],
+                latitude: userLocation[1]
             },
             {
                 longitude: selectedPlace.coordinate[0],
@@ -194,6 +196,7 @@ function Map() {
 
         setDuration(parseFloat(res["routes"][0]["duration"] / 60).toFixed(2))
         setDistance(parseFloat(res["routes"][0]["distance"] / 1000).toFixed(2))
+        console.log(routeDirections)
         setRouteDirections({
             type: 'FeatureCollection',
             features: [
@@ -353,6 +356,9 @@ function Map() {
         })
     }
 
+
+
+
     return (
         <View style={styles.container}>
             <StatusBar barStyle="light-content" hidden={false} backgroundColor='#b1b3b5' />
@@ -411,9 +417,11 @@ function Map() {
                     centerCoordinate={selectedPlace ? selectedPlace.coordinate : userLocation}
                     animationMode="flyTo"
                     animationDuration={1000}
+
                 />
                 <MapboxGL.UserLocation
                     androidRenderMode='normal'
+                    minDisplacement={1.0}
                 />
 
                 {/* display marker */}
@@ -421,6 +429,8 @@ function Map() {
                 {displayLocation && showLocations()}
                 {/* {displayLocation && showLocation()} */}
                 {query && showLocation(selectedItemId)}
+
+         
 
                 {/* Showing direction */}
                 {(displayRoute || displayRouteToWaypoints) && routeDirections && selectedItemId && (
@@ -435,6 +445,7 @@ function Map() {
                                 lineCap: 'round'
                             }}
                         />
+                      
                     </MapboxGL.ShapeSource>
                 )}
 
@@ -477,6 +488,8 @@ function Map() {
                     </TouchableOpacity>
                 </Animated.View>
             </View>
+
+
 
 
             {/* Bottom Sheet */}
@@ -542,6 +555,9 @@ function Map() {
                                     style={[styles.button, styles.viewDirectionButton]}
                                     onPress={async () => {
                                         setDisplayRoute(true)
+                                        console.log('display route')
+                                        console.log(routeDirections)
+                                        console.log(selectedItemId)
                                     }}
                                 >
                                     <Text style={[styles.buttonText, styles.viewDirectionText]}>View Directions</Text>
@@ -691,7 +707,7 @@ const styles = StyleSheet.create({
         padding: 4,
         position: "absolute",
         bottom: 19,
-       
+
 
         shadowOffset: { width: -12, height: -12 },
         shadowColor: "#000",
@@ -703,7 +719,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
 
         elevation: 8,
-        
+
     },
     bottomSheet: {
         flex: 1,
@@ -712,13 +728,13 @@ const styles = StyleSheet.create({
         shadowOffset: { width: -12, height: -12 },
         elevation: 20,
 
-        
+
     },
     bottomSheetContent: {
         position: 'absolute',
         margin: 10,
         width: "95%",
-        
+
     },
     title: {
         fontSize: 18,
