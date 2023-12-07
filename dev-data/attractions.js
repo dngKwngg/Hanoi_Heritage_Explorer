@@ -8,7 +8,8 @@ const locations = [
                 "title": "Cổng nhà Bá Kiến",
                 "type": "Historical landmark",
                 "coordinate": [
-                    105.79191505807296, 20.95790386229897
+                    105.79191505807296,
+                    20.95790386229897
                 ],
                 "address:": "3R99+FP, Quảng An, Tây Hồ, Hà Nội, Việt Nam",
                 "description": "",
@@ -19,7 +20,8 @@ const locations = [
                 "title": "Ô Quan Chưởng",
                 "type": "Historical landmark",
                 "coordinate": [
-                    105.85212062060405, 21.037306547176506
+                    105.85212062060405,
+                    21.037306547176506
                 ],
                 "address": "Km5+200, Đ. Lê Trọng Tấn, An Khánh, Hoài Đức, Hà Nội, Việt Nam",
                 "description": "",
@@ -186,7 +188,8 @@ const locations = [
                 "title": "MỘ NỮ SĨ ĐOÀN THỊ ĐIỂM",
                 "type": "Historical landmark",
                 "coordinate": [
-                    105.81334355148172, 21.085936640382283
+                    105.81334355148172,
+                    21.085936640382283
                 ],
                 "address": "P. Duy Tân, Dịch Vọng, Cầu Giấy, Hà Nội 10000, Việt Nam",
                 "description": "",
@@ -218,18 +221,6 @@ const locations = [
             },
             {
                 "id": 18,
-                "title": "Trung tâm Nghệ thuật đương đại Vincom",
-                "type": "Art gallery",
-                "coordinate": [
-                    105.81481058717804,
-                    21.003143749864048
-                ],
-                "address": "B1-R3 Floor, Royal City, 72A Đ. Nguyễn Trãi, Street, Thanh Xuân, Hà Nội, Vietnam",
-                "description": "",
-                "slug": "Vincom-Center-for-Contemporary-Art-(VCCA)"
-            },
-            {
-                "id": 19,
                 "title": "Di Tích Lịch Sử Cửa Bắc",
                 "type": "Historical landmark",
                 "coordinate": [
@@ -241,7 +232,7 @@ const locations = [
                 "slug": "Vietnam-Museum-of-Ethnology"
             },
             {
-                "id": 20,
+                "id": 19,
                 "title": "Bảo Tàng Lịch Sử Quân Sự Việt Nam",
                 "type": "War Museum",
                 "coordinate": [
@@ -253,7 +244,7 @@ const locations = [
                 "slug": "Vietnam-Museum-of-Ethnology"
             },
             {
-                "id": 21,
+                "id": 20,
                 "title": "Dấu tích lăng mộ Hoàng Cao Khải",
                 "type": "Historical landmark",
                 "coordinate": [
@@ -265,7 +256,7 @@ const locations = [
                 "slug": "Vietnam-Museum-of-Ethnology"
             },
             {
-                "id": 22,
+                "id": 21,
                 "title": "Bốt Nước Hàng Đậu",
                 "type": "Historical landmark",
                 "coordinate": [
