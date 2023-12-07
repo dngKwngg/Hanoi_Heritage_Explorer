@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "HelloWorld",
-    "slug": "HelloWorld",
+    "name": "HanoiHeritageExplorer",
+    "slug": "HanoiHeritageExplorer",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,24 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.phuonghongvu.HanoiHeritageExplorer"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "mapbox",
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNsb2tkMTVzMzI5OHYybHBsYTA2b25ydmcifQ.aaWG0irRntbIhoB8X6ySsQ"
+        }
+      ]
+    ],
+    "scheme": [
+      "HanoiHeritageExplorer", "fb1073189397046597"
+    ]
   }
 }
+
