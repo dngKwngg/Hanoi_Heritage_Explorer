@@ -34,7 +34,7 @@ export const eventOfDestinations = [
 		name: 'Khai mạc trưng bày triển lãm "Thành xưa phố cũ"',
 		url: "https://hoangthanhthanglong.vn/wp-content/uploads/2023/10/thanhphoxuacu01.jpg",
 		address: "Hoàng Thành Thăng Long",
-		day: new Date(2023, 10, 14),
+		day: new Date(2023, 11, 14),
 		carouselData: [
 			{
 				id: 1,
