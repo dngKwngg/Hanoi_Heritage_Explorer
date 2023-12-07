@@ -19,7 +19,7 @@ import AttractionFeedback from "../components/AttractionFeedback";
 
 import { locations } from "../constants/locations";
 
-const StoryScreen = ({ route, navigation }) => {
+const AttractionScreen = ({ route, navigation }) => {
     const { index } = route.params;
     const screenWidth = Dimensions.get("window").width;
     const [activeCategory, setActiveCategory] = useState(1);
@@ -105,7 +105,7 @@ const StoryScreen = ({ route, navigation }) => {
     );
 };
 
-export default StoryScreen;
+export default AttractionScreen;
 
 const styles = StyleSheet.create({
     // Your styles here

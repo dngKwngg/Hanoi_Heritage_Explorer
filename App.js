@@ -1,9 +1,8 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NativeWindStyleSheet } from "nativewind";
 import NotificationScreen from "./screens/NotificationScreen";
 import EventScreen from "./screens/EventScreen";
 import { useFonts } from "expo-font";
@@ -11,11 +10,13 @@ import LoginScreen from "./screens/LoginScreen";
 import SignupScreen from "./screens/SignupScreen";
 import OnboardingScreen from "./screens/OnboardingScreen";
 import Splash from "./screens/Splash";
-import StoryScreen from "./screens/StoryScreen";
+import AttractionScreen from "./screens/AttractionScreen";
 import HomeScreen from "./screens/HomeScreen";
-
 import TestScreen from "./screens/TestScreen";
 
+LogBox.ignoreLogs([
+    "Non-serializable values were found in the navigation state",
+]);
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
                 <Stack.Screen name="Login" component={LoginScreen} />
                 <Stack.Screen name="SignUp" component={SignupScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Story" component={StoryScreen} />
+                <Stack.Screen name="Attraction" component={AttractionScreen} />
                 <Stack.Screen name="Test" component={TestScreen} />
                 <Stack.Screen
                     name="Notification"

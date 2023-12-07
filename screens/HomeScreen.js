@@ -7,16 +7,16 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.title}>Home Screen</Text>
             <Button
                 title="Go to StoryScreen (Index 0)"
-                onPress={() => navigation.navigate("Story", { index: 0 })}
+                onPress={() => navigation.navigate("Attraction", { index: 0 })}
             />
             <Button
                 title="Go to StoryScreen (Index 1)"
-                onPress={() => navigation.navigate("Story", { index: 1 })}
+                onPress={() => navigation.navigate("Attraction", { index: 1 })}
             />
 
             <Button
-                title="Go to NotificationScreen (Index 2)"
-                onPress={() => navigation.navigate("Notification", { index: 2 })}
+                title="Go to NotificationScreen"
+                onPress={() => navigation.navigate("Notification")}
             />
             {/* Add more buttons for different indices as needed */}
         </View>
