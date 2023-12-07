@@ -5,7 +5,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeWindStyleSheet } from "nativewind";
 import NotificationScreen from "./screens/NotificationScreen";
-import FeedbackScreen from "./screens/FeedbackScreen";
 import EventScreen from "./screens/EventScreen";
 import { useFonts } from "expo-font";
 import LoginScreen from "./screens/LoginScreen";

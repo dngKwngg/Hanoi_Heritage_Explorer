@@ -36,13 +36,13 @@ const styles = StyleSheet.create({
         flex: 1,
         height: 200,
         resizeMode: "cover",
-        borderRadius: 30,
+        borderRadius: 15,
         margin: 4,
         width: imageWidth,
     },
     row: {
         flexDirection: "row",
-        marginBottom: 10,
+        marginBottom: 8,
     },
 });
 

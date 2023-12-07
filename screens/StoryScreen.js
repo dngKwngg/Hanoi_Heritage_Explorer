@@ -15,6 +15,7 @@ import AttractionArchitecture from "../components/AttractionArchitecture";
 import AttractionTicket from "../components/AttractionTicket";
 import AttractionImage from "../components/AttractionImage";
 import AttractionVideo from "../components/AttractionVideo";
+import AttractionFeedback from "../components/AttractionFeedback";
 
 import { locations } from "../constants/locations";
 
@@ -56,6 +57,8 @@ const StoryScreen = ({ route, navigation }) => {
                 return <AttractionVideo location={location} />;
             case 6:
                 return <AttractionTicket location={location} />;
+            case 7:
+                return <AttractionFeedback location={location} />;
             default:
                 return (
                     <ScrollView style={{ flex: 1, paddingLeft: 16 }}>

@@ -80,7 +80,7 @@ export const locations = [
             },
             {
                 id: 7,
-                title: "Đánh giá",
+                title: "Phản hồi",
                 content: "Đánh giá Hoàng thành Thăng Long",
             },
         ],

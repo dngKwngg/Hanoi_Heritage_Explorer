@@ -31,7 +31,7 @@ const CategorySlider = ({
                                 ...styles.button,
                                 backgroundColor: isActive
                                     ? COLORS.primary
-                                    : "rgba(0, 0, 0, 0.07)",
+                                    : "rgba(0, 0, 0, 0.15)",
                             }}
                         >
                             <Text
