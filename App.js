@@ -6,7 +6,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NativeWindStyleSheet } from "nativewind";
 import NotificationScreen from "./screens/NotificationScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
-import VideoScreen from "./screens/VideoScreen";
 import EventScreen from "./screens/EventScreen";
 import { useFonts } from "expo-font";
 import LoginScreen from "./screens/LoginScreen";
@@ -36,7 +35,7 @@ function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator
-                initialRouteName="Splash"
+                initialRouteName="Home"
                 screenOptions={{ headerShown: false }}
             >
                 <Stack.Screen name="Splash" component={Splash} />
@@ -45,6 +44,7 @@ function App() {
                 <Stack.Screen name="SignUp" component={SignupScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Story" component={StoryScreen} />
+                <Stack.Screen name="Test" component={TestScreen} />
                 <Stack.Screen
                     name="Notification"
                     component={NotificationScreen}

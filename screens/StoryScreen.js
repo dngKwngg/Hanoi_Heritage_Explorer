@@ -14,6 +14,8 @@ import AttractionHistory from "../components/AttractionHistory";
 import AttractionArchitecture from "../components/AttractionArchitecture";
 import AttractionTicket from "../components/AttractionTicket";
 import AttractionImage from "../components/AttractionImage";
+import AttractionVideo from "../components/AttractionVideo";
+
 import { locations } from "../constants/locations";
 
 const StoryScreen = ({ route, navigation }) => {
@@ -50,6 +52,8 @@ const StoryScreen = ({ route, navigation }) => {
                 );
             case 4:
                 return <AttractionImage location={location} />;
+            case 5:
+                return <AttractionVideo location={location} />;
             case 6:
                 return <AttractionTicket location={location} />;
             default:

@@ -40,8 +40,6 @@ export const locations = [
                     "https://hoangthanhthanglong.com/store/uploads/2018/11/38.jpg",
                     "https://tl.cdnchinhphu.vn/344445545208135680/2022/4/30/anh-httl-16512788990051146244697.jpg",
                     "https://file3.qdnd.vn/data/images/0/2022/09/10/vuhuyen/hoang-thanh.jpg?dpi=150&quality=100&w=870",
-                    "https://hoangthanhthanglong.com/store/uploads/2018/11/untitled-126.jpg",
-                    "https://hoangthanhthanglong.com/store/uploads/2018/11/untitled-85.jpg",
                     "https://hoangthanhthanglong.com/store/uploads/2018/11/23.jpg",
                     "http://hoangthanhthanglong.com/store/uploads/2018/11/45.jpg",
                     "http://hoangthanhthanglong.com/store/uploads/2018/11/44.jpg",
@@ -59,7 +57,16 @@ export const locations = [
             {
                 id: 5,
                 title: "Video",
-                content: "Video Hoàng thành Thăng Long",
+                videoList: [
+                    {
+                        title: "Hoàng Thành Thăng Long Hà Nội còn lại di tích gì sau 1000 năm",
+                        url: "k4iWrukqY-o",
+                    },
+                    {
+                        title: "Trải nghiệm tour đêm tại Hoàng thành Thăng Long",
+                        url: "I3DA84EBoMc",
+                    },
+                ],
             },
             {
                 id: 6,

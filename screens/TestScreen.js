@@ -1,46 +1,33 @@
-import React from "react";
-import { View, StyleSheet, Button, Alert } from "react-native";
+import React, { useState, useCallback, useRef } from "react";
+import { Button, View, Alert } from "react-native";
+import YoutubePlayer from "react-native-youtube-iframe";
 
-const App = () => {
-    const createTwoButtonAlert = () =>
-        Alert.alert("Alert Title", "My Alert Msg", [
-            {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") },
-        ]);
+export default function App() {
+    const [playing, setPlaying] = useState(false);
 
-    const createThreeButtonAlert = () =>
-        Alert.alert("Alert Title", "My Alert Msg", [
-            {
-                text: "Ask me later",
-                onPress: () => console.log("Ask me later pressed"),
-            },
-            {
-                text: "Cancel",
-                onPress: () => console.log("Cancel Pressed"),
-                style: "cancel",
-            },
-            { text: "OK", onPress: () => console.log("OK Pressed") },
-        ]);
+    const onStateChange = useCallback((state) => {
+        if (state === "ended") {
+            setPlaying(false);
+            Alert.alert("video has finished playing!");
+        }
+    }, []);
+
+    const togglePlaying = useCallback(() => {
+        setPlaying((prev) => !prev);
+    }, []);
 
     return (
-        <View style={styles.container}>
-            <Button title={"2-Button Alert"} onPress={createTwoButtonAlert} />
-            <Button title={"3-Button Alert"} onPress={createThreeButtonAlert} />
+        <View>
+            <YoutubePlayer
+                height={300}
+                play={playing}
+                videoId={"iee2TATGMyI"}
+                onChangeState={onStateChange}
+            />
+            <Button
+                title={playing ? "pause" : "play"}
+                onPress={togglePlaying}
+            />
         </View>
     );
-};
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "space-around",
-        alignItems: "center",
-        backgroundColor: "white",
-    },
-});
-
-export default App;
+}
