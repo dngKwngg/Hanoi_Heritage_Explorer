@@ -5,18 +5,6 @@ const locations = [
         "places": [
             {
                 "id": 0,
-                "title": "Cổng nhà Bá Kiến",
-                "type": "Historical landmark",
-                "coordinate": [
-                    105.79191505807296,
-                    20.95790386229897
-                ],
-                "address:": "3R99+FP, Quảng An, Tây Hồ, Hà Nội, Việt Nam",
-                "description": "",
-                "slug": "West-Lake-Fish-Spa"
-            },
-            {
-                "id": 1,
                 "title": "Ô Quan Chưởng",
                 "type": "Historical landmark",
                 "coordinate": [
@@ -28,7 +16,7 @@ const locations = [
                 "slug": "Cong-Vien-Thien-Duong-Bao-Son"
             },
             {
-                "id": 2,
+                "id": 1,
                 "title": "Lăng Chủ Tịch",
                 "type": "Historical landmark",
                 "coordinate": [
@@ -40,7 +28,7 @@ const locations = [
                 "slug": "HCM-Mausoleum"
             },
             {
-                "id": 3,
+                "id": 2,
                 "title": "Chùa Một Cột",
                 "type": "Buddhist temple",
                 "coordinate": [
@@ -52,7 +40,7 @@ const locations = [
                 "slug": "One-Pillar-Pagodar"
             },
             {
-                "id": 4,
+                "id": 3,
                 "title": "Văn Miếu Quốc Tử Giám",
                 "type": "Place of worship",
                 "coordinate": [
@@ -64,7 +52,7 @@ const locations = [
                 "slug": "Temple-Of-Literature"
             },
             {
-                "id": 5,
+                "id": 4,
                 "title": "Nhà Hát Lớn Hà Nội",
                 "type": "Opera house",
                 "coordinate": [
@@ -76,7 +64,7 @@ const locations = [
                 "slug": "Hanoi-Opera-House"
             },
             {
-                "id": 6,
+                "id": 5,
                 "title": "Nhà Thờ Lớn Hà Nội",
                 "type": "Catholic cathedral",
                 "coordinate": [
@@ -88,7 +76,7 @@ const locations = [
                 "slug": "St-Joseph-Cathedral"
             },
             {
-                "id": 7,
+                "id": 6,
                 "title": "Di tích nhà Tù Hỏa Lò",
                 "type": "History museum",
                 "coordinate": [
@@ -100,7 +88,7 @@ const locations = [
                 "slug": "Hoa-Lo-Prison-Relic"
             },
             {
-                "id": 8,
+                "id": 7,
                 "title": "Bảo tàng lịch sử quốc gia",
                 "type": "History museum",
                 "coordinate": [
@@ -112,7 +100,7 @@ const locations = [
                 "slug": "Vietnam-National-Museum-of-History"
             },
             {
-                "id": 9,
+                "id": 8,
                 "title": "Đền Quán Thánh",
                 "type": "Taoist temple",
                 "coordinate": [
@@ -124,7 +112,7 @@ const locations = [
                 "slug": "Quan-Thanh-Temple"
             },
             {
-                "id": 10,
+                "id": 9,
                 "title": "Hoàng Thành Thăng Long",
                 "type": "Historical landmark",
                 "coordinate": [
@@ -136,7 +124,7 @@ const locations = [
                 "slug": "Imperial-Citadel-of-Thang-Long"
             },
             {
-                "id": 11,
+                "id": 10,
                 "title": "Chùa Trấn Quốc",
                 "type": "Attraction",
                 "coordinate": [
@@ -148,7 +136,7 @@ const locations = [
                 "slug": "Tran-Quoc-Pagoda"
             },
             {
-                "id": 12,
+                "id": 11,
                 "title": "Đền Ngọc Sơn",
                 "type": "Attraction",
                 "coordinate": [
@@ -160,7 +148,7 @@ const locations = [
                 "slug": "Ngoc-Son-Temple"
             },
             {
-                "id": 13,
+                "id": 12,
                 "title": "Bảo Tàng Hồ Chí Minh",
                 "type": "Museum",
                 "coordinate": [
@@ -172,7 +160,7 @@ const locations = [
                 "slug": "HCM-Museum"
             },
             {
-                "id": 14,
+                "id": 13,
                 "title": "Phủ Chủ Tịch",
                 "type": "Government office",
                 "coordinate": [
@@ -184,19 +172,7 @@ const locations = [
                 "slug": "Presidential-Palace"
             },
             {
-                "id": 15,
-                "title": "MỘ NỮ SĨ ĐOÀN THỊ ĐIỂM",
-                "type": "Historical landmark",
-                "coordinate": [
-                    105.81334355148172,
-                    21.085936640382283
-                ],
-                "address": "P. Duy Tân, Dịch Vọng, Cầu Giấy, Hà Nội 10000, Việt Nam",
-                "description": "",
-                "slug": "Cau-Giay-Park"
-            },
-            {
-                "id": 16,
+                "id": 14,
                 "title": "Làng Gốm Bát Tràng",
                 "type": "Attraction",
                 "coordinate": [
@@ -208,7 +184,7 @@ const locations = [
                 "slug": "Bat-Trang-Pottery-Village"
             },
             {
-                "id": 17,
+                "id": 15,
                 "title": "Bảo tàng dân tộc Việt Nam",
                 "type": "Museum",
                 "coordinate": [
@@ -220,7 +196,7 @@ const locations = [
                 "slug": "Vietnam-Museum-of-Ethnology"
             },
             {
-                "id": 18,
+                "id": 16,
                 "title": "Di Tích Lịch Sử Cửa Bắc",
                 "type": "Historical landmark",
                 "coordinate": [
@@ -232,36 +208,12 @@ const locations = [
                 "slug": "Vietnam-Museum-of-Ethnology"
             },
             {
-                "id": 19,
+                "id": 17,
                 "title": "Bảo Tàng Lịch Sử Quân Sự Việt Nam",
                 "type": "War Museum",
                 "coordinate": [
                     105.75386658567554,
                     21.01051076465537
-                ],
-                "address": "B1-R3 Floor, Royal City, 72A Đ. Nguyễn Trãi, Street, Thanh Xuân, Hà Nội, Vietnam",
-                "description": "",
-                "slug": "Vietnam-Museum-of-Ethnology"
-            },
-            {
-                "id": 20,
-                "title": "Dấu tích lăng mộ Hoàng Cao Khải",
-                "type": "Historical landmark",
-                "coordinate": [
-                    105.82366583165896,
-                    21.011055874434774
-                ],
-                "address": "B1-R3 Floor, Royal City, 72A Đ. Nguyễn Trãi, Street, Thanh Xuân, Hà Nội, Vietnam",
-                "description": "",
-                "slug": "Vietnam-Museum-of-Ethnology"
-            },
-            {
-                "id": 21,
-                "title": "Bốt Nước Hàng Đậu",
-                "type": "Historical landmark",
-                "coordinate": [
-                    105.8474508363576,
-                    21.04000686605683
                 ],
                 "address": "B1-R3 Floor, Royal City, 72A Đ. Nguyễn Trãi, Street, Thanh Xuân, Hà Nội, Vietnam",
                 "description": "",
