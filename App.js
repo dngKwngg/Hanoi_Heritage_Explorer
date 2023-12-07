@@ -44,6 +44,7 @@ function App() {
                 <Stack.Screen name="SignUp" component={SignupScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="Attraction" component={AttractionScreen} />
+                <Stack.Screen name="Event" component={EventScreen} />
                 <Stack.Screen name="Test" component={TestScreen} />
                 <Stack.Screen
                     name="Notification"

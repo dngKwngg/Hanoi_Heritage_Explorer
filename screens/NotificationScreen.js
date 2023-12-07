@@ -12,6 +12,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 import { eventOfDestinations } from "../constants/eventOfDestinations";
+import Header from "../components/Header";
 const NotificationScreen = ({ navigation }) => {
     const isFutureEvent = (event) => {
         const today = new Date(); // today được khởi tạo bằng new Date() sẽ là ngày hiện tại
@@ -126,40 +127,13 @@ const NotificationScreen = ({ navigation }) => {
                 hidden={false}
             />
             {/* Header */}
-            <View
-                style={{
-                    width: "100%",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    paddingTop: 16,
-                    backgroundColor: "white",
-                }}
-            >
-                <TouchableOpacity style={{ position: "absolute", left: 16 }}>
-                    <Icon
-                        name="angle-left"
-                        size={24}
-                        style={{ paddingLeft: 16, bottom: -8 }}
-                    ></Icon>
-                </TouchableOpacity>
+            <Header
+                onPress={() => navigation.goBack()}
+                headerContent={"Thông báo"}
+            />
 
-                <Text
-                    style={{
-                        fontSize: 18,
-                        fontWeight: 700,
-                        marginBottom: 8,
-                        bottom: 8,
-                    }}
-                >
-                    Thông Báo
-                </Text>
-            </View>
             {/* Body */}
             <ScrollView>
-                {/* {sortedAndFilteredEventOfDestinations.map((item, idx) =>
-					renderItemOfEvents(item, idx)
-				)} */}
-
                 {sortedAndFilteredEventOfDestinations.map(renderItemOfEvents)}
             </ScrollView>
         </View>

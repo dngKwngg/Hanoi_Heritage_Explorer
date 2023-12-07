@@ -71,6 +71,7 @@ const styles = {
         marginTop: 12,
         marginLeft: 16,
         marginRight: 12,
+        marginBottom: 16,
         textAlign: "justify",
         fontFamily: "Montserrat-Regular",
     },

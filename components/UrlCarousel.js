@@ -1,16 +1,16 @@
 import React from "react";
 import { View, Text, FlatList, Image, Dimensions } from "react-native";
 import COLORS from "../constants/colors";
-const Carousel = ({ carouselData }) => {
+const UrlCarousel = ({ carouselData }) => {
     const screenWidth = Dimensions.get("window").width;
     const [activeIndex, setActiveIndex] = React.useState(0);
 
     // Display images / UI
-    const renderItemByPath = ({ item, index }) => {
+    const renderItemByUrl = ({ item, index }) => {
         return (
             <View>
                 <Image
-                    source={item.image}
+                    source={{ uri: item.image }}
                     style={{ height: 200, width: screenWidth }}
                 />
             </View>
@@ -60,7 +60,7 @@ const Carousel = ({ carouselData }) => {
             {/* <Image source={carouselData[0].image} /> */}
             <FlatList
                 data={carouselData}
-                renderItem={renderItemByPath}
+                renderItem={renderItemByUrl}
                 keyExtractor={(item) => item.id}
                 horizontal
                 pagingEnabled
@@ -80,4 +80,4 @@ const Carousel = ({ carouselData }) => {
     );
 };
 
-export default Carousel;
+export default UrlCarousel;

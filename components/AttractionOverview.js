@@ -3,13 +3,13 @@ import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import COLORS from "../constants/colors";
-import Carousel from "../components/Carousel";
+import PathCarousel from "./PathCarousel";
 
 const AttractionOverview = ({ location }) => {
     return (
         <ScrollView style={{ flex: 1 }}>
             {/* Carousel */}
-            <Carousel carouselData={location.carouselData} />
+            <PathCarousel carouselData={location.carouselData} />
 
             {/* TitleContent */}
             <View
