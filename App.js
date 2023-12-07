@@ -9,7 +9,11 @@ import NotificationScreen from "./screens/NotificationScreen";
 import FeedbackScreen from "./screens/FeedbackScreen";
 import VideoScreen from "./screens/VideoScreen";
 import EventScreen from "./screens/EventScreen";
+import { LogBox } from "react-native";
 
+LogBox.ignoreLogs([
+	"Non-serializable values were found in the navigation state",
+]);
 const Stack = createNativeStackNavigator();
 
 NativeWindStyleSheet.setOutput({

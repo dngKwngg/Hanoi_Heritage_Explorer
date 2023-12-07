@@ -48,11 +48,6 @@ const NotificationScreen = ({ navigation }) => {
 		}
 	}
 	const renderItemOfEvents = (item, idx) => {
-		{
-			console.log(item.name);
-			console.log(idx);
-			console.log(item.content);
-		}
 		return (
 			<TouchableOpacity
 				key={idx}
@@ -62,14 +57,25 @@ const NotificationScreen = ({ navigation }) => {
 						sortedAndFilteredEventOfDestinations:
 							sortedAndFilteredEventOfDestinations,
 					});
-					console.log("This is index: " + idx);
 				}}
 			>
-				<Card
-					containerStyle={{
-						borderRadius: 30,
+				<View
+					style={{
 						backgroundColor: "#f8f9fb",
-						marginBottom: 20,
+						padding: 10,
+						margin: 10,
+						borderRadius: 20,
+						shadowColor: "#000",
+						shadowOffset: {
+							width: 0,
+							height: 6,
+						},
+						shadowOpacity: 0.37,
+						shadowRadius: 7.49,
+						// elevation: 12,
+						borderColor: "#d0d2d5",
+						borderWidth: 1,
+						marginHorizontal: 20,
 					}}
 					key={idx}
 				>
@@ -112,7 +118,7 @@ const NotificationScreen = ({ navigation }) => {
 							</Text>
 						</View>
 					</View>
-				</Card>
+				</View>
 			</TouchableOpacity>
 		);
 	};

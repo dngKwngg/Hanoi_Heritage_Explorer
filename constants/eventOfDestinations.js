@@ -116,7 +116,7 @@ export const eventOfDestinations = [
 		name: 'Tour đêm "Giải mã Hoàng thành Thăng Long"',
 		url: "https://hoangthanhthanglong.vn/wp-content/uploads/2023/05/tourdem2-768x512-1.jpg",
 		address: "Hoàng Thành Thăng Long",
-		day: new Date(2023, 11, 9),
+		day: new Date(2023, 11, 10),
 		carouselData: [
 			{
 				id: 1,
