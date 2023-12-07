@@ -161,15 +161,15 @@ const locations = [
             },
             {
                 "id": 13,
-                "title": "Phủ Chủ Tịch",
-                "type": "Government office",
+                "title": "Quảng trường Ba Đình",
+                "type": "Town square",
                 "coordinate": [
-                    105.83456458566792,
-                    21.039282512264414
+                    105.83600139535449, 21.037443677698437
+
                 ],
-                "address": "1 Đ. Hoàng Hoa Thám, Thuỵ Khuê, Hoàn Kiếm, Hà Nội, Việt Nam",
+                "address": "Ba Đình, Hanoi, Vietnam",
                 "description": "",
-                "slug": "Presidential-Palace"
+                "slug": "Ba-Dinh-Square"
             },
             {
                 "id": 14,
