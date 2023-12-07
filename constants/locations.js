@@ -124,8 +124,7 @@ export const locations = [
             {
                 id: 3,
                 title: "Kiến trúc",
-                titleContent:
-                    "Hành Trình Kiến Trúc Đỉnh Cao: Khám Phá Hoàng Thành Thăng Long",
+                titleContent: "Kiến trúc đặc sắc vốn có của nhà tù Hỏa Lò",
                 content:
                     "Nhà tù được thực dân Pháp đặc biệt chú trọng trong việc xây dựng, đặc biệt là nguyên liệu. Tất cả thiết bị, phụ kiện đều được phải nhập từ Pháp và được kiến trúc sư chấp nhận. Từ đó mà thực dân Pháp cho rằng Nhà tù này “Nội bất xuất, ngoại bất nhập”. Sau 3 năm xây dựng, mặc dù nhiều hạng mục công trình còn chưa hoàn thiện nhưng nhiều người yêu nước Việt Nam đã bị thực dân Pháp bắt.\nCác phòng giam tại Nhà tù Hỏa Lò được thiết kế cùng một kiểu: mái lợp ngói, tường gạch kiên cố, quét vôi xám và hắc ín; các xà lim chỉ có một vài ô cửa nhỏ được mở sát mái, làm cho các phòng giam trở nên càng tối tăm và ngột ngạt. Bao quanh nhà tù là một bức tường đá hộc được xây kiên cố (cao 4,3m và 5,4m, dày 0,5m), trên đó cắm đầy những mảnh chai sắc nhọn nhằm ngăn tù nhân vượt ngục. Một đường tuần tra dọc hành lang rộng hơn 2m ngăn cách giữa bức tường bảo vệ nhà tù. Bốn góc nhà tù là bốn chòi canh gác để lính gác có thể quan sát toàn bộ hoạt động cả phía trong và ngoài nhà tù.",
                 timeReading: "5 min",
@@ -192,6 +191,282 @@ export const locations = [
             {
                 id: 3,
                 image: require("../assets/images/NhaTuHoaLo/HoaLoslider3.png"),
+            },
+        ],
+    },
+    {
+        id: 3,
+        name: "Quảng trường Ba Đình",
+        categories: [
+            {
+                id: 1,
+                title: "Tổng quan",
+                titleContent:
+                    "Quảng trường Ba Đình – Nơi ghi dấu những sự kiện lịch sử trọng đại",
+                content:
+                    "Quảng trường Ba Đình được đánh giá là quan trọng và lớn nhất Việt Nam, với công trình nổi bật nhất là Lăng Chủ tịch Hồ Chí Minh. Quảng trường Ba Đình ghi dấu nhiều sự kiện lịch sử quan trọng của Việt Nam, đặc biệt là vào ngày 2 tháng 9 năm 1945, khi Chủ tịch Chính phủ Cách mạng lâm thời Hồ Chí Minh đọc bản Tuyên ngôn Độc lập, khai sinh ra nước Việt nam Dân chủ Cộng hòa\nQuảng trường Ba Đình ngày nay là một khuôn viên lớn có sức chứa khoảng 20 vạn người. Khuôn viên quảng trường được tô điểm bởi hàng trăm ô cỏ vuông vức, xen giữa là lối đi rộng. Những ô cỏ này không chỉ để tăng không gian xanh cho quảng trường, mà còn có tác dụng giải nhiệt mặt sân bê tông. Loại cỏ được trồng tại quảng trường là cỏ gừng, vừa xanh tốt quanh năm mà nếu lỡ có bị giẫm đạp thì vẫn chịu được. Giữa quảng trường là cột cờ cao 25m, và nằm sau cột cờ chính là Lăng Chủ tịch Hồ Chí Minh.",
+                timeReading: "3 min",
+            },
+            {
+                id: 2,
+                title: "Lịch sử",
+                titleContent: "Lịch sử xây dựng Quảng trường Ba Đình Hà Nội",
+                content:
+                    "Bên cạnh những giới thiệu sơ lược về Quảng trường Ba Đình, lịch sử của địa điểm này cũng được khách du lịch quan tâm. Trước thế kỷ XX, nơi đây chỉ là một mảnh đất trống, sau đó được người Pháp xây dựng thành vườn hoa có tên gọi là Pugininer, xung quanh là những công trình công sở và biệt thự.\nSau khi Nhật đảo chính Pháp, bác sĩ Trần Văn Lai – thị trưởng thành phố Hà Nội đã đổi tên vườn hoa thành Quảng trường Ba Đình. Chỉ sau hơn một tháng đặt tên chính thức, nơi đây đã được chọn làm địa điểm diễn ra sự kiện trọng đại nhất trong lịch sử nước ta. Vào ngày 2/9/1945, tại đây, Chủ tịch Hồ Chí Minh đã đọc Bản Tuyên ngôn Độc lập, khai sinh nước Việt Nam Dân chủ Cộng hòa.\nNhững hình ảnh Quảng trường Ba Đình trong dịp đặc biệt này hiện lên đầy uy nghi, xung quanh là rất nhiều người, gương mặt ai cũng rạng rỡ, hân hoan và phấn khởi. Ai từng có mặt và trải qua ngày hôm đó chắc hẳn không thể quên bầu không khí và cảm xúc tại sự kiện lịch sử Quảng trường Ba Đình.\nSau một thời gian, nơi này được gọi là Quảng trường Độc Lập hoặc Quảng trường Hồng Bàng. Tuy nhiên, cuối cùng người ta vẫn giữ lại tên gọi hiện tại để ghi nhớ về sự kiện lịch sử thiêng liêng năm 1945.",
+                timeReading: "4 min",
+                image: require("../assets/images/QuangTruongBaDinh/lichsu.jpg"),
+            },
+            {
+                id: 3,
+                title: "Kiến trúc",
+                titleContent:
+                    "Kiến trúc và ý nghĩa lịch sử: Vẻ đẹp tuyệt vời của Quảng trường Ba Đình",
+                content:
+                    "Hiện tại, quảng trường Ba Đình là quảng trường lớn nhất Việt Nam với hơn 32.000 mét vuông. Đây là nơi diễn ra các sự kiện long trọng như lễ tưởng niệm các anh hùng liệt sĩ, lễ duyệt binh, mít tinh, báo công, lễ kết nạp Đảng... Vào thường nhật, quảng trường sẽ diễn ra lễ thượng cờ và hạ cờ.\nNgoài khu vực quảng trường trung tâm, bạn có thể tham quan các công trình kiến trúc khác như: Hội trường Ba Đình, Lăng Chủ tịch Hồ Chí Minh, Bảo tàng Hồ Chí Minh, Đài tưởng niệm các Anh hùng liệt sĩ, Khu di tích Phủ Chủ tịch, chùa Một Cột, cùng di tích Hoàng Thành Thăng Long.",
+                timeReading: "5 min",
+                image: require("../assets/images/QuangTruongBaDinh/kientruc.jpg"),
+            },
+            {
+                id: 4,
+                title: "Ảnh",
+                imageList: [
+                    "https://statics.vinpearl.com/quang-truong-ba-dinh-1_1680149609.jpg",
+                    "https://statics.vinpearl.com/quang-truong-ba-dinh-2_1680149655.jpg",
+                    "https://statics.vinpearl.com/quang-truong-ba-dinh-4_1680149711.jpg",
+                    "https://media.mia.vn/uploads/blog-du-lich/kham-pha-quang-truong-ba-dinh-noi-luu-giu-lich-su-giua-long-ha-noi-1639388972.jpg",
+                    "https://statics.vinpearl.com/quang-truong-ba-dinh-7_1680149793.jpg",
+                    "https://mediaim.expedia.com/destination/1/cc157faf5813cc8fffa749c761051845.jpg",
+                    "https://vnanet.vn/Data/Articles/2020/09/01/4991644/vna_potal_quang_truong_ba_dinh_%E2%80%93_noi_ghi_dau_nhieu_su_kien_trong_dai_cua_dat_nuoc_111645353_stand.jpg",
+                    "https://i.pinimg.com/736x/9b/b4/19/9bb41948638faf3e21a473f939f824dc.jpg",
+                    "https://kenh14cdn.com/thumb_w/660/203336854389633024/2022/4/30/va06208-16512840381401671278631.jpg",
+                    "https://res.cloudinary.com/nifehub-production/image/upload/public/64c/c08/957/64cc0895737fe311406095.jpg",
+                    "https://i.imgur.com/pd9ykjG.jpg",
+                    "https://file.qdnd.vn/data/images/0/2018/09/01/nguyenthao/chu%20tich%20hcm.jpg?w=575",
+                    "https://dulichkhampha24.com/wp-content/uploads/2020/01/quang-truong-ba-dinh-ha-noi-11.jpg",
+                    "https://kenh24h.com.vn/wp-content/uploads/2020/09/1-3.jpg",
+                ],
+            },
+            {
+                id: 5,
+                title: "Video",
+                videoList: [
+                    {
+                        title: "Lễ hạ cờ ở quảng trường Ba Đình",
+                        url: "oVK1wCaSF14",
+                    },
+                    {
+                        title: "Tham Quan Lăng Bác | Quảng Trường Ba Đình | Hà Nội",
+                        url: "n-cCziVKtGQ",
+                    },
+                ],
+            },
+            {
+                id: 6,
+                title: "Đặt vé",
+                adultPrice: 15000,
+                teenPrice: 10000,
+                childPrice: 5000,
+            },
+            {
+                id: 7,
+                title: "Phản hồi",
+            },
+        ],
+        locateAt: "Đường Hùng Vương, quận Ba Đình",
+        phone: "024.39342253",
+        time: "6:00 đến 21:00 hàng ngày",
+        carouselData: [
+            {
+                id: 1,
+                image: require("../assets/images/QuangTruongBaDinh/BaDinhslider1.jpg"),
+            },
+            {
+                id: 2,
+                image: require("../assets/images/QuangTruongBaDinh/BaDinhslider2.jpg"),
+            },
+            {
+                id: 3,
+                image: require("../assets/images/QuangTruongBaDinh/BaDinhslider3.jpg"),
+            },
+        ],
+    },
+    {
+        id: 4,
+        name: "Lăng Chủ tịch",
+        categories: [
+            {
+                id: 1,
+                title: "Tổng quan",
+                titleContent: "Lăng Chủ tịch - một công trình trang nghiêm",
+                content:
+                    "Thể theo ý nguyện thiết tha của toàn Đảng, toàn dân, trong phiên họp sáng 29/11/1969, Bộ Chính trị Trung ương Đảng đã bàn và quyết định: Với tấm lòng kính yêu vô hạn và đời đời nhớ ơn Chủ tịch Hồ Chí Minh, chúng ta phải thực hiện đến mức tốt nhất nhiệm vụ giữ gìn lâu dài thi hài Chủ tịch Hồ Chí Minh và xây dựng Lăng của Người.\nĐảng và Nhà nước ta quyết định xây dựng lăng của Người tại Quảng trường Ba Đình lịch sử, nơi Người đọc bản Tuyên ngôn độc lập, tuyên bố thành lập nước Việt Nam Dân chủ Cộng hòa.\nLăng Bác là một công trình kiến trúc đồ sộ, uy nghi; lăng cao 21,6 mét, bề mặt rộng 31 mét. Hai cánh gà mở ra hai phía.  Lăng Chủ tịch Hồ Chí Minh nằm tại vị trí lễ đài cũ giữa Quảng trường Ba Đình, nơi ngày xưa Chủ tịch Hồ Chí Minh dẫn đầu các cuộc mít-tinh quan trọng.",
+                timeReading: "3 min",
+            },
+            {
+                id: 2,
+                title: "Lịch sử",
+                titleContent: "Quá trình xây dựng Lăng Chủ tịch Hồ Chí Minh",
+                content:
+                    "Sau khi Bác Hồ muôn vàn kính yêu của dân tộc ta qua đời, thực hiện nguyện vọng của toàn Đảng, toàn dân, toàn quân, ngày 29 tháng 11 năm 1969 Bộ Chính trị Ban Chấp hành Trung ương Đảng đã ra Nghị quyết, trong đó có đoạn: “Với tấm lòng kính yêu vô hạn và đời đời nhớ ơn Hồ Chủ tịch, chúng ta phải thực hiện đến mức tốt nhất nhiệm vụ giữ gìn thi hài Hồ Chủ tịch và xây dựng Lăng của Người…”.\nLàm sao để Công trình Lăng Bác xứng đáng với thời đại.Thời đại rực rỡ, huy hoàng nhất trong lịch sử vinh quang của dân tộc ta xứng đáng với Bác Hồ, người anh hùng dân tộc vĩ đại nhất và cũng là người giản dị nhất, trong sáng nhất và thật là gần gũi. Đồng thời cũng làm sao cho Lăng Bác thể hiện được tấm lòng kính yêu vô bờ bến và đời đời nhớ ơn của nhân dân ta đối với Bác.\nTrong Nghị quyết ngày 29/11/1969, Bộ Chính trị Ban Chấp hành Trung ương Đảng đã nêu ra những yêu cầu cơ bản đối với công tác thiết kế và xây dựng Lăng Bác. Những yêu cầu này là phương châm chỉ đạo xuyên suốt trong quá trình thiết kế xây dựng Lăng Bác, Quảng trường Ba Đình và các Công trình về Bác sau này (Bảo tàng Hồ Chí Minh...)\nCông trình Lăng Chủ tịch Hồ Chí Minh do Viện nghiên cứu thiết kế Cục Tổ chức xây dựng Mátxcơva chủ trì cùng với các viện và các viện thiết kế chuyên ngành khác. Chủ trì thiết kế là kiến trúc sư Garon Ixacovich, người đã được nhận giải thưởng Lênin về thiết kế công trình lưu niệm ở thành phố Ulianopxco quê hương Lê nin. Kiến trúc sư Garon Ixacovich cùng với 2 chuyên gia khác là Đê bốp - Viện sỹ, Giám đốc Viện Khoa học giữ gìn thi hài Lê nin người có công lớn giúp ta giữ gìn thi hài Bác và Tổng Công trình sư Metvedep, Tổng Công trình sư xây dựng Lăng Bác. Sau khi xây dựng xong Công trình Lăng đã được Nhà nước ta tuyên dương Anh hùng lao động.",
+                timeReading: "4 min",
+                image: require("../assets/images/LangChuTich/lichsu.jpg"),
+            },
+            {
+                id: 3,
+                title: "Kiến trúc",
+                titleContent: "Kiến trúc hoàn mỹ của Lăng Chủ tịch Hồ Chí Minh",
+                content:
+                    "Kiến trúc tổng thể của Lăng Bác là một khối vuông kiên cố, gồm 3 lớp. Lăng cao 21,6m, rộng 41,2m. Kết cấu Lăng được thiết kế đặc biệt để có thể chống lũ lụt, bom đạn và động đất cường độ 7 richter. Bên ngoài Lăng được ốp đá granite xám, xung quanh là những hàng cột bằng đá hoa cương, với dòng chữ CHỦ TỊCH HỒ - CHÍ - MINH bằng đá ngọc màu đỏ thẫm nổi bật trên đỉnh Lăng.\nTrước cửa Lăng luôn có 2 người lính cảnh vệ đứng gác, mỗi giờ đổi ca gác một lần. Tiền sảnh lăng ốp đá hoa cương vân đỏ hồng, làm nổi bật dòng chữ “Không có gì quý hơn Độc lập Tự do” và chữ ký dát vàng của Bác.\nLăng Bác hiện có tất cả 200 bộ cửa được làm từ nhiều loại gỗ quý thu thập từ mọi miền trên đất nước. Chính giữa Lăng là phòng đặt thi hài Bác, được ốp đá cẩm thạch. Thi hài Chủ tịch Hồ Chí Minh được đặt trong hòm kính, trên một chiếc giường được đặt trên bệ đá và luôn có chiến sĩ cảnh vệ đứng gác.",
+                timeReading: "5 min",
+                image: require("../assets/images/LangChuTich/kientruc.jpg"),
+            },
+            {
+                id: 4,
+                title: "Ảnh",
+                imageList: [
+                    "https://imagev3.vietnamplus.vn/w1000/Uploaded/2023/ngtmbh/2021_08_13/ttxvn_lang_chu_tich_ho_chi_minh.jpg.webp",
+                    "https://statics.vinpearl.com/quang-truong-ba-dinh-2_1680149655.jpg",
+                    "https://statics.vinpearl.com/quang-truong-ba-dinh-4_1680149711.jpg",
+                    "https://media.mia.vn/uploads/blog-du-lich/kham-pha-quang-truong-ba-dinh-noi-luu-giu-lich-su-giua-long-ha-noi-1639388972.jpg",
+                    "https://cdnmedia.baotintuc.vn/Upload/c2tvplmdloSDblsn03qN2Q/files/2023/05/19/lang-chu-tich-ho-chi-minh-1952023.jpg",
+                    "https://mediaim.expedia.com/destination/1/cc157faf5813cc8fffa749c761051845.jpg",
+                    "https://vnanet.vn/Data/Articles/2020/09/01/4991644/vna_potal_quang_truong_ba_dinh_%E2%80%93_noi_ghi_dau_nhieu_su_kien_trong_dai_cua_dat_nuoc_111645353_stand.jpg",
+                    "https://i.pinimg.com/736x/9b/b4/19/9bb41948638faf3e21a473f939f824dc.jpg",
+                    "https://kenh14cdn.com/thumb_w/660/203336854389633024/2022/4/30/va06208-16512840381401671278631.jpg",
+                    "https://res.cloudinary.com/nifehub-production/image/upload/public/64c/c08/957/64cc0895737fe311406095.jpg",
+                    "https://i.imgur.com/pd9ykjG.jpg",
+                    "https://file.qdnd.vn/data/images/0/2018/09/01/nguyenthao/chu%20tich%20hcm.jpg?w=575",
+                    "https://dulichkhampha24.com/wp-content/uploads/2020/01/quang-truong-ba-dinh-ha-noi-11.jpg",
+                    "https://kenh24h.com.vn/wp-content/uploads/2020/09/1-3.jpg",
+                ],
+            },
+            {
+                id: 5,
+                title: "Video",
+                videoList: [
+                    {
+                        title: "Vào Lăng viếng Bác | Nhịp sống Hà Nội",
+                        url: "bLS2JinHaEE",
+                    },
+                    {
+                        title: "Tham Quan Lăng Bác | Quảng Trường Ba Đình | Hà Nội",
+                        url: "n-cCziVKtGQ",
+                    },
+                ],
+            },
+            {
+                id: 6,
+                title: "Đặt vé",
+                adultPrice: 15000,
+                teenPrice: 10000,
+                childPrice: 5000,
+            },
+            {
+                id: 7,
+                title: "Phản hồi",
+            },
+        ],
+        locateAt: "Đường Hùng Vương, quận Ba Đình",
+        phone: "02438455124",
+        time: "6:00 đến 21:00 hàng ngày",
+        carouselData: [
+            {
+                id: 1,
+                image: require("../assets/images/LangChuTich/LangChuTichslider1.jpg"),
+            },
+            {
+                id: 2,
+                image: require("../assets/images/LangChuTich/LangChuTichslider2.jpg"),
+            },
+            {
+                id: 3,
+                image: require("../assets/images/LangChuTich/LangChuTichslider3.png"),
+            },
+        ],
+    },
+    {
+        id: 5,
+        name: "Chùa Một Cột",
+        categories: [
+            {
+                id: 1,
+                title: "Tổng quan",
+                titleContent:
+                    "Chùa Một Cột – ngôi chùa có kiến trúc độc đáo nhất tại Châu Á",
+                content:
+                    "Chùa Một Cột là ngôi chùa cổ ở Việt Nam được xây dựng từ thời vua Lý Thái Tông, còn được biết đến với nhiều tên gọi khác nhau như Chùa Mật, Liên Hoa Đài hay Diên Hựu Tự. Dưới thời nhà Lý, chùa tọa lạc trên phần đất của thôn Thanh Bảo, huyện Quảng Đức, phía tây Hoàng thành Thăng Long. Ngày nay, chùa thuộc quận Ba Đình, nằm ở công viên phía sau phố Ông Ích Khiêm, cạnh quần thể Quảng trường Ba Đình và Lăng Chủ tịch Hồ Chí Minh.\nChùa Một Cột là một trong những ngôi chùa có kiến trúc độc đáo nhất tại Châu Á, là biểu tượng văn hoá và điểm đến tâm linh ở Thủ đô Hà Nội. Với vẻ đẹp kiến trúc cổ kính cùng những giá trị về mặt lịch sử, ngôi chùa này sẽ mang đến cho bạn một cái nhìn trực quan, hấp dẫn về văn hoá Phật Giáo Việt.",
+                timeReading: "3 min",
+            },
+            {
+                id: 2,
+                title: "Lịch sử",
+                titleContent:
+                    "Chùa Một Cột: Hành trình qua thời gian và vẻ đẹp lịch sử của di tích văn hóa nổi tiếng",
+                content:
+                    "Chùa Một Cột còn được gọi với những cái tên khác là chùa Mật, chùa Diên Hựu hay Liên Hoa Đài.\nTheo sử xưa, chùa được vua Lý Thái Tông cho xây dựng vào mùa đông năm 1049. Tích xưa còn lưu lại câu chuyện vua Lý Thái Tông nằm chiêm bao thấy Phật Quan Âm tọa thiền trên tòa hoa sen sáng rực, đưa tay dắt vua lên đài.\nTỉnh mộng vua đã cho dựng chùa Một Cột với lối kiến trúc tựa như trong giấc mơ. Từ đó người ta thấy một ngôi chùa với kết cấu một cột độc đáo, dáng tựa đài sen vươn lên giữa mặt hồ Linh Chiểu ở kinh thành Thăng Long.\nSau khi dựng chùa, vua Lý Anh Tông thường lui tới cầu nguyện. Không lâu sau Hoàng hậu hạ sinh một Hoàng tử khôi ngô. Cho rằng công đức Phật ban cho, vua Lý cho tu sửa lại chùa và dựng thêm một ngôi chùa bên cạnh chùa Một Cột để tạ ơn.\nLúc này quần thể chùa (bao gồm chùa Một Cột và ngôi chùa mới) có tên là Diên Hựu với ý nghĩa “phước bền dài lâu”.",
+                timeReading: "4 min",
+                image: require("../assets/images/ChuaMotCot/lichsu.jpg"),
+            },
+            {
+                id: 3,
+                title: "Kiến trúc",
+                titleContent: "Ngôi chùa có lối kiến trúc ấn tượng nhất Châu Á",
+                content:
+                    "Chùa Một Cột sở hữu lối kiến trúc chỉ có duy nhất một gian chùa bằng gỗ nhỏ nằm trên một trụ đá lớn. Được đặt giữa hồ Linh chiểu trông đẹp tựa như một bông sen khổng lồ ở giữa hồ.\nCột trụ ngôi chùa được dựng chỉ với 2 cột đá chồng lên nhau nhưng vô cùng vững chắc. Phía trên chính là giá đỡ cho Đài Liên Hoa được thiết kế bằng gỗ theo hình vuông có độ dài mỗi cạnh là 3 mét cùng chắn sóng lớn bao xung quanh.\nMái của chùa Một Cột được lợp bằng ngói đỏ gạch, có bốn góc uốn cong vút lên trời. Hình tượng 2 con rồng đặt trên đỉnh mái là biểu tượng lưỡng long chầu nguyệt mang văn hóa đậm chất phương Đông tượng trưng cho sự sinh sôi nảy nở, âm dương hài hòa",
+                timeReading: "5 min",
+                image: require("../assets/images/ChuaMotCot/kientruc.jpg"),
+            },
+            {
+                id: 4,
+                title: "Ảnh",
+                imageList: [
+                    "https://upload.wikimedia.org/wikipedia/commons/9/90/One_Pillar_Pagoda_Hanoi.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjGyhBSfWDEFdimAD0eVdtU6GWUOiWyUPMyA&usqp=CAU",
+                    "https://images2.thanhnien.vn/528068263637045248/2023/7/1/chua-mot-cot1-16882196924471085207484.jpg",
+                    "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/95000/95398-One-Pillar-Pagoda.jpg",
+                    "https://anvientv.com.vn/uploads/upload/1673941688_anh-chua-mot-cot(1).jpg",
+                    "https://i.ex-cdn.com/phatgiao.org.vn/files/f1/Contents/phatgiaovietnam/20130719/chua-mot-cot-1986.jpg",
+                    "https://images.baophunuthudo.vn/zoom/1000/uploads/2021/04/22/34-1619086600.jpg",
+                    "https://media.mia.vn/uploads/blog-du-lich/chua-mot-cot-ngoi-chua-co-kien-truc-doc-dao-nhat-chau-a-03-1642081299.jpeg",
+                ],
+            },
+            {
+                id: 5,
+                title: "Video",
+                videoList: [
+                    {
+                        title: "Chùa Một Cột - biểu tượng văn hóa ngàn năm của Hà Nội",
+                        url: "tYXe1AnQQxk",
+                    },
+                    {
+                        title: "Ký ức Hà Nội: Chùa Một Cột",
+                        url: "GGo8QrsDoaM",
+                    },
+                ],
+            },
+            {
+                id: 6,
+                title: "Đặt vé",
+                adultPrice: 20000,
+                teenPrice: 15000,
+                childPrice: 10000,
+            },
+            {
+                id: 7,
+                title: "Phản hồi",
+            },
+        ],
+        locateAt: "P. Chùa Một Cột, Đội Cấn, Ba Đình, Hà Nội",
+        phone: "02438455124",
+        time: "9:00 đến 19:00 hàng ngày",
+        carouselData: [
+            {
+                id: 1,
+                image: require("../assets/images/ChuaMotCot/ChuaMotCotslider1.jpg"),
+            },
+            {
+                id: 2,
+                image: require("../assets/images/ChuaMotCot/ChuaMotCotslider2.jpg"),
             },
         ],
     },

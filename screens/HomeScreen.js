@@ -13,7 +13,18 @@ const HomeScreen = ({ navigation }) => {
                 title="Go to StoryScreen (Index 1)"
                 onPress={() => navigation.navigate("Attraction", { index: 1 })}
             />
-
+            <Button
+                title="Go to StoryScreen (Index 2)"
+                onPress={() => navigation.navigate("Attraction", { index: 2 })}
+            />
+            <Button
+                title="Go to StoryScreen (Index 3)"
+                onPress={() => navigation.navigate("Attraction", { index: 3 })}
+            />
+            <Button
+                title="Go to StoryScreen (Index 4)"
+                onPress={() => navigation.navigate("Attraction", { index: 4 })}
+            />
             <Button
                 title="Go to NotificationScreen"
                 onPress={() => navigation.navigate("Notification")}

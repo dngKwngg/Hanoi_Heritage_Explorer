@@ -11,7 +11,7 @@ const PathCarousel = ({ carouselData }) => {
             <View>
                 <Image
                     source={item.image}
-                    style={{ height: 200, width: screenWidth }}
+                    style={{ height: 250, width: screenWidth }}
                 />
             </View>
         );

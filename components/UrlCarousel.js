@@ -11,7 +11,7 @@ const UrlCarousel = ({ carouselData }) => {
             <View>
                 <Image
                     source={{ uri: item.image }}
-                    style={{ height: 200, width: screenWidth }}
+                    style={{ height: 250, width: screenWidth }}
                 />
             </View>
         );

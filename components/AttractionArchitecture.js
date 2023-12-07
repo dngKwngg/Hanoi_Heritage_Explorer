@@ -70,6 +70,7 @@ const styles = {
         lineHeight: 30,
         marginTop: 12,
         marginLeft: 16,
+        marginBottom: 16,
         marginRight: 12,
         textAlign: "justify",
         fontFamily: "Montserrat-Regular",
