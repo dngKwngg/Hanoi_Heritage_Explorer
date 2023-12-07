@@ -91,7 +91,6 @@ const locations = [
                 description: "",
                 slug: "Vietnam-National-Museum-of-History",
             },
-
             {
                 id: 9,
                 title: "Chùa Trấn Quốc",
