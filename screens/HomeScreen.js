@@ -22,8 +22,8 @@ const HomeScreen = ({ navigation }) => {
                 onPress={() => navigation.navigate("Attraction", { index: 3 })}
             />
             <Button
-                title="Go to StoryScreen (Index 4)"
-                onPress={() => navigation.navigate("Attraction", { index: 4 })}
+                title="Go to StoryScreen (Index 5)"
+                onPress={() => navigation.navigate("Attraction", { index: 11 })}
             />
             <Button
                 title="Go to NotificationScreen"
