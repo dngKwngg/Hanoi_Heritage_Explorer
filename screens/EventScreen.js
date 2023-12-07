@@ -14,6 +14,7 @@ import { Card } from "react-native-elements";
 import UrlCarousel from "../components/UrlCarousel";
 import HTML from "react-native-render-html";
 import { eventOfDestinations } from "../constants/eventOfDestinations";
+import Header from "../components/Header";
 const EventScreen = ({ route, navigation }) => {
     // const currentIndex = 4; // You can set the initial index here
     const { currentIndex, sortedAndFilteredEventOfDestinations } = route.params;
@@ -49,34 +50,11 @@ const EventScreen = ({ route, navigation }) => {
                 hidden={false}
             />
             {/* Header */}
-            <View
-                style={{
-                    width: "100%",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    paddingTop: 16,
-                    backgroundColor: "white",
-                }}
-            >
-                <TouchableOpacity
-                    style={{ position: "absolute", left: 16 }}
-                    onPress={() => navigation.navigate("Notification")}
-                >
-                    <Icon
-                        name="angle-left"
-                        size={24}
-                        style={{ paddingLeft: 16, bottom: -8 }}
-                    ></Icon>
-                </TouchableOpacity>
-                <Text
-                    style={{
-                        fontSize: 18,
-                        fontWeight: 700,
-                        marginBottom: 8,
-                        bottom: 8,
-                    }}
-                ></Text>
-            </View>
+            <Header
+                onPress={() => navigation.navigate("Notification")}
+                headerContent={""}
+            />
+
             {/* Body */}
             <ScrollView>
                 <UrlCarousel
