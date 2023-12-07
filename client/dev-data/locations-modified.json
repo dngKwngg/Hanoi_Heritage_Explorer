@@ -1,0 +1,278 @@
+[
+    {
+        "name": "attractions",
+        "icon": "fort-awesome",
+        "places": [
+            {
+                "id": 0,
+                "title": "Phố Hòa Bình",
+                "type": "Nhà riêng",
+                "coordinate": [
+                    107.12532810840786,
+                    20.95703808166434
+                ],
+                "description": "",
+                "slug": "Hoa-Binh-Street"
+            },
+            {
+                "id": 1,
+                "title": "Nhà Tùng",
+                "type": "Nhà riêng",
+                "coordinate": [
+                    105.43546413128074,
+                    21.107726880543524
+                ],
+                "description": "",
+                "slug": "Nhà-Tùng"
+            },
+            {
+                "id": 2,
+                "title": "Lăng Chủ Tịch",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.83466839914279,
+                    21.036912507764324
+                ],
+                "description": "",
+                "slug": "HCM-Mausoleum"
+            },
+            {
+                "id": 3,
+                "title": "Chùa Một Cột",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.83361989333477,
+                    21.035855844678977
+                ],
+                "description": "",
+                "slug": "One-Pillar-Pagodar"
+            },
+            {
+                "id": 4,
+                "title": "Văn Miếu Quốc Tử Giám",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.83566933019767,
+                    21.02812009959497
+                ],
+                "description": "",
+                "slug": "Temple-Of-Literature"
+            },
+            {
+                "id": 5,
+                "title": "Nhà Hát Lớn Hà Nội",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.85748460411847,
+                    21.024246579604206
+                ],
+                "description": "",
+                "slug": "Hanoi-Opera-House"
+            },
+            {
+                "id": 6,
+                "title": "Nhà Thờ Lớn Hà Nội",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.84918800765573,
+                    21.028811024395043
+                ],
+                "description": "",
+                "slug": "St-Joseph-Cathedral"
+            },
+            {
+                "id": 7,
+                "title": "Di tích nhà Tù Hỏa Lò",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.84654627716178,
+                    21.025306339636696
+                ],
+                "description": "",
+                "slug": "Hoa-Lo-Prison-Relic"
+            },
+            {
+                "id": 8,
+                "title": "Bảo tàng lịch sử quốc gia",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.8587476748773,
+                    21.02488517863446
+                ],
+                "description": "",
+                "slug": "Vietnam-National-Museum-of-History"
+            },
+            {
+                "id": 9,
+                "title": "Đền Quán Thánh",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.83645898520308,
+                    21.04301001256985
+                ],
+                "description": "",
+                "slug": "Quan-Thanh-Temple"
+            },
+            {
+                "id": 10,
+                "title": "Hoàng Thành Thăng Long",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.84025749817256,
+                    21.035225818810716
+                ],
+                "categories": [
+                    {
+                        "id": 1,
+                        "title": "Tổng quan",
+                        "titleContent": "Hoàng Thành Thăng Long: Biểu tượng lịch sử và văn hóa Hà Nội",
+                        "content": "Hoàng thành Thăng Long là quần thể di tích gắn liền với lịch sử kinh thành Thăng Long Hà Nội. Công trình này được xây dựng từ thế kỷ VII đến triều đại Đinh – Tiền Lê. Vào năm 1010, dưới triều đại nhà Lý, kinh thành được dời từ Đại La về Thăng Long. Trải qua các vương triều Lý – Trần – Lê – Nguyễn… nơi đây trở thành chứng nhân lịch sử cho các cuộc đấu tranh giữ nước của dân tộc. Đồng thời kinh thành cũng là minh chứng cho sự tiếp nối văn hóa giữa các triều đại. Vào ngày 31/7/2010, tại Brazil, Ủy ban Di sản Thế giới đã thông qua Nghị quyết công nhận khu trung tâm Hoàng thành Thăng Long – Hà Nội là Di sản Văn hóa Thế giới. Đây là niềm tự hào của không chỉ Hà Nội mà cả đất nước Việt Nam. Với kiến trúc độc đáo cùng ý nghĩa đặc biệt, ngày nay Hoàng thành là khu di tích lịch sử và là địa điểm du lịch nổi tiếng Hà Nội. Đến đây, du khách sẽ được tận mắt chiêm ngưỡng một số phần di tích còn sót lại đã được bảo tồn, từ đó hiểu hơn về lịch sử, văn hóa của thế hệ cha ông đi trước.",
+                        "timeReading": "3 min"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Lịch sử",
+                        "titleContent": "Hoàng Thành Thăng Long: Hòn Ngọc Lịch Sử Việt Nam",
+                        "content": "Xuất phát từ Chiếu dời đô của vua Lý Thái Tổ vào năm 1010, kinh thành chính thức dời về Thăng Long (tên trước đó là Đại La) và các công trình dần được xây dựng. Trong đó nổi bật nhất là đại công trình hoàng thành với mô hình “Tam trùng thành quách”. Theo đó thành gồm có 3 vòng: La thành, Hoàng thành, Tử cấm thành. Giữa La Thành và Hoàng thành là nơi sinh sống của người dân, vòng trong cùng là nơi sinh sống của vua và gia đình hoàng gia. Sau hơn 1000 năm, trải qua thời đại Lý, Trần, Lê, Mạc, Nguyễn… Hoàng Thành Thăng Long đã bị thời gian và các cuộc tấn công phá hoại nghiêm trọng. Hiện nay phần lớn kiến trúc được bảo tồn, phục dựng trên nền di tích cũ. Bên cạnh phần công trình trên bề mặt, khu khảo cổ cũng dần được khai quật bài bản và mở cửa cho công chúng tham quan. Vào ngày 31/07/2010, Hoàng Thành Thăng Long được UNESCO công nhận là Di sản văn hóa thế giới. Trong vòng 10 năm trở lại đây, các hoạt động du lịch tại Hoàng Thành Thăng Long dần được đầu tư bài bản, chú trọng công tác bảo tồn, lồng ghép yếu tố văn hóa thông qua các hoạt động thực tế phong phú… giúp du khách không những được tận mắt chiêm ngưỡng những cổ vật quý hiếm mà còn được trải nghiệm không gian đậm chất truyền thống, cổ xưa.",
+                        "timeReading": "4 min"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Kiến trúc",
+                        "titleContent": "Hành Trình Kiến Trúc Đỉnh Cao: Khám Phá Hoàng Thành Thăng Long",
+                        "content": "Hiện nay, khu vực di sản Hoàng Thành Thăng Long đang được nghiên cứu, bảo tồn bao gồm khu di tích khảo cổ 18 Hoàng Diệu và khu Thành cổ Hà Nội. Khu vực khảo cổ 18 Hoàng Diệu được phát lộ năm 2002, với nhiều tầng di vật phong phú, liên tục; thể hiện rõ nét các giá trị văn hóa – lịch sử qua thời gian các triều đại; từ thời tiền Thăng Long, qua các thời Lý – Trần – Lê – Nguyễn về sau. Tại đây những nhà nghiên cứu đã tìm thấy nhiều nền móng kiến trúc, các chi tiết kiến trúc, điêu khắc bị chôn vùi dưới đất. Tất cả phản ánh cả một quần thể thống nhất, đa dạng và có giá trị cao về nghệ thuật. Tuy nhiên, do vẫn còn đang trong thời gian nghiên cứu thực địa và đưa ra giải pháp bảo tồn lâu dài; nên khu vực này chưa thể trở thành một trung tâm tham quan phổ biến. Khu vực Thành cổ Hà Nội: Là khu trung tâm thành Hà Nội thời Nguyễn, trải dài theo trục Nam – Bắc của thành. Hiện nay, khu vực này còn có các di tích lộ thiên sau: \n    Cột cờ (Kỳ đài): Xây dựng cùng với thành Hà Nội thời Nguyễn, nằm phía trước thành trên trục thần đạo, giữa 2 cửa Đông Nam và Tây Nam. \n    Đoan Môn: Là cổng chính ra vào Cấm thành của Hoàng Thành Thăng Long, xây dựng từ thời Lý. Kiến trúc hiện nay là của thời Lê và được tu sửa thêm vào thời Nguyễn. \n    Thềm điện Kính Thiên: Điện Kính Thiên, cung điện trung tâm, xây dựng thời Lê trên nền cũ của điện Càn Nguyên, Thiên An thời Lý – Trần. Hiện chỉ còn lại thềm điện và đôi rồng đá. \n    Hậu Lâu (Lầu công chúa): Thời Lê gọi là Tĩnh Bắc lâu, thời Nguyễn gọi là Hậu điện. Đây là nơi ở của cung tần mỹ nữ theo vua từ Phú Xuân ra ngự giá Bắc Thành. Hậu Lâu đã bị hư hỏng khi Pháp chiếm thành Hà Nội và được người Pháp tu sửa như hiện nay. \n    Cửa Bắc (Bắc Môn, Chính Bắc Môn): Là cổng thành Hà Nội phía Bắc, xây dựng trên cơ sở của Cửa Bắc Thành Thăng Long thời Lê. Khi người Pháp chiếm thành Hà Nội, họ giữ lại Cửa Bắc để làm đài quan sát, có hai vết đạn đại bác bắn trên cổng, là biểu tượng của sức mạnh quân sự.",
+                        "timeReading": "5 min"
+                    },
+                    {
+                        "id": 4,
+                        "title": "Ảnh",
+                        "content": "Ảnh Hoàng thành Thăng Long"
+                    },
+                    {
+                        "id": 5,
+                        "title": "Video",
+                        "content": "Video Hoàng thành Thăng Long"
+                    },
+                    {
+                        "id": 6,
+                        "title": "Đặt vé",
+                        "content": "Đặt vé Hoàng thành Thăng Long"
+                    },
+                    {
+                        "id": 7,
+                        "title": "Đánh giá",
+                        "content": "Đánh giá Hoàng thành Thăng Long"
+                    }
+                ],
+                "locateAt": "19C Hoàng Diệu, Quận Ba Đình, Hà Nội",
+                "phone": "+84-24-37345926",
+                "time": "8:00 đến 17:00 hàng ngày",
+                "carouselData": [],
+                "description": "",
+                "slug": "Imperial-Citadel-of-Thang-Long"
+            },
+            {
+                "id": 11,
+                "title": "Chùa Trấn Quốc",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.83673221420527,
+                    21.047857744273028
+                ],
+                "description": "",
+                "slug": "Tran-Quoc-Pagoda"
+            },
+            {
+                "id": 12,
+                "title": "Đền Ngọc Sơn",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.85237881350297,
+                    21.030689225393292
+                ],
+                "description": "",
+                "slug": "Ngoc-Son-Temple"
+            },
+            {
+                "id": 13,
+                "title": "Bảo Tàng Hồ Chí Minh",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.83241688480017,
+                    21.035862606165214
+                ],
+                "description": "",
+                "slug": "HCM-Museum"
+            },
+            {
+                "id": 14,
+                "title": "Phủ Chủ Tịch",
+                "type": "Điểm mốc lịch sử",
+                "coordinate": [
+                    105.83456458566792,
+                    21.039282512264414
+                ],
+                "description": "",
+                "slug": "Presidential-Palace"
+            },
+            {
+                "id": 15,
+                "title": "Vincom Center Phạm Ngọc Thạch",
+                "type": "Shopping mall",
+                "coordinate": [
+                    105.83195578790375,
+                    21.00629834531049
+                ],
+                "description": "",
+                "slug": "Vincom-Center-Pham-Ngoc-Thach"
+            },
+            {
+                "id": 16,
+                "title": "Công viên cầu giấy",
+                "type": "Park",
+                "coordinate": [
+                    105.79083879604285,
+                    21.028284609421526
+                ],
+                "description": "",
+                "slug": "Cau-Giay-Park"
+            },
+            {
+                "id": 17,
+                "title": "Aeon Mall Hà Đông",
+                "type": "Shopping mall",
+                "coordinate": [
+                    105.7517170179332,
+                    20.989700958388884
+                ],
+                "address": "Dương Nội, Hà Đông, Hanoi, Vietnam",
+                "description": "",
+                "slug": "Aeon-Mall-Ha-Đong"
+            },
+            {
+                "id": 18,
+                "title": "Aeon Mall Hà Đông",
+                "type": "Shopping mall",
+                "coordinate": [
+                    105.7517170179332,
+                    20.989700958388884
+                ],
+                "address": "Dương Nội, Hà Đông, Hanoi, Vietnam",
+                "description": "",
+                "slug": "Aeon-Mall-Ha-Đong"
+            },
+            {
+                "id": 19,
+                "title": "Bảo tàng dân tộc Việt Nam",
+                "type": "Museum",
+                "coordinate": [
+                    105.79873424885892,
+                    21.04033865364875
+                ],
+                "address": "Đ. Nguyễn Văn Huyên, Quan Hoa, Cầu Giấy, Hà Nội 100000, Vietnam",
+                "description": "",
+                "slug": "Vietnam-Museum-of-Ethnology"
+            }
+        ]
+    }
+]
