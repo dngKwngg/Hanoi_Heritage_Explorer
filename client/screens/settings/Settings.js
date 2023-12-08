@@ -19,50 +19,50 @@ const Settings = ({ navigation }) => {
 
 
   const toNotificationSettings = () => {
-    navigation.navigate("Notification Settings");
+    navigation.navigate("Cài đặt thông báo");
   };
 
   const toDarkModeSettings = () => {
-    navigation.navigate("Appearance Settings");
+    navigation.navigate("Cài đặt giao diện");
   };
 
   const toLanguageSettings = () => {
-    navigation.navigate("App Language Settings");
+    navigation.navigate("Cài đặt ngôn ngữ");
   };
 
   const toFontSizeSettings = () => {
-    navigation.navigate("Font Size Settings");
+    navigation.navigate("Cài đặt cỡ chữ");
   };
 
   const toUpdateAppSettings = () => {
-    navigation.navigate("App Updates Settings");
+    navigation.navigate("Cập nhật ứng dụng");
   };
 
 
   const items = [
     {
       icon: "bell",
-      text: "Notification",
+      text: "Thông báo",
       action: toNotificationSettings,
     },
     {
       icon: "moon",
-      text: "Appearance",
+      text: "Giao diện",
       action: toDarkModeSettings
     },
     {
       icon: "language",
-      text: "App Language",
+      text: "Ngôn ngữ",
       action: toLanguageSettings,
     },
     {
       icon: "font",
-      text: "App Font Size",
+      text: "Cỡ chữ",
       action: toFontSizeSettings
     },
     {
       icon: "download",
-      text: "App Updates",
+      text: "Cập nhật ứng dụng",
       action: toUpdateAppSettings
     },
   ];
@@ -133,7 +133,7 @@ const Settings = ({ navigation }) => {
 
         <View style={{ marginLeft: 25, marginTop: 110, marginBottom: 25 }}>
 
-          <Header>Settings</Header>
+          <Header>Cài đặt</Header>
         </View>
         <ScrollView style={{ marginHorizontal: 13 }}>
           <View>

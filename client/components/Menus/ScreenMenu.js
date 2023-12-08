@@ -106,23 +106,23 @@ const ScreenMenu = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Notification Settings"
+            name="Cài đặt thông báo"
             component={NotificationSettings}
           />
           <Stack.Screen
-            name="Appearance Settings"
+            name="Cài đặt giao diện"
             component={DarkModeSettings}
           />
           <Stack.Screen
-            name="App Language Settings"
+            name="Cài đặt ngôn ngữ"
             component={LanguageSettings}
           />
           <Stack.Screen
-            name="Font Size Settings"
+            name="Cài đặt cỡ chữ"
             component={FontSizeSettings}
           />
           <Stack.Screen
-            name="App Updates Settings"
+            name="Cập nhật ứng dụng"
             component={AppUpdatesSettings}
           />
         </>

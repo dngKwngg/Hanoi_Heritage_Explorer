@@ -113,7 +113,7 @@ const Login = ({ navigation }) => {
       }
 
 
-      Alert.alert(data && data.message);
+      // Alert.alert(data && data.message);
       setEmail({ value: '', error: '' });
       setPassword({ value: '', error: '' });
       setShowPassword(false);
@@ -141,7 +141,7 @@ const Login = ({ navigation }) => {
     <Background>
       {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
-      <Header>Welcome back!</Header>
+      <Header>Chào mừng bạn!</Header>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -156,7 +156,7 @@ const Login = ({ navigation }) => {
       />
       <View style={{ flexDirection: 'row' }}>
         <TextInput
-          label="Password"
+          label="Mật khẩu"
           returnKeyType="done"
           value={password.value}
           onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -185,7 +185,7 @@ const Login = ({ navigation }) => {
         >
           {isChecked && <MaterialIcons name="check-box" size={23} />}
           {!isChecked && <MaterialIcons name="check-box-outline-blank" size={23} />}
-          <Text style={styles.remember}>Remember me</Text>
+          <Text style={styles.remember}>Nhớ mật khẩu</Text>
         </TouchableOpacity>
 
 
@@ -193,16 +193,16 @@ const Login = ({ navigation }) => {
         <TouchableOpacity style={styles.forgotPassword}
           onPress={() => navigation.navigate('ForgotPassword')}
         >
-          <Text style={styles.forgot}>Forgot your password?</Text>
+          <Text style={styles.forgot}>Quên mật khẩu?</Text>
         </TouchableOpacity>
 
       </View>
 
       <Button mode="contained" onPress={onLoginPressed}>
-        Login
+        Đăng nhập
       </Button>
 
-      <Text style={{ fontWeight: '500', marginTop: 20 }}>Or login with</Text>
+      <Text style={{ fontWeight: '500', marginTop: 20 }}>Hoặc sử dụng</Text>
       <View style={{flexDirection: 'row', marginVertical: 10, width: '80%', justifyContent: 'space-evenly'}}>
         <TouchableOpacity style={[styles.iconButton, {backgroundColor: '#f2391d'}]}>
           <FontAwesome5 name='google' size={20} color='white' />
@@ -218,9 +218,9 @@ const Login = ({ navigation }) => {
       </View>
 
       <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
+        <Text>Bạn chưa có tài khoản? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Register')}>
-          <Text style={styles.link}>Sign up</Text>
+          <Text style={styles.link}>Đăng ký</Text>
         </TouchableOpacity>
       </View>
     </Background>

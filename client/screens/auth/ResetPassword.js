@@ -96,9 +96,9 @@ export default function ResetPassword({ navigation }) {
     <Background>
       {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
-      <Header>Reset Password</Header>
+      <Header>Đặt lại mật khẩu</Header>
       <TextInput
-        label="Verification Code"
+        label="Mã xác thực"
         returnKeyType="next"
         value={resetCode.value}
         onChangeText={(text) => setResetCode({ value: text, error: '' })}
@@ -110,7 +110,7 @@ export default function ResetPassword({ navigation }) {
       />
       <View style={{flexDirection: 'row'}}>
         <TextInput
-          label="New Password"
+          label="Mật khẩu mới"
           returnKeyType="next"
           value={newPassword.value}
           onChangeText={(text) => setNewPassword({ value: text, error: '' })}
@@ -130,7 +130,7 @@ export default function ResetPassword({ navigation }) {
 
       <View style={{flexDirection: 'row'}}>
         <TextInput
-          label="Confirm Password"
+          label="Gõ lại mật khẩu"
           returnKeyType="done"
           value={confirmPassword.value}
           onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
@@ -149,7 +149,7 @@ export default function ResetPassword({ navigation }) {
       </View>
 
       <Button mode="contained" onPress={onResetPassPressed}>
-        Continue
+        Tiếp tục
       </Button>
       <Button
         mode="text"
@@ -159,7 +159,7 @@ export default function ResetPassword({ navigation }) {
           marginBottom: 0,
         }}
       >
-        Resend Code
+        Gửi lại mã
       </Button>
 
       <Button
@@ -169,7 +169,7 @@ export default function ResetPassword({ navigation }) {
           marginTop: 0,
         }}
       >
-        Back to Login
+        Quay lại Đăng nhập
       </Button>
 
     </Background>

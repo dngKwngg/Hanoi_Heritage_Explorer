@@ -66,7 +66,7 @@ const OnboardingScreen = ({ navigation }) => {
                 fontWeight: "bold",
               }}
             >
-              Get Started
+              Bắt đầu
             </Text>
           </TouchableOpacity>
         </View>

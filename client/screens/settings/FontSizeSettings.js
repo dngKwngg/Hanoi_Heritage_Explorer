@@ -26,7 +26,7 @@ const FontSizeSettings = () => {
                         status={checked === 'first' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('first')}
                     />
-                    <Text style={styles.sectionTitle}>Small</Text>
+                    <Text style={styles.sectionTitle}>Nhỏ</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setChecked('second')} style={styles.section}>
@@ -36,7 +36,7 @@ const FontSizeSettings = () => {
                         status={checked === 'second' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('second')}
                     />
-                    <Text style={styles.sectionTitle}>Medium</Text>
+                    <Text style={styles.sectionTitle}>Trung bình</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setChecked('third')} style={styles.section}>
@@ -46,7 +46,7 @@ const FontSizeSettings = () => {
                         status={checked === 'third' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('third')}
                     />
-                    <Text style={styles.sectionTitle}>Large</Text>
+                    <Text style={styles.sectionTitle}>Lớn</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

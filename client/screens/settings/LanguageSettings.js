@@ -12,7 +12,7 @@ import { theme } from "../../core/theme";
 
 
 const LanguageSettings = () => {
-    const [checked, setChecked] = useState('second');
+    const [checked, setChecked] = useState('first');
     return (
         <SafeAreaView
             style={styles.container}
@@ -26,7 +26,7 @@ const LanguageSettings = () => {
                         status={checked === 'first' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('first')}
                     />
-                    <Text style={styles.sectionTitle}>Vietnamese</Text>
+                    <Text style={styles.sectionTitle}>Tiếng Việt</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setChecked('second')} style={styles.section}>
@@ -36,7 +36,7 @@ const LanguageSettings = () => {
                         status={checked === 'second' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('second')}
                     />
-                    <Text style={styles.sectionTitle}>English</Text>
+                    <Text style={styles.sectionTitle}>Tiếng Anh</Text>
                 </TouchableOpacity>
             </View>
         </SafeAreaView>

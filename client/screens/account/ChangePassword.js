@@ -48,7 +48,7 @@ export default function ChangePassword({ navigation }) {
       let newPasswordError = passwordValidator(newPassword.value)
       const confirmPasswordError = confirmPasswordValidator(confirmPassword.value, newPassword.value)
       if (newPassword.value === password.value) {
-        newPasswordError = 'New password and current password can\'t be the same.'
+        newPasswordError = 'Mật khẩu mới và mật khẩu hiện tại không thể giống nhau.'
       }
       if (passwordError || newPasswordError || confirmPasswordError) {
         setPassword({ ...password, error: passwordError })
@@ -118,10 +118,10 @@ export default function ChangePassword({ navigation }) {
       <BackButton goBack={navigation.goBack} />
 
       <Logo />
-      <Header>Change Password</Header>
+      <Header>Đổi mật khẩu</Header>
       <View style={{ flexDirection: 'row' }}>
         <TextInput
-          label="Current Password"
+          label="Mật khẩu hiện tại"
           returnKeyType="next"
           value={password.value}
           onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -140,7 +140,7 @@ export default function ChangePassword({ navigation }) {
       </View>
       <View style={{ flexDirection: 'row' }}>
         <TextInput
-          label="New Password"
+          label="Mật khẩu mới"
           returnKeyType="next"
           value={newPassword.value}
           onChangeText={(text) => setNewPassword({ value: text, error: '' })}
@@ -160,7 +160,7 @@ export default function ChangePassword({ navigation }) {
 
       <View style={{ flexDirection: 'row' }}>
         <TextInput
-          label="Confirm Password"
+          label="Gõ lại mật khẩu"
           returnKeyType="done"
           value={confirmPassword.value}
           onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
@@ -189,11 +189,11 @@ export default function ChangePassword({ navigation }) {
             fontSize: 13,
             color: theme.colors.secondary,
             fontWeight: '700'
-          }}>Forgot your password?</Text>
+          }}>Quên mật khẩu?</Text>
         </TouchableOpacity>
       </View>
       <Button mode="contained" onPress={onChangePassPressed}>
-        Continue
+        Tiếp tục
       </Button>
 
 

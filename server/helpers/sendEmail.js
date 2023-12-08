@@ -29,7 +29,7 @@ const sendEmail = async (email, username, message, templatePath) => {
     const info = await transporter.sendMail({
         from: 'HNHE',
         to: email,
-        subject: 'Resetting your Hanoi Heritage Explorer account password!',
+        subject: 'Đặt lại mật khẩu ứng dụng Hanoi Heritage Explorer của bạn!',
         text: 'We sent a verification code.', // dont really need this
         html: htmlToSend
     });

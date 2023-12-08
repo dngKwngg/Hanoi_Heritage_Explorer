@@ -26,7 +26,7 @@ const DarkModeSettings = () => {
                         status={checked === 'first' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('first')}
                     />
-                    <Text style={styles.sectionTitle}>Light theme</Text>
+                    <Text style={styles.sectionTitle}>Sáng</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={() => setChecked('second')} style={styles.section}>
@@ -36,7 +36,7 @@ const DarkModeSettings = () => {
                         status={checked === 'second' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('second')}
                     />
-                    <Text style={styles.sectionTitle}>Dark theme</Text>
+                    <Text style={styles.sectionTitle}>Tối</Text>
                 </TouchableOpacity>
 
 
@@ -48,7 +48,7 @@ const DarkModeSettings = () => {
                         status={checked === 'third' ? 'checked' : 'unchecked'}
                         onPress={() => setChecked('third')}
                     />
-                    <Text style={styles.sectionTitle}>Use device theme</Text>
+                    <Text style={styles.sectionTitle}>Theo hệ thống</Text>
                 </TouchableOpacity>
 
 

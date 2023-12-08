@@ -31,8 +31,8 @@ const NotificationSettings = () => {
 
         <TouchableOpacity onPress={eventToggleSwitch} style={styles.section}>
           <View>
-            <Text style={styles.sectionTitle}>Events notification</Text>
-            <Text style={styles.content}>Receive notifications about new events</Text>
+            <Text style={styles.sectionTitle}>Thông báo về sự kiện</Text>
+            <Text style={styles.content}>Nhận thông báo về các sự kiện mới</Text>
           </View>
 
           <Switch
@@ -44,8 +44,8 @@ const NotificationSettings = () => {
 
         <TouchableOpacity onPress={newDesToggleSwitch} style={styles.section}>
           <View style={styles.textContainer}>
-            <Text style={styles.sectionTitle}>New destinations notification</Text>
-            <Text style={styles.content}>Get notified about new destinations on our app</Text>
+            <Text style={styles.sectionTitle}>Thông báo về điểm đến mới</Text>
+            <Text style={styles.content}>Nhận thông báo về những điểm đến mới được thêm vào ứng dụng</Text>
           </View>
 
           <Switch
@@ -59,14 +59,14 @@ const NotificationSettings = () => {
 
         <View style={styles.section}>
           <TouchableOpacity style={styles.textContainer}>
-            <Text style={styles.sectionTitle}>Notification sound</Text>
-            <Text style={styles.content}>Choose the notification sound that you like!</Text>
+            <Text style={styles.sectionTitle}>Âm thanh thông báo</Text>
+            <Text style={styles.content}>Tuỳ chọn âm thanh thông báo mà bạn thích!</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.section}>
           <TouchableOpacity style={styles.textContainer}>
-            <Text style={styles.sectionTitle}>Customize system notification</Text>
+            <Text style={styles.sectionTitle}>Tuỳ chỉnh thông báo hệ thống</Text>
 
           </TouchableOpacity>
         </View>

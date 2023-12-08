@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">HanoiHeritageExplorer</string>
+  <string name="expo_splash_screen_resize_mode" translatable="false">contain</string>
+  <string name="expo_splash_screen_status_bar_translucent" translatable="false">false</string>
+  <string name="facebook_app_id">1073189397046597</string>
+  <string name="facebook_client_token">4148f6633f1809b6863bfd6fb4e3dcfa</string>
+</resources>

@@ -30,8 +30,8 @@ const AppUpdatesSettings = () => {
 
                 <TouchableOpacity onPress={autoUpdateToggle} style={styles.section}>
                     <View>
-                        <Text style={styles.sectionTitle}>Automatic update</Text>
-                        <Text style={styles.content}>Automatically update app via Wi-Fi</Text>
+                        <Text style={styles.sectionTitle}>Tự động cập nhật</Text>
+                        <Text style={styles.content}>Tự động cập nhật ứng dụng qua Wi-Fi</Text>
                     </View>
 
                     <Switch
@@ -43,8 +43,8 @@ const AppUpdatesSettings = () => {
 
                 <TouchableOpacity onPress={getNotifiedToggle} style={styles.section}>
                     <View style={styles.textContainer}>
-                        <Text style={styles.sectionTitle}>Notification about updates</Text>
-                        <Text style={styles.content}>Get notified about app updates</Text>
+                        <Text style={styles.sectionTitle}>Thông báo về cập nhật</Text>
+                        <Text style={styles.content}>Nhận thông báo về các bản cập nhật mới</Text>
                     </View>
 
                     <Switch

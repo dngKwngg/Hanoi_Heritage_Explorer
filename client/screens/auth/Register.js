@@ -74,9 +74,9 @@ const Register = ({ navigation }) => {
     <Background>
       {/* <BackButton goBack={navigation.goBack} /> */}
       <Logo />
-      <Header>Create Account</Header>
+      <Header>Tạo tài khoản</Header>
       <TextInput
-        label="Name"
+        label="Họ tên"
         returnKeyType="next"
         value={name.value}
         onChangeText={(text) => setName({ value: text, error: '' })}
@@ -97,7 +97,7 @@ const Register = ({ navigation }) => {
       />
       <View style={{ flexDirection: 'row' }}>
         <TextInput
-          label="Password"
+          label="Mật khẩu"
           returnKeyType="next"
           value={password.value}
           onChangeText={(text) => setPassword({ value: text, error: '' })}
@@ -117,7 +117,7 @@ const Register = ({ navigation }) => {
 
       <View style={{ flexDirection: 'row' }}>
         <TextInput
-          label="Confirm Password"
+          label="Gõ lại mật khẩu"
           returnKeyType="done"
           value={confirmPassword.value}
           onChangeText={(text) => setConfirmPassword({ value: text, error: '' })}
@@ -139,12 +139,12 @@ const Register = ({ navigation }) => {
         onPress={onSignUpPressed}
         style={{ marginTop: 24 }}
       >
-        Sign Up
+        Đăng ký
       </Button>
       <View style={styles.row}>
-        <Text>Already have an account? </Text>
+        <Text>Đã có tài khoản? </Text>
         <TouchableOpacity onPress={() => navigation.replace('Login')}>
-          <Text style={styles.link}>Login</Text>
+          <Text style={styles.link}>Đăng nhập</Text>
         </TouchableOpacity>
       </View>
     </Background>

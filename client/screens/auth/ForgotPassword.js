@@ -48,9 +48,9 @@ export default function ForgotPassword({ navigation }) {
     <Background>
       <BackButton goBack={() => navigation.replace('Login')} />
       <Logo />
-      <Header>Forgot Password?</Header>
+      <Header>Quên mật khẩu?</Header>
       <TextInput
-        label="E-mail address"
+        label="Địa chỉ e-mail"
         returnKeyType="done"
         value={email.value}
         onChangeText={(text) => setEmail({ value: text, error: '' })}
@@ -60,14 +60,14 @@ export default function ForgotPassword({ navigation }) {
         autoCompleteType="email"
         textContentType="emailAddress"
         keyboardType="email-address"
-        description="You will receive an email with verification code to recover your account."
+        description="Bạn sẽ nhận một email chứa mã xác thực để khôi phục tài khoản của mình."
       />
       <Button
         mode="contained"
         onPress={sendResetPasswordEmail}
         style={{ marginTop: 16 }}
       >
-        Send Email
+        Gửi email
       </Button>
     </Background>
   )

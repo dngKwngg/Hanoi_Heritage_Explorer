@@ -17,14 +17,14 @@ const FooterMenu = () => {
 
       <View style={styles.container}>
         <TouchableOpacity style={styles.tabContainer} onPress={() => navigation.navigate("Home")}>
-          <View style={[styles.iconContainer, route.name !== "Home" ? { backgroundColor: 'transparent' } : { backgroundColor: COLORS.light_gray }]}>
+          <View style={[styles.iconContainer, route.name !== "Home" ? { backgroundColor: 'transparent' } : { backgroundColor: COLORS.light_gray, width: 55 }]}>
             <FontAwesome5
-              name="home"
+              name="location-arrow"
               style={styles.iconStyle}
               color={route.name !== "Home" ? COLORS.grey : theme.colors.third}
             />
           </View>
-          <Text style={route.name !== "Home" ? { color: COLORS.grey } : { color: theme.colors.third }}>Home</Text>
+          <Text style={route.name !== "Home" ? { color: COLORS.grey } : { color: theme.colors.third }}>Khám phá</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Notifications")}>
           <View style={[styles.iconContainer, route.name !== "Notifications" ? { backgroundColor: 'transparent' } : { backgroundColor: COLORS.light_gray }]}>
@@ -34,7 +34,7 @@ const FooterMenu = () => {
               color={route.name !== "Notifications" ? COLORS.grey : theme.colors.third}
             />
           </View>
-          <Text style={route.name !== "Notifications" ? { color: COLORS.grey } : { color: theme.colors.third }}>Notifications</Text>
+          <Text style={route.name !== "Notifications" ? { color: COLORS.grey } : { color: theme.colors.third }}>Thông báo</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.tabContainer} onPress={() => navigation.navigate("Profile")}>
           <View style={[styles.iconContainer, route.name !== "Profile" ? { backgroundColor: 'transparent' } : { backgroundColor: COLORS.light_gray }]}>
@@ -44,7 +44,7 @@ const FooterMenu = () => {
               color={route.name !== "Profile" ? COLORS.grey : theme.colors.third}
             />
           </View>
-          <Text style={route.name !== "Profile" ? { color: COLORS.grey } : { color: theme.colors.third }}>Profile</Text>
+          <Text style={route.name !== "Profile" ? { color: COLORS.grey } : { color: theme.colors.third }}>Hồ sơ</Text>
         </TouchableOpacity>
       </View>
     </View>

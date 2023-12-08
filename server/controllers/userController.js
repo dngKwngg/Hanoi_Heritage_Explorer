@@ -38,7 +38,7 @@ const registerController = async (req, res) => {
     if (exisitingUser) {
       return res.status(500).send({
         success: false,
-        message: "This email has already been registered! ",
+        message: "Email này đã được đăng ký! ",
       });
     }
 
@@ -54,7 +54,7 @@ const registerController = async (req, res) => {
 
     return res.status(201).send({
       success: true,
-      message: "Register successfully, please login!",
+      message: "Đăng ký thành công, vui lòng đăng nhập!",
     });
   } catch (error) {
     console.log(error);
@@ -82,7 +82,7 @@ const loginController = async (req, res) => {
     if (!user) {
       return res.status(500).send({
         success: false,
-        message: "Incorrect username or password!",
+        message: "Sai email hoặc mật khẩu!",
       });
     }
     //match password
@@ -90,7 +90,7 @@ const loginController = async (req, res) => {
     if (!match) {
       return res.status(500).send({
         success: false,
-        message: "Incorrect username or password!",
+        message: "Sai email hoặc mật khẩu!",
       });
     }
     //TOKEN JWT
@@ -102,7 +102,7 @@ const loginController = async (req, res) => {
     user.password = undefined;
     res.status(200).send({
       success: true,
-      message: "Login successfully!",
+      message: "Đăng nhập thành công!",
       token,
       user,
     });
@@ -127,7 +127,7 @@ const forgotPasswordController = async (req, res) => {
     if (!user) {
       return res.send({
         success: false,
-        message: "If user exists, an email was sent.",
+        message: "Nếu email hợp lệ, một mã xác thực đã được gửi.",
       });
     }
 
@@ -136,7 +136,7 @@ const forgotPasswordController = async (req, res) => {
     user.resettokenExpiration = Date.now() + 300000;
     await user.save();
     await sendEmail(user.email, user.name, `${token}`, './template/forgotPasswordEmail.html')
-    return res.send({ success: true, message: "We've sent a verification code to your email!" });
+    return res.send({ success: true, message: "Chúng tôi đã gửi mã xác thực đến email của bạn!" });
 
   } catch (error) {
     console.log(error);
@@ -154,10 +154,10 @@ const resetPasswordController = async (req, res) => {
 
     const user = await userModel.findOne({ email });
     if (!user || user.resettoken !== resetCode) {
-      return res.status(400).send({ success: false, message: 'The verification code is incorrect. Please try again!' });
+      return res.status(400).send({ success: false, message: 'Mã xác thực không đúng, vui lòng thử lại!' });
     }
     if (user.resettokenExpiration < new Date()) {
-      return res.status(400).send({ success: false, message: 'Verification code has expired!' });
+      return res.status(400).send({ success: false, message: 'Mã xác thực đã hết hạn!' });
     }
     //hashed pasword
     const hashedPassword = await hashPassword(newPassword);
@@ -170,7 +170,7 @@ const resetPasswordController = async (req, res) => {
 
     return res.status(200).send({
       success: true,
-      message: 'Your password has been reset successfully, please login!',
+      message: 'Mật khẩu của bạn đã được đặt lại thành công, vui lòng đăng nhập!',
     });
   } catch (error) {
     console.log(error);
@@ -198,7 +198,7 @@ const changePasswordController = async (req, res) => {
     if (!match) {
       return res.status(500).send({
         success: false,
-        message: "Incorrect current password. Please try again!",
+        message: "Mật khẩu hiện tại không đúng, vui lòng thử lại!",
       });
     }
 
@@ -207,7 +207,7 @@ const changePasswordController = async (req, res) => {
     user.resettokenExpiration = Date.now() + 300000;
     await user.save();
     await sendEmail(user.email, user.name, `${token}`, './template/changePasswordEmail.html')
-    return res.send({ success: true, message: "We've sent a verification code to your email!" });
+    return res.send({ success: true, message: "Chúng tôi đã gửi một mã xác thực đến email của bạn!" });
 
   } catch (error) {
     console.log(error);
@@ -226,10 +226,10 @@ const verificationController = async (req, res) => {
 
     const user = await userModel.findOne({ email });
     if (!user || user.resettoken !== resetCode) {
-      return res.status(400).send({ success: false, message: 'The verification code is incorrect. Please try again!' });
+      return res.status(400).send({ success: false, message: 'Mã xác thực không đúng, vui lòng thử lại!' });
     }
     if (user.resettokenExpiration < new Date()) {
-      return res.status(400).send({ success: false, message: 'Verification code has expired!' });
+      return res.status(400).send({ success: false, message: 'Mã xác thực đã hết hạn!' });
     }
     //hashed pasword
     const hashedPassword = await hashPassword(newPassword);
@@ -242,7 +242,7 @@ const verificationController = async (req, res) => {
 
     return res.status(200).send({
       success: true,
-      message: 'Your password has been changed successfully, please login!',
+      message: 'Đổi mật khẩu thành công, vui lòng đăng nhập!',
     });
 
   } catch (error) {
@@ -272,7 +272,7 @@ const resendCodeController = async (req, res) => {
     user.resettokenExpiration = Date.now() + 300000;
     await user.save();
     await sendEmail(user.email, user.name, `${token}`, './template/changePasswordEmail.html')
-    return res.send({ success: true, message: "We've resent a verification code to your email!" });
+    return res.send({ success: true, message: "Chúng tôi đã gửi lại mã xác thực đến email của bạn!" });
 
   } catch (error) {
     console.log(error);
@@ -295,14 +295,14 @@ const updateUserProfileController = async (req, res) => {
     if (name === user.name && JSON.stringify(dateOfBirth) === JSON.stringify(user.dateOfBirth)) {
       return res.status(400).send({
         success: false,
-        message: 'You haven\'t made any changes yet!'
+        message: 'Bạn chưa thực hiện thay đổi nào!'
       });
     }
 
     if (!name) {
       return res.status(400).send({
         success: false,
-        message: 'Name can not be empty!'
+        message: 'Trường tên không thể bỏ trống!'
       });
     }
 
@@ -317,7 +317,7 @@ const updateUserProfileController = async (req, res) => {
 
     res.status(200).send({
       success: true,
-      message: "Profile has been updated.",
+      message: "Hồ sơ của bạn đã được cập nhật.",
       updatedUser,
     });
   } catch (error) {

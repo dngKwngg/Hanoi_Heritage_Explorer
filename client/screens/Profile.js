@@ -44,23 +44,22 @@ const SettingsScreen = ({ navigation }) => {
   const logout = async () => {
     setState({ token: "", user: null });
     await AsyncStorage.removeItem("@auth");
-    Alert.alert("Logout successfully!");
   };
 
   const items = [
     {
       icon: "user-alt",
-      text: "My Account",
+      text: "Tài khoản",
       action: navigateToAccount,
     },
-    { icon: "cog", text: "Settings", action: navigateToSettings },
+    { icon: "cog", text: "Cài đặt", action: navigateToSettings },
     {
       icon: "comment",
-      text: "Feedback",
+      text: "Phản hồi",
       action: navigateToFeedback,
     },
-    { icon: "shield-alt", text: "Privacy & Security", action: navigateToPrivacy },
-    { icon: "sign-out-alt", text: "Log out", action: logout },
+    { icon: "book", text: "Điều khoản", action: navigateToPrivacy },
+    { icon: "sign-out-alt", text: "Đăng xuất", action: logout },
   ];
 
 
@@ -124,7 +123,7 @@ const SettingsScreen = ({ navigation }) => {
 
         <View style={{ marginLeft: 25, marginTop: 110, marginBottom: 25 }}>
 
-          <Header>My Profile</Header>
+          <Header>Hồ sơ của tôi</Header>
         </View>
 
 

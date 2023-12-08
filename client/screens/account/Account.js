@@ -106,11 +106,11 @@ const Account = ({ navigation }) => {
             {name.value}
           </Text>
 
-          <Text style={styles.subsectionTitle}>Information</Text>
+          <Text style={styles.subsectionTitle}>Thông tin</Text>
           <View style={styles.profileContainer}>
 
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Name</Text>
+              <Text style={styles.inputText}>Họ tên</Text>
               <View style={styles.iconContainer}>
 
                 <TextInput
@@ -147,7 +147,10 @@ const Account = ({ navigation }) => {
               />
             </View>
             <View style={styles.inputContainer}>
-              <Text style={styles.inputText}>Date of Birth</Text>
+        
+
+              <Text style={[styles.inputText]}>Ngày sinh</Text>
+            
 
               {showPicker && (
                 <DateTimePicker
@@ -182,11 +185,11 @@ const Account = ({ navigation }) => {
 
 
             <View style={{ alignItems: "center", marginTop: 10 }}>
-              <Button style={styles.updateBtn} mode="contained" onPress={handleUpdate} >Update Profile</Button>
+              <Button style={styles.updateBtn} mode="contained" onPress={handleUpdate} >Cập nhật hồ sơ</Button>
             </View>
           </View>
 
-          <Text style={styles.subsectionTitle}>Password</Text>
+          <Text style={styles.subsectionTitle}>Mật khẩu</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("ChangePassword")}
             style={{
@@ -214,7 +217,7 @@ const Account = ({ navigation }) => {
 
               }}
             >
-              Change Password
+              Đổi mật khẩu
             </Text>
           </TouchableOpacity>
         </ScrollView>
@@ -265,7 +268,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 30,
-    paddingHorizontal: 5
+    paddingHorizontal: 4
   },
   inputText: {
     fontWeight: "bold",
@@ -274,7 +277,7 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   inputBox: {
-    width: '100%',
+    marginLeft: 3,
     height: 45,
     fontSize: 16,
     backgroundColor: 'transparent'
