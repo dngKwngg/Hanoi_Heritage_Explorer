@@ -1,0 +1,45 @@
+{
+  "expo": {
+    "name": "client",
+    "slug": "client",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.mitnaxfet.Hanoi_Heritage_Explorer"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsImpl": "mapbox",
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoibWl0bmF4ZmV0IiwiYSI6ImNsb2tkMTVzMzI5OHYybHBsYTA2b25ydmcifQ.aaWG0irRntbIhoB8X6ySsQ"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "a33ee61b-2b05-429a-8340-b8ec06545b97"
+      }
+    }
+  }
+}
